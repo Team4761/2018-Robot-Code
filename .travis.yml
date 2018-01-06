@@ -7,8 +7,3 @@ install:
 script: ant compile
 
 jdk: oraclejdk8
-
-addons:
-  apt:
-    packages:
-      - python3
