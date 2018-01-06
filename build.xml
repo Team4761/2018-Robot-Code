@@ -26,5 +26,42 @@
   <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
 
   <import file="${wpilib.ant.dir}/build.xml"/>
+  <!-- 4761 -->
+
+  <target name="make-jar-directory">
+    <mkdir dir="./lib/jar"></mkdir>
+  </target>
+
+  <macrodef name="getjar">
+    <attribute name="url" />
+    <attribute name="jarname" />
+    <sequential>
+      <if>
+        <not>
+          <available file="./lib/jar/@{jarname}" />
+        </not>
+        <then>
+          <get src="@{url}" dest="./lib/jar/@{jarname}" />
+        </then>
+        <else>
+          <echo message="JAR @{jarname} already downloaded. Not redownloading." />
+        </else>
+      </if>
+    </sequential>
+  </macrodef>
+
+  <target name="get-dependencies" description="Download JAR files for dependencies from the Internet" depends="make-jar-directory">
+    <getjar url="https://github.com/Team4761/Robockets-Commons/releases/download/v2.1.0/Robockets-Commons-2.1.0.jar" jarname="Robockets-Commons-2.1.0.jar" />
+  </target>
+
+  <target name="compile" description="Compile source code" depends="get-dependencies, athena-project-build.compile"></target>
+  
+  <target name="clean-dependencies" description="Deletes JAR files for dependencies">
+    <delete>
+      <fileset dir="lib/jar">
+        <include name="*" />
+      </fileset>
+    </delete>
+  </target>
 
 </project>

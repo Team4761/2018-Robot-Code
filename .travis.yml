@@ -1,0 +1,9 @@
+language: java
+
+install:
+  - sh .travis-init.sh
+  - ant get-dependencies
+
+script: ant compile
+
+jdk: oraclejdk8
