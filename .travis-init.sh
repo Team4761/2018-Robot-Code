@@ -10,7 +10,7 @@ python3 dl_wpilibjars.py --dest ~/wpilib/java/current --members ant/ant-classloa
 	ant/robotCommand \
 	ant/robotDebugCommand \
 	lib/WPILib.jar \
-	lib/NetworkTables.jar \
+	lib/ntcore.jar \
 	lib/cscore.jar \
 	lib/opencv.jar
 rm dl_wpilibjars.py
