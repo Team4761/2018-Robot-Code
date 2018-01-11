@@ -41,6 +41,8 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		
 		drivetrain = new Drivetrain();
+		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
+		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
 		
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
