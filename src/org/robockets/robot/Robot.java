@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.robockets.robot.commands.ExampleCommand;
 import org.robockets.robot.drivetrain.Drivetrain;
+import org.robockets.robot.drivetrain.Joyride;
 import org.robockets.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -30,6 +31,8 @@ public class Robot extends TimedRobot {
 	
 	public static Drivetrain drivetrain;
 
+	public static Command joyride;
+
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -43,7 +46,9 @@ public class Robot extends TimedRobot {
 		drivetrain = new Drivetrain();
 		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
 		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
-		
+
+		joyride = new Joyride();
+
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
@@ -110,6 +115,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		
+		joyride.start();
 	}
 
 	/**
