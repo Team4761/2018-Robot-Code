@@ -1,4 +1,4 @@
-package climber;
+package org.robockets.robot.climber;
 
 import org.robockets.robot.RobotMap;
 

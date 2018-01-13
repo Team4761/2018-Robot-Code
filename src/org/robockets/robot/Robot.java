@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.robockets.robot.climber.Climber;
 import org.robockets.robot.commands.ExampleCommand;
 import org.robockets.robot.subsystems.ExampleSubsystem;
 
@@ -25,6 +27,7 @@ import org.robockets.robot.subsystems.ExampleSubsystem;
 public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem
 			= new ExampleSubsystem();
+	public static final Climber climber = new Climber();
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
