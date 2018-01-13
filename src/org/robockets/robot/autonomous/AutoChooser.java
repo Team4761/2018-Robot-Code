@@ -1,0 +1,31 @@
+package org.robockets.robot.autonomous;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.robockets.robot.utility.AutoHelper;
+
+/**
+ * @author Jake Backer
+ */
+public class AutoChooser extends CommandGroup {
+
+	public AutoChooser(AutoHelper.AutoType auto, AutoHelper.RobotPosition startingPosition, AutoHelper.Priority priority) {
+		Command autoCommand = new DumbAuto();
+		switch (auto) {
+			case DUMB:
+				autoCommand = new DumbAuto();
+				break;
+			case MIN:
+				autoCommand = new EasyAuto();
+				break;
+			case MID:
+				// autoCommand = new MidAuto(startingPosition, priority);
+				break;
+			case MAX:
+				// autoCommand = new MaxAuto(SOMETHING_HERE);
+				break;
+		}
+
+		addSequential(autoCommand);
+	}
+}

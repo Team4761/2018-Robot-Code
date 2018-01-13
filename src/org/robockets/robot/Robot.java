@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.robockets.robot.autonomous.AutoChooser;
 import org.robockets.robot.autonomous.DumbAuto;
 import org.robockets.robot.autonomous.EasyAuto;
 import org.robockets.robot.drivetrain.Drivetrain;
@@ -33,9 +34,7 @@ public class Robot extends TimedRobot {
 	public static Command joyride;
 
 	Command m_autonomousCommand;
-	AutoHelper.RobotPosition startingPosition;
-	AutoHelper.Priority autoPriority;
-	SendableChooser<Command> autoChooser = new SendableChooser<>();
+	SendableChooser<AutoHelper.AutoType> autoChooser = new SendableChooser<>();
 	SendableChooser<AutoHelper.RobotPosition> positionChooser = new SendableChooser<>();
 	SendableChooser<AutoHelper.Priority> priorityChooser = new SendableChooser<>();
 
@@ -52,8 +51,8 @@ public class Robot extends TimedRobot {
 
 		joyride = new Joyride();
 
-		autoChooser.addDefault("Dumb Auto", new DumbAuto());
-		autoChooser.addObject("Easy Auto", new EasyAuto());
+		autoChooser.addDefault("Dumb Auto", AutoHelper.AutoType.DUMB);
+		autoChooser.addObject("Min Auto", AutoHelper.AutoType.MIN);
 
 		SmartDashboard.putData("Auto mode", autoChooser);
 
@@ -100,7 +99,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = autoChooser.getSelected();
+		m_autonomousCommand = new AutoChooser(
+				autoChooser.getSelected(),
+				positionChooser.getSelected(),
+				priorityChooser.getSelected());
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
