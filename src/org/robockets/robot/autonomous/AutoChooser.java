@@ -16,7 +16,7 @@ public class AutoChooser extends CommandGroup {
 				autoCommand = new DumbAuto();
 				break;
 			case MIN:
-				autoCommand = new EasyAuto();
+				autoCommand = new MinAuto();
 				break;
 			case MID:
 				// autoCommand = new MidAuto(startingPosition, priority);

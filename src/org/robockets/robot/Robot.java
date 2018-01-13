@@ -13,8 +13,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.robockets.robot.autonomous.AutoChooser;
-import org.robockets.robot.autonomous.DumbAuto;
-import org.robockets.robot.autonomous.EasyAuto;
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
 import org.robockets.robot.utility.AutoHelper;
