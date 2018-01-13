@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.robockets.robot.autonomous.DumbAuto;
+import org.robockets.robot.autonomous.EasyAuto;
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
 
@@ -45,8 +47,11 @@ public class Robot extends TimedRobot {
 
 		joyride = new Joyride();
 
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_chooser.addDefault("Dumb Auto", new DumbAuto());
+		m_chooser.addObject("Easy Auto", new EasyAuto());
+
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
 		m_oi = new OI();
 	}
 
