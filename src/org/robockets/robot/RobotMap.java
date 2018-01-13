@@ -37,8 +37,8 @@ public class RobotMap {
 	public static DrivePodPIDOutput leftDrivePodOutput = new DrivePodPIDOutput(leftDrivepodSpeedController);	
 	public static DrivePodPIDOutput rightDrivePodOutput = new DrivePodPIDOutput(rightDrivepodSpeedController);
 	
-	public static DigitalInput bottemLimitSwitch = new DigitalInput(0);
-	public static DigitalInput switchLimitSwitch = new DigitalInput(2);
-	public static DigitalInput scaleLimitSwitch = new DigitalInput(3);
+	public static DigitalInput bottomLimitSwitch = new DigitalInput(0);
+	public static DigitalInput middleLimitSwitch = new DigitalInput(2);
+	public static DigitalInput topLimitSwitch = new DigitalInput(3);
 	
 }
