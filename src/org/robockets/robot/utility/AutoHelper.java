@@ -6,6 +6,16 @@ package org.robockets.robot.utility;
 public class AutoHelper {
 
 	/**
+	 * The type of auto
+	 */
+	public enum AutoType {
+		DUMB,
+		MIN,
+		MID,
+		MAX
+	}
+
+	/**
 	 * The starting position of the robot
 	 */
 	public enum RobotPosition {
