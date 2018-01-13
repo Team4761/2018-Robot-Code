@@ -16,6 +16,7 @@ import org.robockets.robot.autonomous.DumbAuto;
 import org.robockets.robot.autonomous.EasyAuto;
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
+import org.robockets.robot.utility.AutoHelper;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,7 +33,11 @@ public class Robot extends TimedRobot {
 	public static Command joyride;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	AutoHelper.RobotPosition startingPosition;
+	AutoHelper.Priority autoPriority;
+	SendableChooser<Command> autoChooser = new SendableChooser<>();
+	SendableChooser<AutoHelper.RobotPosition> positionChooser = new SendableChooser<>();
+	SendableChooser<AutoHelper.Priority> priorityChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -47,11 +52,23 @@ public class Robot extends TimedRobot {
 
 		joyride = new Joyride();
 
-		m_chooser.addDefault("Dumb Auto", new DumbAuto());
-		m_chooser.addObject("Easy Auto", new EasyAuto());
+		autoChooser.addDefault("Dumb Auto", new DumbAuto());
+		autoChooser.addObject("Easy Auto", new EasyAuto());
 
-		SmartDashboard.putData("Auto mode", m_chooser);
-		
+		SmartDashboard.putData("Auto mode", autoChooser);
+
+		positionChooser.addDefault("Left", AutoHelper.RobotPosition.LEFT);
+		positionChooser.addObject("Right", AutoHelper.RobotPosition.RIGHT);
+		positionChooser.addObject("Middle", AutoHelper.RobotPosition.MIDDLE);
+
+		SmartDashboard.putData("Robot Starting Position", positionChooser);
+
+		priorityChooser.addObject("Switch", AutoHelper.Priority.SWITCH);
+		priorityChooser.addObject("Scale", AutoHelper.Priority.SCALE);
+		priorityChooser.addDefault("None", AutoHelper.Priority.NONE);
+
+		SmartDashboard.putData("Autonomous Priority", priorityChooser);
+
 		m_oi = new OI();
 	}
 
@@ -83,7 +100,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		m_autonomousCommand = autoChooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
