@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.robockets.robot.drivetrain.Drivetrain;
+import org.robockets.robot.drivetrain.Joyride;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +24,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	public static OI m_oi;
+	
+	public static Drivetrain drivetrain;
+
+	public static Command joyride;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -32,9 +38,16 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
+		
+		drivetrain = new Drivetrain();
+		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
+		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
+
+		joyride = new Joyride();
+
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		m_oi = new OI();
 	}
 
 	/**
@@ -97,6 +110,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		
+		joyride.start();
 	}
 
 	/**
