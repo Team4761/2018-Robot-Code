@@ -19,6 +19,10 @@ public class Elevate extends Command {
     	this.elSpeed = elSpeed;
     }
 
+    public Elevate(ElevatorPosition newPosition) {
+    	this(newPosition, 0.75);
+	}
+
     // Called just before this Command runs the first time
     protected void initialize() {
     }
