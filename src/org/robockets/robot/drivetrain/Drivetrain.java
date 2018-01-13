@@ -17,9 +17,9 @@ public class Drivetrain extends Subsystem {
 	 private final EncoderPIDSource leftPodPIDSource;
 	 private final EncoderPIDSource rightPodPIDSource;
 	 private final GyroPIDSource gyroPIDSource;
-	 public final PIDController leftPodPID;
-	 public final PIDController rightPodPID;
-	 public final PIDController gyroPID;
+	 private final PIDController leftPodPID;
+	 private final PIDController rightPodPID;
+	 private final PIDController gyroPID;
 
 	public Drivetrain() {
 		
@@ -90,5 +90,20 @@ public class Drivetrain extends Subsystem {
     	leftPodPID.setSetpoint(leftDistance);
     	rightPodPID.setSetpoint(rightDistance);
     }
+
+	/**
+	 * Since the built in OnTarget for PID is terrible and broken, this is a manual one for the drive pods
+	 * @return Returns if both the encoder PIDs are OnTarget, with a tolerance of <code>ABSOLUTE_TOLERANCE</code>
+	 */
+	public boolean encodersOnTarget() {
+		final double ABSOLUTE_TOLERANCE = 1.0; // TODO: Change this to something more reasonable
+		return Math.abs((leftPodPID.getSetpoint() - leftPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE &&
+				Math.abs((rightPodPID.getSetpoint() - rightPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE;
+	}
+
+	public void enableEncoderPID() {
+		leftPodPID.enable();
+		rightPodPID.enable();
+	}
 }
 
