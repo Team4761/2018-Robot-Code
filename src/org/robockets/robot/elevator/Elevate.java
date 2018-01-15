@@ -31,12 +31,12 @@ public class Elevate extends Command {
     protected void execute() {
     	double tempSpeed = elSpeed;
     	if (Robot.elevator.getCurrentPosition() == ElevatorPosition.BOTTOM) {
-    		tempSpeed = elSpeed > 0 ? elSpeed : -elSpeed; // Always move up
+    		tempSpeed = Math.abs(elSpeed); // Always move up
 		} else if(Robot.elevator.getCurrentPosition() == ElevatorPosition.MIDDLE) {
     		tempSpeed = newPosition == ElevatorPosition.TOP ?
-					(elSpeed > 0 ? elSpeed : -elSpeed) : (elSpeed < 0 ? elSpeed : -elSpeed);
+					Math.abs(elSpeed) : -Math.abs(elSpeed);
 		} else if (Robot.elevator.getCurrentPosition() == ElevatorPosition.TOP) {
-			tempSpeed = elSpeed < 0 ? elSpeed : -elSpeed; // Always move down
+			tempSpeed = -Math.abs(elSpeed); // Always move down
 		}
 
 		Robot.elevator.setElevatorSpeed(tempSpeed);
