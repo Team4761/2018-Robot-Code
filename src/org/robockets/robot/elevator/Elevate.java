@@ -29,14 +29,10 @@ public class Elevate extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double tempSpeed = elSpeed;
-    	if (Robot.elevator.getCurrentPosition() == ElevatorPosition.BOTTOM) {
-    		tempSpeed = Math.abs(elSpeed); // Always move up
-		} else if(Robot.elevator.getCurrentPosition() == ElevatorPosition.MIDDLE) {
-    		tempSpeed = newPosition == ElevatorPosition.TOP ?
-					Math.abs(elSpeed) : -Math.abs(elSpeed);
-		} else if (Robot.elevator.getCurrentPosition() == ElevatorPosition.TOP) {
-			tempSpeed = -Math.abs(elSpeed); // Always move down
+    	double tempSpeed = Math.abs(elSpeed);
+		if((Robot.elevator.getCurrentPosition() == ElevatorPosition.MIDDLE && newPosition == ElevatorPosition.BOTTOM)
+				|| Robot.elevator.getCurrentPosition() == ElevatorPosition.TOP) {
+    		tempSpeed = -Math.abs(elSpeed);
 		}
 
 		Robot.elevator.setElevatorSpeed(tempSpeed);
