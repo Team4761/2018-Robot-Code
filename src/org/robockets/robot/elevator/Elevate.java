@@ -12,11 +12,15 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Elevate extends Command {
 
 	private ElevatorPosition newPosition;
+	private RelativeDirection.ZAxis direction;
 	private double elSpeed = 0.0;
 
     public Elevate(ElevatorPosition newPosition, double elSpeed) {
     	this.newPosition = newPosition;
     	this.elSpeed = elSpeed;
+
+		direction = newPosition.getValue() > Robot.elevator.getCurrentPosition().getValue()
+				? RelativeDirection.ZAxis.UP : RelativeDirection.ZAxis.DOWN;
     }
 
     public Elevate(ElevatorPosition newPosition) {
@@ -30,9 +34,9 @@ public class Elevate extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double tempSpeed = Math.abs(elSpeed);
-		if((Robot.elevator.getCurrentPosition() == ElevatorPosition.MIDDLE && newPosition == ElevatorPosition.BOTTOM)
-				|| Robot.elevator.getCurrentPosition() == ElevatorPosition.TOP) {
-    		tempSpeed = -Math.abs(elSpeed);
+
+		if (direction == RelativeDirection.ZAxis.DOWN) {
+			tempSpeed = -tempSpeed;
 		}
 
 		Robot.elevator.setElevatorSpeed(tempSpeed);
@@ -40,7 +44,7 @@ public class Elevate extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.elevator.isSwitchPressed(newPosition);
+        return Robot.elevator.isSwitchPressed(newPosition, direction);
     }
 
     // Called once after isFinished returns true

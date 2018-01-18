@@ -1,5 +1,6 @@
 package org.robockets.robot.elevator;
 
+import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -30,19 +31,16 @@ public class Elevator extends Subsystem {
     	this.position = position;
 	}
 
-	public boolean isSwitchPressed(ElevatorPosition position) {
+	public boolean isSwitchPressed(ElevatorPosition position, RelativeDirection.ZAxis direction) {
     	boolean isPressed = false;
-    	switch (position) {
-			case TOP:
-				isPressed = RobotMap.topLimitSwitch.get();
-				break;
-			case MIDDLE:
-				isPressed = RobotMap.middleLimitSwitch.get();
-				break;
-			case BOTTOM:
-				isPressed = RobotMap.bottomLimitSwitch.get();
-				break;
-		}
+
+    	double encoderPos = position.getValue();
+
+    	if (direction == RelativeDirection.ZAxis.UP) {
+    		isPressed = RobotMap.elevatorEncoder.getDistance() > encoderPos;
+	    } else {
+			isPressed = RobotMap.elevatorEncoder.getDistance() < encoderPos;
+	    }
 
 		return isPressed;
 	}
