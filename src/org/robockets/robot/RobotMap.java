@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.SPI;
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
+ * floating around.qa1`		`1
  */
 public class RobotMap {
 	public static Victor leftDrivepodSpeedController = new Victor(4);
@@ -33,5 +33,11 @@ public class RobotMap {
 	
 	public static DrivePodPIDOutput leftDrivePodOutput = new DrivePodPIDOutput(leftDrivepodSpeedController);	
 	public static DrivePodPIDOutput rightDrivePodOutput = new DrivePodPIDOutput(rightDrivepodSpeedController);
+	
+	
+	public static Victor leftIntake = new Victor(2);
+	public static Victor rightIntake = new Victor(3);
+	public static Victor barIntake = new Victor(5);
+	
 	
 }
