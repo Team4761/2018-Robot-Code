@@ -18,7 +18,7 @@ public class GearIntake extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void moveInakeArm(RelativeDirection.XAxis direction,double speed){
+    public void moveIntakeArm(RelativeDirection.XAxis direction,double speed){
     	if (direction == RelativeDirection.XAxis.LEFT){
     		RobotMap.leftIntake.set(speed);
     	} else {
