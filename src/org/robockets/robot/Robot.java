@@ -48,6 +48,8 @@ public class Robot extends TimedRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		m_oi = new OI();
+
+		SmartDashboard.putNumber("Drivetrain Scalar", 1);
 	}
 
 	/**
