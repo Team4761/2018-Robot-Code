@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveIntakeArm extends Command {
 
-	RelativeDirection.XAxis direction; 
+	RelativeDirection.XAxis arm;
 	
 	double speed;
-	
-    public MoveIntakeArm(RelativeDirection.XAxis direction, double speed) {
+
+    public MoveIntakeArm(RelativeDirection.XAxis arm, double speed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.direction = direction;
+    	this.arm = arm;
     	
     	this.speed = speed;
     	
@@ -29,7 +29,7 @@ public class MoveIntakeArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearIntake.moveIntakeArm(direction, speed);
+    	Robot.gearIntake.moveIntakeArm(arm, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
