@@ -20,7 +20,6 @@ public class MoveIntakeArm extends Command {
     	this.arm = arm;
     	
     	this.speed = speed;
-    	
     }
 
     // Called just before this Command runs the first time
