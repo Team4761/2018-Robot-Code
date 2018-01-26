@@ -7,6 +7,7 @@
 
 package org.robockets.robot;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Victor;
 
@@ -20,4 +21,6 @@ public class RobotMap {
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.
 	public static Victor climberMotor = new Victor(0);
 	public static int climberMotorPDPChannel = 1; // Dummy value.
+	
+	public static Encoder climberEncoder = new Encoder(2,3);
 }

@@ -1,7 +1,9 @@
 package org.robockets.robot.climber;
 
 import org.robockets.robot.RobotMap;
+import org.robockets.robot.pidsources.ClimberPIDSource;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,9 +19,18 @@ public class Climber extends Subsystem {
 	final Victor climberMotor;
 	final PowerDistributionPanel pdp;
 	
+	final ClimberPIDSource climberPIDSource;
+	final PIDController climberPID;
+	
 	public Climber() {
 		climberMotor = RobotMap.climberMotor;
 		pdp = RobotMap.pdp;
+		
+		climberPIDSource = new ClimberPIDSource(RobotMap.climberEncoder); 
+		climberPID = new PIDController(0, 0, 0, climberPIDSource, climberMotor);
+		climberPID.disable();
+		climberPID.setOutputRange(-1.0, 1.0);
+		climberPID.setAbsoluteTolerance(0.5);
 	}
 	
 	/*
@@ -51,6 +62,15 @@ public class Climber extends Subsystem {
 	 */
 	public void setMotor(double speed) {
 		climberMotor.set(speed);
+	}
+	
+	
+	/*
+	 * THIS METHOD IS ENTIRELY FOR DEMONSTRATION PURPOSES. NOT FULLY FUNCTIONAL
+	 */
+	public void setMotor2(double position) {
+		climberPID.setSetpoint(position);
+		
 	}
 	
 	// SmartDashboard related commands.
