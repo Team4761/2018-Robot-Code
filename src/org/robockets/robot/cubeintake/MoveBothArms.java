@@ -1,4 +1,4 @@
-package org.robockets.robot.gearintake;
+package org.robockets.robot.cubeintake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.robockets.commons.RelativeDirection;

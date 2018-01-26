@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
-import org.robockets.robot.gearintake.GearIntake;
+import org.robockets.robot.cubeintake.CubeIntake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
 	
 	public static Drivetrain drivetrain;
 	
-	public static GearIntake gearIntake;
+	public static CubeIntake cubeIntake;
 
 	public static Command joyride;
 
@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
 		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
 		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
 		
-		gearIntake = new GearIntake();
+		cubeIntake = new CubeIntake();
 
 		joyride = new Joyride();
 

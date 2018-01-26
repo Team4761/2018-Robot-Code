@@ -1,4 +1,4 @@
-package org.robockets.robot.gearintake;
+package org.robockets.robot.cubeintake;
 
 import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.Robot;
@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveIntakeArm extends Command {
 
-	RelativeDirection.XAxis arm;
+	private RelativeDirection.XAxis arm;
 	
-	double speed;
+	private double speed;
 
     public MoveIntakeArm(RelativeDirection.XAxis arm, double speed) {
         // Use requires() here to declare subsystem dependencies
@@ -28,7 +28,7 @@ public class MoveIntakeArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearIntake.moveIntakeArm(arm, speed);
+    	Robot.cubeIntake.moveIntakeArm(arm, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
