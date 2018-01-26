@@ -19,7 +19,7 @@ public class CubeIntake extends Subsystem {
     }
     
     public void moveIntakeArm(RelativeDirection.XAxis direction, double speed){
-			if (direction == RelativeDirection.XAxis.LEFT){
+		if (direction == RelativeDirection.XAxis.LEFT) {
     		RobotMap.leftIntake.set(speed);
     	} else {
     		RobotMap.rightIntake.set(speed);
