@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
+import org.robockets.robot.drivetrain.StartGyroPID;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,10 +39,20 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
+		RobotMap.gyro.reset();
+		RobotMap.gyro.calibrate();
+
 		drivetrain = new Drivetrain();
 		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
 		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
+		RobotMap.leftDrivepodSpeedController.setInverted(true);
+		RobotMap.rightDrivepodSpeedController.setInverted(true);
+
+		SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
+		SmartDashboard.putNumber("Gyro I", drivetrain.gyroPID.getI());
+		SmartDashboard.putNumber("Gyro D", drivetrain.gyroPID.getD());
+		SmartDashboard.putNumber("Gyro Setpoint", 0);
+		SmartDashboard.putData(new StartGyroPID());
 
 		joyride = new Joyride();
 
@@ -50,6 +61,14 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 
 		SmartDashboard.putNumber("Drivetrain Scalar", 1);
+	}
+
+	@Override
+	public void robotPeriodic() {
+		SmartDashboard.putNumber("Gyro Value", RobotMap.gyro.getAngle());
+		drivetrain.setGyroPID(SmartDashboard.getNumber("Gyro P", 0),
+				SmartDashboard.getNumber("Gyro I", 0),
+				SmartDashboard.getNumber("Gyro D", 0));
 	}
 
 	/**

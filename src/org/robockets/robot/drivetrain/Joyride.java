@@ -25,8 +25,8 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	translate = OI.joystick.getRawAxis(1);
-		rotate = OI.joystick.getRawAxis(4);
+    	translate = -OI.joystick.getRawAxis(1);
+		rotate = -OI.joystick.getRawAxis(4);
 
 		double scalar = SmartDashboard.getNumber("Drivetrain Scalar", 1);
 
