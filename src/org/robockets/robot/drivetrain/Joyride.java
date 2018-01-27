@@ -1,5 +1,6 @@
 package org.robockets.robot.drivetrain;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.robockets.robot.OI;
 import org.robockets.robot.Robot;
 
@@ -24,8 +25,13 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	translate = OI.joystick.getRawAxis(1);
-		rotate = OI.joystick.getRawAxis(4);
+    	translate = -OI.joystick.getRawAxis(1);
+		rotate = -OI.joystick.getRawAxis(4);
+
+		double scalar = SmartDashboard.getNumber("Drivetrain Scalar", 1);
+
+		translate *= scalar;
+		rotate *= scalar;
 		
 		Robot.drivetrain.driveArcade(translate, rotate);
     }
