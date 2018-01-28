@@ -11,29 +11,33 @@ public class Climb extends Command {
 
 	boolean stall = false;
 	double time = 0;
+
+	private double speed;
 	
 	/*
 	 * Climb until the robot climber motor stalls.
 	 */
-    public Climb() {
+    public Climb(double speed) {
     	requires(Robot.climber);
     	stall = true;
+    	this.speed = speed;
     }
     
     /* 
      * Climb for a given amount of time or indefinitely.
      * @param time		How long to climb for given a certain time. If zero, climb indefinitely.
      */
-    public Climb(double time) {
+    public Climb(double time, double speed) {
     	this.time = time;
     	if (time != 0) {
     		setTimeout(time);
     	}
+    	this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.climber.setMotor(1);
+    	Robot.climber.setMotor(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
