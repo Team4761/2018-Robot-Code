@@ -1,5 +1,6 @@
 package org.robockets.robot.climber;
 
+import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,32 +13,32 @@ public class Climb extends Command {
 	boolean stall = false;
 	double time = 0;
 
-	private double speed;
+	private RelativeDirection.ZAxis direction;
 	
 	/*
 	 * Climb until the robot climber motor stalls.
 	 */
-    public Climb(double speed) {
+    public Climb(RelativeDirection.ZAxis direction) {
     	requires(Robot.climber);
     	stall = true;
-    	this.speed = speed;
+    	this.direction = direction;
     }
     
     /* 
      * Climb for a given amount of time or indefinitely.
      * @param time		How long to climb for given a certain time. If zero, climb indefinitely.
      */
-    public Climb(double time, double speed) {
+    public Climb(double time, RelativeDirection.ZAxis direction) {
     	this.time = time;
     	if (time != 0) {
     		setTimeout(time);
     	}
-    	this.speed = speed;
+    	this.direction = direction;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.climber.setMotor(speed);
+    	Robot.climber.setMotor(direction == RelativeDirection.ZAxis.UP ? 1 : -1);
     }
 
     // Called repeatedly when this Command is scheduled to run
