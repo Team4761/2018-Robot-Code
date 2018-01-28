@@ -7,9 +7,11 @@
 
 package org.robockets.robot;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.robockets.robot.autonomous.AutoChooser;
@@ -88,6 +90,10 @@ public class Robot extends TimedRobot {
 		drivetrain.setGyroPID(SmartDashboard.getNumber("Gyro P", 0),
 				SmartDashboard.getNumber("Gyro I", 0),
 				SmartDashboard.getNumber("Gyro D", 0));
+		SmartDashboard.putNumber("PDP0: ", RobotMap.pdp.getCurrent(0));
+		SmartDashboard.putNumber("PDP1: ", RobotMap.pdp.getCurrent(1));
+		SmartDashboard.putNumber("PDP14: ", RobotMap.pdp.getCurrent(14));
+		SmartDashboard.putNumber("PDP15: ", RobotMap.pdp.getCurrent(15));
 	}
 
 	/**
@@ -165,6 +171,10 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
+	@Override
+	public void testInit() {
+		LiveWindow.addActuator("Drivetrain", "RobotDrive", RobotMap.robotDrive);
+	}
 	/**
 	 * This function is called periodically during test mode.
 	 */
