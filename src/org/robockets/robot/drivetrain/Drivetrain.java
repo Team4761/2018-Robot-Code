@@ -36,10 +36,10 @@ public class Drivetrain extends Subsystem {
         rightPodPID.setAbsoluteTolerance(0.5);
 		
 		gyroPIDSource = new GyroPIDSource();
-        gyroPID = new PIDController(0, 0, 0, gyroPIDSource, new GyroPIDOutput(RobotMap.robotDrive));
+        gyroPID = new PIDController(0.06, 0.0002, 0.15, gyroPIDSource, new GyroPIDOutput(RobotMap.robotDrive));
         gyroPID.disable();
-        gyroPID.setOutputRange(-1.0, 1.0); // Set turning speed range
-        gyroPID.setPercentTolerance(5.0); // Set tolerance of 5%
+        gyroPID.setOutputRange(-0.75, 0.75); // Set turning speed range
+        gyroPID.setAbsoluteTolerance(2);
 		
 	}
 	

@@ -45,8 +45,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		RobotMap.gyro.reset();
 		RobotMap.gyro.calibrate();
+		RobotMap.gyro.reset();
 
 		drivetrain = new Drivetrain();
 		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
@@ -87,9 +87,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotPeriodic() {
 		SmartDashboard.putNumber("Gyro Value", RobotMap.gyro.getAngle());
-		drivetrain.setGyroPID(SmartDashboard.getNumber("Gyro P", 0),
-				SmartDashboard.getNumber("Gyro I", 0),
-				SmartDashboard.getNumber("Gyro D", 0));
 		SmartDashboard.putNumber("PDP0: ", RobotMap.pdp.getCurrent(0));
 		SmartDashboard.putNumber("PDP1: ", RobotMap.pdp.getCurrent(1));
 		SmartDashboard.putNumber("PDP14: ", RobotMap.pdp.getCurrent(14));

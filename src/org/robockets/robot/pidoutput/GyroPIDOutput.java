@@ -14,6 +14,6 @@ public class GyroPIDOutput implements PIDOutput {
     
     @Override
     public void pidWrite(double output) {
-    	dd.arcadeDrive(0, output);
+    	dd.arcadeDrive(0, -output);
     }
 }
