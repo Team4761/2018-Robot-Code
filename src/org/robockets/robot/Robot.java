@@ -43,6 +43,19 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		SmartDashboard.getNumber("Climber P", Robot.climber.climberPID.getP());
+		SmartDashboard.getNumber("Climber I", Robot.climber.climberPID.getI());
+		SmartDashboard.getNumber("Climber D", Robot.climber.climberPID.getD());
+	}
+	
+	@Override
+	public void robotPeriodic() {
+		SmartDashboard.putNumber("Climber encoder distance", Robot.climber.getClimbingDistance());
+		Robot.climber.climberPID.setPID(
+				SmartDashboard.getNumber("Climber P", 0),
+				SmartDashboard.getNumber("Climber I", 0),
+				SmartDashboard.getNumber("Climber D", 0));
 	}
 
 	/**

@@ -8,27 +8,18 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * This command will climb the scale given certain starting parameters.
  */
-public class Climb extends Command {
+public class ClimbTime extends Command {
 
-	boolean stall = false;
 	double time = 0;
 
 	private RelativeDirection.ZAxis direction;
 	
-	/*
-	 * Climb until the robot climber motor stalls.
-	 */
-    public Climb(RelativeDirection.ZAxis direction) {
-    	requires(Robot.climber);
-    	stall = true;
-    	this.direction = direction;
-    }
-    
     /* 
      * Climb for a given amount of time or indefinitely.
      * @param time		How long to climb for given a certain time. If zero, climb indefinitely.
+     * @param direction	Which direction to climb in.
      */
-    public Climb(double time, RelativeDirection.ZAxis direction) {
+    public ClimbTime(double time, RelativeDirection.ZAxis direction) {
     	this.time = time;
     	if (time != 0) {
     		setTimeout(time);
@@ -47,13 +38,7 @@ public class Climb extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (stall == true) {
-    		return Robot.climber.isStalling();
-    	} else if (time == 0) {
-    		return false;
-    	} else {
-    		return isTimedOut();
-    	}
+    	return (time == 0 ? false : isTimedOut());
     }
 
     // Called once after isFinished returns true

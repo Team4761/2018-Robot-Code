@@ -18,9 +18,10 @@ import edu.wpi.first.wpilibj.Victor;
  * floating around.
  */
 public class RobotMap {
-	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.
+	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0);
+	// Zero is the CAN id of the power distribution panel.
 	public static Victor climberMotor = new Victor(0);
 	public static int climberMotorPDPChannel = 1; // Dummy value.
-	
+	public static int climberMotor2PDPChannel = 2; // There will be a second motor.
 	public static Encoder climberEncoder = new Encoder(2,3);
 }
