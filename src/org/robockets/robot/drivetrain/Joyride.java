@@ -25,7 +25,6 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		System.out.println("AAAAAA");
 		translate = -OI.joystick.getRawAxis(1);
 		rotate = -OI.joystick.getRawAxis(4);
 
