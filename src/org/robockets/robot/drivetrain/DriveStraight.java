@@ -12,6 +12,7 @@ public class DriveStraight extends Command {
 	private double speed;
 
 	public DriveStraight(double time, double speed) {
+		requires(Robot.drivetrain);
 		this.time = time;
 		this.speed = speed;
 	}

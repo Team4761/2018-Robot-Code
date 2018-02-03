@@ -9,6 +9,6 @@ import org.robockets.robot.drivetrain.DriveStraight;
 public class DumbAuto extends CommandGroup {
 
 	public DumbAuto() {
-		addSequential(new DriveStraight(2.5)); // TODO: Change this to a correct number
+		addSequential(new DriveStraight(15, .5)); // TODO: Change this to a correct number
 	}
 }

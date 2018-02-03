@@ -21,11 +21,12 @@ public class Joyride extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    }
+	}
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	translate = -OI.joystick.getRawAxis(1);
+		System.out.println("AAAAAA");
+		translate = -OI.joystick.getRawAxis(1);
 		rotate = -OI.joystick.getRawAxis(4);
 
 		double scalar = SmartDashboard.getNumber("Drivetrain Scalar", 1);
@@ -43,7 +44,7 @@ public class Joyride extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
+		Robot.drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
