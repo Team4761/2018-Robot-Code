@@ -19,7 +19,7 @@ public class AutoChooser extends CommandGroup {
 				autoCommand = new MinAuto();
 				break;
 			case MID:
-				// autoCommand = new MidAuto(startingPosition, priority);
+				autoCommand = new MidAuto(startingPosition, priority);
 				break;
 			case MAX:
 				// autoCommand = new MaxAuto(SOMETHING_HERE);
