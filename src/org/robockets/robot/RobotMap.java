@@ -22,8 +22,8 @@ import edu.wpi.first.wpilibj.SPI;
  * floating around.
  */
 public class RobotMap {
-	public static Victor leftDrivepodSpeedController = new Victor(2);
-	public static Victor rightDrivepodSpeedController = new Victor(3);
+	public static Victor leftDrivepodSpeedController = new Victor(0);
+	public static Victor rightDrivepodSpeedController = new Victor(1);
 	
 	public static DifferentialDrive robotDrive = new DifferentialDrive(leftDrivepodSpeedController, rightDrivepodSpeedController);
 	
