@@ -25,7 +25,7 @@ public class RobotMap {
 	public static Victor leftDrivepodSpeedController = new Victor(4);
 	public static Victor rightDrivepodSpeedController = new Victor(1);
 	public static Victor elevatorMotor = new Victor(6);//Not the correct port
-
+	public static Victor elevatorFloorMotor = new Victor(7);
 	
 	public static DifferentialDrive robotDrive = new DifferentialDrive(leftDrivepodSpeedController, rightDrivepodSpeedController);
 	
