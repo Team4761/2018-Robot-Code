@@ -31,7 +31,7 @@ public class Elevator extends Subsystem {
     	this.position = position;
 	}
 
-	public boolean isSwitchPressed(ElevatorPosition position, RelativeDirection.ZAxis direction) {
+	public boolean isInPosition(ElevatorPosition position, RelativeDirection.ZAxis direction) {
     	boolean isPressed = false;
 
     	double encoderPos = position.getValue();

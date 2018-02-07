@@ -2,7 +2,6 @@ package org.robockets.robot.elevator;
 
 import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.Robot;
-import org.robockets.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -44,7 +43,7 @@ public class Elevate extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.elevator.isSwitchPressed(newPosition, direction);
+        return Robot.elevator.isInPosition(newPosition, direction);
     }
 
     // Called once after isFinished returns true
