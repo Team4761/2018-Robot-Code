@@ -9,6 +9,7 @@ public class AutoHelper {
 	 * The type of auto
 	 */
 	public enum AutoType {
+		TEST,
 		DUMB,
 		MIN,
 		MID,

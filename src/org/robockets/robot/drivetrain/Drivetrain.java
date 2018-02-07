@@ -1,6 +1,8 @@
 package org.robockets.robot.drivetrain;
 
+import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.RobotMap;
+import org.robockets.robot.pidoutput.DrivePodPIDOutput;
 import org.robockets.robot.pidoutput.GyroPIDOutput;
 import org.robockets.robot.pidsources.EncoderPIDSource;
 import org.robockets.robot.pidsources.GyroPIDSource;
@@ -17,22 +19,25 @@ public class Drivetrain extends Subsystem {
 	 private final EncoderPIDSource leftPodPIDSource;
 	 private final EncoderPIDSource rightPodPIDSource;
 	 private final GyroPIDSource gyroPIDSource;
-	 private final PIDController leftPodPID;
-	 private final PIDController rightPodPID;
-	 public final PIDController gyroPID;
+
+	public final PIDController leftPodPID;
+	public final PIDController rightPodPID;
+	public final PIDController gyroPID;
 
 	public Drivetrain() {
-		
-		leftPodPIDSource = new EncoderPIDSource(RobotMap.leftEncoder, 1); 
-		leftPodPID = new PIDController(0, 0, 0, leftPodPIDSource, RobotMap.leftDrivePodOutput);
+
+		leftPodPIDSource = new EncoderPIDSource(RobotMap.leftEncoder);
+		leftPodPID = new PIDController(0.05, 0, 0, leftPodPIDSource,
+				new DrivePodPIDOutput(RobotMap.leftDrivepodSpeedController));
         leftPodPID.disable();
-        leftPodPID.setOutputRange(-1.0, 1.0);
+        leftPodPID.setOutputRange(-0.5, 0.5);
         leftPodPID.setAbsoluteTolerance(0.5);
-        
-        rightPodPIDSource = new EncoderPIDSource(RobotMap.rightEncoder, 1);
-        rightPodPID = new PIDController(0, 0, 0, rightPodPIDSource, RobotMap.rightDrivePodOutput);
+
+        rightPodPIDSource = new EncoderPIDSource(RobotMap.rightEncoder);
+        rightPodPID = new PIDController(0.05, 0, 0, rightPodPIDSource,
+				new DrivePodPIDOutput(RobotMap.rightDrivepodSpeedController, true));
         rightPodPID.disable();
-        rightPodPID.setOutputRange(-1.0, 1.0);
+        rightPodPID.setOutputRange(-0.5, 0.5);
         rightPodPID.setAbsoluteTolerance(0.5);
 		
 		gyroPIDSource = new GyroPIDSource();
@@ -44,7 +49,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new Joyride());
+    	//setDefaultCommand(new Joyride());
     }
     
     /**
@@ -74,6 +79,14 @@ public class Drivetrain extends Subsystem {
 
     public void setGyroPID(double p, double i, double d) {
 		gyroPID.setPID(p, i, d);
+	}
+
+	public void setEncoderPID(RelativeDirection.XAxis side, double p,  double i, double d) {
+		if (side == RelativeDirection.XAxis.LEFT) {
+			leftPodPID.setPID(p, i, d);
+		} else {
+			rightPodPID.setPID(p, i, d);
+		}
 	}
 
     /**
@@ -120,6 +133,11 @@ public class Drivetrain extends Subsystem {
 
 	public void disableGyroPID() {
     	gyroPID.disable();
+	}
+
+	public void disableEncoderPID() {
+		leftPodPID.disable();
+		rightPodPID.disable();
 	}
 }
 

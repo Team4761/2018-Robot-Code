@@ -2,6 +2,7 @@ package org.robockets.robot.drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.robockets.robot.Robot;
+import org.robockets.robot.RobotMap;
 
 /**
  * @author Jake Backer
@@ -9,19 +10,16 @@ import org.robockets.robot.Robot;
 public class DriveStraightAssisted extends Command {
 
 	private double distance;
-	private double speed;
-
-	public DriveStraightAssisted(double distance, double speed) {
-		this.distance = distance;
-		this.speed = speed;
-	}
 
 	public DriveStraightAssisted(double distance) {
-		this(distance, 0.75);
+		this.distance = distance;
 	}
 
 	protected void initialize() {
-		Robot.drivetrain.setDistance(distance);
+		double leftPosition = RobotMap.leftEncoder.getDistance() + distance; // Convert relative to absolute
+		double rightPosition = RobotMap.rightEncoder.getDistance() + distance;
+
+		Robot.drivetrain.setDistance(leftPosition, rightPosition);
 		Robot.drivetrain.enableEncoderPID();
 	}
 
@@ -33,7 +31,7 @@ public class DriveStraightAssisted extends Command {
 	}
 
 	protected void end() {
-
+		Robot.drivetrain.disableEncoderPID();
 	}
 
 	protected void interrupted() {

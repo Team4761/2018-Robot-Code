@@ -9,6 +9,6 @@ import org.robockets.robot.drivetrain.DriveStraightAssisted;
 public class MinAuto extends CommandGroup {
 
 	public MinAuto() {
-		addSequential(new DriveStraightAssisted(120, 0.75)); // 12ft TODO: Change the speed
+		addSequential(new DriveStraightAssisted(120)); // 12ft
 	}
 }

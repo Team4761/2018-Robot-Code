@@ -12,6 +12,9 @@ public class AutoChooser extends CommandGroup {
 	public AutoChooser(AutoHelper.AutoType auto, AutoHelper.RobotPosition startingPosition, AutoHelper.Priority priority) {
 		Command autoCommand = new DumbAuto();
 		switch (auto) {
+			case TEST:
+				autoCommand = new TestAuto();
+				break;
 			case DUMB:
 				autoCommand = new DumbAuto();
 				break;

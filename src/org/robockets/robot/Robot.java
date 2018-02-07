@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.robockets.robot.autonomous.AutoChooser;
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
+import org.robockets.robot.drivetrain.StartEncoderPID;
 import org.robockets.robot.utility.AutoHelper;
 import org.robockets.robot.drivetrain.StartGyroPID;
 
@@ -49,20 +50,32 @@ public class Robot extends TimedRobot {
 		RobotMap.gyro.reset();
 
 		drivetrain = new Drivetrain();
-		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
-		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
+		RobotMap.leftEncoder.setDistancePerPulse(1/39.92);
+		RobotMap.rightEncoder.setDistancePerPulse(1/39.07);
 		RobotMap.leftDrivepodSpeedController.setInverted(true);
 		RobotMap.rightDrivepodSpeedController.setInverted(true);
 		RobotMap.leftEncoder.setReverseDirection(true);
 
-		SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
+		/*SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
 		SmartDashboard.putNumber("Gyro I", drivetrain.gyroPID.getI());
 		SmartDashboard.putNumber("Gyro D", drivetrain.gyroPID.getD());
 		SmartDashboard.putNumber("Gyro Setpoint", 0);
-		SmartDashboard.putData(new StartGyroPID());
+		SmartDashboard.putData(new StartGyroPID());*/
+
+		SmartDashboard.putNumber("Left Encoder P", drivetrain.leftPodPID.getP());
+		SmartDashboard.putNumber("Left Encoder I", drivetrain.leftPodPID.getI());
+		SmartDashboard.putNumber("Left Encoder D", drivetrain.leftPodPID.getD());
+		SmartDashboard.putNumber("Left Encoder Setpoint", 0);
+
+		SmartDashboard.putNumber("Right Encoder P", drivetrain.rightPodPID.getP());
+		SmartDashboard.putNumber("Right Encoder I", drivetrain.rightPodPID.getI());
+		SmartDashboard.putNumber("Right Encoder D", drivetrain.rightPodPID.getD());
+		SmartDashboard.putNumber("Right Encoder Setpoint", 0);
+		SmartDashboard.putData(new StartEncoderPID());
 
 		joyride = new Joyride();
 
+		autoChooser.addObject("Test Auto", AutoHelper.AutoType.TEST);
 		autoChooser.addDefault("Dumb Auto", AutoHelper.AutoType.DUMB);
 		autoChooser.addObject("Min Auto", AutoHelper.AutoType.MIN);
 
@@ -90,6 +103,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Gyro Value", RobotMap.gyro.getAngle());
 		SmartDashboard.putNumber("Left Encoder Value", RobotMap.leftEncoder.get());
 		SmartDashboard.putNumber("Right Encoder Value", RobotMap.rightEncoder.get());
+
+		SmartDashboard.putNumber("Left Distance", RobotMap.leftEncoder.getDistance());
+		SmartDashboard.putNumber("Right Distance", RobotMap.rightEncoder.getDistance());
+
+		SmartDashboard.putNumber("Left PID Output", drivetrain.leftPodPID.get());
+		SmartDashboard.putNumber("Right PID Output", drivetrain.rightPodPID.get());
 		/*SmartDashboard.putNumber("PDP0: ", RobotMap.pdp.getCurrent(0));
 		SmartDashboard.putNumber("PDP1: ", RobotMap.pdp.getCurrent(1));
 		SmartDashboard.putNumber("PDP14: ", RobotMap.pdp.getCurrent(14));

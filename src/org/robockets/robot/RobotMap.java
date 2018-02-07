@@ -31,9 +31,6 @@ public class RobotMap {
 	
 	public static Encoder leftEncoder = new Encoder(0, 1);
 	public static Encoder rightEncoder = new Encoder(2, 3);
-	
-	public static DrivePodPIDOutput leftDrivePodOutput = new DrivePodPIDOutput(leftDrivepodSpeedController);	
-	public static DrivePodPIDOutput rightDrivePodOutput = new DrivePodPIDOutput(rightDrivepodSpeedController);
 
 	//public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
