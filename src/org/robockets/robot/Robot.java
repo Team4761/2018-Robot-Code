@@ -12,9 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
 import org.robockets.robot.cubeintake.CubeIntake;
+import org.robockets.robot.elevator.Elevate;
+import org.robockets.robot.elevator.Elevator;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,7 +34,9 @@ public class Robot extends TimedRobot {
 	public static CubeIntake cubeIntake;
 
 	public static Command joyride;
-
+	
+	public static Elevator elevator;
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -49,6 +54,8 @@ public class Robot extends TimedRobot {
 		cubeIntake = new CubeIntake();
 
 		joyride = new Joyride();
+		elevator = new Elevator();
+		
 
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);

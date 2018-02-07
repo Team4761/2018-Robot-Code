@@ -9,6 +9,7 @@ package org.robockets.robot;
 
 import org.robockets.robot.pidoutput.DrivePodPIDOutput;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -21,8 +22,15 @@ import edu.wpi.first.wpilibj.SPI;
  * floating around.qa1`		`1
  */
 public class RobotMap {
-	public static Victor leftDrivepodSpeedController = new Victor(4);
 	public static Victor rightDrivepodSpeedController = new Victor(1);
+	public static Victor leftDrivepodSpeedController = new Victor(4);
+	
+	public static Victor leftIntake = new Victor(2);
+	public static Victor rightIntake = new Victor(3);
+	public static Victor barIntake = new Victor(5);
+
+	public static Victor elevatorMotor = new Victor(6);//Not the correct port
+	public static Victor elevatorFloorMotor = new Victor(7);
 	
 	public static DifferentialDrive robotDrive = new DifferentialDrive(leftDrivepodSpeedController, rightDrivepodSpeedController);
 	
@@ -33,11 +41,7 @@ public class RobotMap {
 	
 	public static DrivePodPIDOutput leftDrivePodOutput = new DrivePodPIDOutput(leftDrivepodSpeedController);	
 	public static DrivePodPIDOutput rightDrivePodOutput = new DrivePodPIDOutput(rightDrivepodSpeedController);
-	
-	
-	public static Victor leftIntake = new Victor(2);
-	public static Victor rightIntake = new Victor(3);
-	public static Victor barIntake = new Victor(5);
-	
+
+	public static Encoder elevatorEncoder = new Encoder(4, 5);
 	
 }
