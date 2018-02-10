@@ -11,7 +11,7 @@ public class TestAuto extends CommandGroup {
 
 	public TestAuto() {
 		addSequential(new DriveStraightAssisted(120));
-		/*addSequential(new DriveAngleAssisted(90));
-		addSequential(new DriveStraightAssisted(36));*/
+		addSequential(new DriveAngleAssisted(90));
+		/*addSequential(new DriveStraightAssisted(36));*/
 	}
 }
