@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.robockets.robot.cubeintake.IntakeListener;
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
 import org.robockets.robot.cubeintake.CubeIntake;
@@ -34,6 +35,8 @@ public class Robot extends TimedRobot {
 	public static CubeIntake cubeIntake;
 
 	public static Command joyride;
+
+	public static Command intakelistener;
 	
 	public static Elevator elevator;
 	
@@ -52,6 +55,7 @@ public class Robot extends TimedRobot {
 		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
 		
 		cubeIntake = new CubeIntake();
+		intakelistener = new IntakeListener(); // This may cause intitializer error
 
 		joyride = new Joyride();
 		elevator = new Elevator();
@@ -124,6 +128,7 @@ public class Robot extends TimedRobot {
 		}
 		
 		joyride.start();
+		intakelistener.start();
 	}
 
 	/**
