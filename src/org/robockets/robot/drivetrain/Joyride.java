@@ -24,8 +24,8 @@ public class Joyride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	translate = OI.joystick.getRawAxis(1);
-		rotate = OI.joystick.getRawAxis(4);
+    	translate = OI.driverJoystick.getRawAxis(1);
+		rotate = OI.driverJoystick.getRawAxis(4);
 		
 		Robot.drivetrain.driveArcade(translate, rotate);
     }
