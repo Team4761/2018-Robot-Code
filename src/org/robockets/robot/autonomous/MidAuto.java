@@ -43,8 +43,8 @@ public class MidAuto extends CommandGroup {
 							if (teamSwitchSameSide == false) { // If switch is on other side
 								// Drive in S shape to other side
 								dropCubeInOppositeSideScaleSShape(teamSwitchLeft);
-							} else {
-								// SOMETHING
+							} else { // If switch is on our side
+								// We can just drop in switch or still drive in s
 							}
 						}
 						break;
@@ -72,7 +72,7 @@ public class MidAuto extends CommandGroup {
 							dropCubeInSameSideSwitch(teamSwitchLeft);
 						} else { // Else
 							// Drive to auto line.
-							autoLine();// Drive in S shape to other side
+							autoLine();
 						}
 				}
 		}
