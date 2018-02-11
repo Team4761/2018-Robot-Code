@@ -1,16 +1,14 @@
 package org.robockets.robot.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.robockets.commons.RelativeDirection;
-import org.robockets.robot.OI;
 import org.robockets.robot.Robot;
 
 /**
  * @author Jake Backer
  */
-public class ManualElevate extends Command {
+public class InterruptElevator extends Command {
 
-	public ManualElevate() {
+	public InterruptElevator() {
 		requires(Robot.elevator);
 	}
 
@@ -18,13 +16,10 @@ public class ManualElevate extends Command {
 	}
 
 	protected void execute() {
-		double speed = -OI.operatorJoystick.getRawAxis(5);
-
-		Robot.elevator.setElevatorSpeed(speed0);
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	protected void end() {

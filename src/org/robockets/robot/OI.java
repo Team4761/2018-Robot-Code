@@ -10,7 +10,10 @@ package org.robockets.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import org.robockets.commons.RelativeDirection;
+import org.robockets.robot.cubeintake.IntakeCube;
+import org.robockets.robot.elevator.InterruptElevator;
 import org.robockets.robot.elevator.ManualElevate;
 
 /**
@@ -21,11 +24,11 @@ public class OI {
 	public static Joystick driverJoystick = new Joystick(0);
 	public static Joystick operatorJoystick = new Joystick(1);
 
+	public static Button operatorA = new JoystickButton(operatorJoystick, 1);
 	public static Button operatorSelect = new JoystickButton(operatorJoystick, 7);
-	public static Button operatorStart = new JoystickButton(operatorJoystick, 8);
 
 	public OI() {
-		operatorSelect.whileHeld(new ManualElevate(RelativeDirection.ZAxis.DOWN));
-		operatorStart.whileHeld(new ManualElevate(RelativeDirection.ZAxis.UP));
+		operatorA.whileHeld(new IntakeCube(1));
+		operatorSelect.whenPressed(new InterruptElevator());
 	}
 }

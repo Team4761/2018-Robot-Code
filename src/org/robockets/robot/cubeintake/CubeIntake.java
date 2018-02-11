@@ -16,6 +16,7 @@ public class CubeIntake extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new IntakeListener());
     }
     
     public void moveIntakeArm(RelativeDirection.XAxis direction, double speed){
