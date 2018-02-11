@@ -19,6 +19,6 @@ public class IntakeCube extends CommandGroup {
 		addSequential(new Elevate(ElevatorPosition.BOTTOM, speed));
 		addParallel(new MoveBothArms(speed));
 		addParallel(new MoveBar(speed));
-		addParallel(new MoveElevatorFloor(RelativeDirection.Malone.IN, speed));
+		addParallel(new MoveElevatorFloor(speed));
 	}
 }
