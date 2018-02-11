@@ -35,4 +35,3 @@ public class ManualElevate extends Command {
 		end();
 	}
 }
-\
