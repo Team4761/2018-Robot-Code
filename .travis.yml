@@ -7,3 +7,6 @@ install:
 script: ant compile
 
 jdk: oraclejdk8
+
+notifications:
+    slack: rmhsrobockets:5yuvOxtOMWZWUGGMDZVvuzwI
