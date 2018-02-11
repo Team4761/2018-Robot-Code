@@ -1,5 +1,6 @@
 package org.robockets.robot.elevator;
 
+import edu.wpi.first.wpilibj.drive.Vector2d;
 import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.RobotMap;
 
@@ -44,6 +45,10 @@ public class Elevator extends Subsystem {
 	    }
 
 		return isPressed;
+	}
+
+	public double getEncoderPos() {
+    	return RobotMap.elevatorEncoder.getDistance();
 	}
 
     public void stop(){
