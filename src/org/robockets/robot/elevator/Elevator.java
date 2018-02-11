@@ -46,12 +46,6 @@ public class Elevator extends Subsystem {
 		return isPressed;
 	}
 
-	public void moveElevatorFloor(RelativeDirection.Malone direction, double speed) {
-    	double temp = Math.abs(speed);
-
-    	RobotMap.elevatorFloorMotor.set(direction == RelativeDirection.Malone.IN ? -temp : temp);
-	}
-
     public void stop(){
     	RobotMap.elevatorMotor.set(0);
 

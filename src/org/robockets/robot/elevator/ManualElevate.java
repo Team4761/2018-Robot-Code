@@ -20,7 +20,7 @@ public class ManualElevate extends Command {
 	protected void execute() {
 		double speed = -OI.operatorJoystick.getRawAxis(5);
 
-		Robot.elevator.setElevatorSpeed(speed0);
+		Robot.elevator.setElevatorSpeed(speed);
 	}
 
 	protected boolean isFinished() {
@@ -35,3 +35,4 @@ public class ManualElevate extends Command {
 		end();
 	}
 }
+\

@@ -19,6 +19,7 @@ import org.robockets.robot.drivetrain.Joyride;
 import org.robockets.robot.cubeintake.CubeIntake;
 import org.robockets.robot.elevator.Elevate;
 import org.robockets.robot.elevator.Elevator;
+import org.robockets.robot.elevator.ElevatorFloor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,10 +36,10 @@ public class Robot extends TimedRobot {
 	public static CubeIntake cubeIntake;
 
 	public static Command joyride;
-
-	public static Command intakelistener;
 	
 	public static Elevator elevator;
+
+	public static ElevatorFloor elevatorFloor;
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -55,11 +56,10 @@ public class Robot extends TimedRobot {
 		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
 		
 		cubeIntake = new CubeIntake();
-		intakelistener = new IntakeListener(); // This may cause intitializer error
 
 		joyride = new Joyride();
 		elevator = new Elevator();
-		
+		elevatorFloor = new ElevatorFloor();
 
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
@@ -128,7 +128,6 @@ public class Robot extends TimedRobot {
 		}
 		
 		joyride.start();
-		intakelistener.start();
 	}
 
 	/**
