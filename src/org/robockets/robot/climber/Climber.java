@@ -18,17 +18,8 @@ public class Climber extends Subsystem {
 	final double STALLING_THRESHOLD = 70; // Stalling threshold in amperes.
 	final PowerDistributionPanel pdp;
 	
-	final ClimberPIDSource climberPIDSource;
-	final PIDController climberPID;
-	
 	public Climber() {
 		pdp = RobotMap.pdp;
-		
-		climberPIDSource = new ClimberPIDSource(RobotMap.climberEncoder); 
-		climberPID = new PIDController(0, 0, 0, climberPIDSource, RobotMap.climberMotorLeft);
-		climberPID.disable();
-		climberPID.setOutputRange(-1.0, 1.0);
-		climberPID.setAbsoluteTolerance(0.5);
 	}
 	
 	/*
@@ -66,15 +57,6 @@ public class Climber extends Subsystem {
 	public void setSpeed(double leftSpeed, double rightSpeed) {
 		RobotMap.climberMotorLeft.set(leftSpeed);
 		RobotMap.climberMotorRight.set(rightSpeed);
-	}
-	
-	
-	/*
-	 * THIS METHOD IS ENTIRELY FOR DEMONSTRATION PURPOSES. NOT FULLY FUNCTIONAL
-	 */
-	public void setMotor2(double position) {
-		climberPID.setSetpoint(position);
-		
 	}
 	
 	// SmartDashboard related commands.

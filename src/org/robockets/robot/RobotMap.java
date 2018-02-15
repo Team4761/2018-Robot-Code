@@ -44,8 +44,7 @@ public class RobotMap {
 	
 	public static Encoder leftEncoder = new Encoder(0, 1);
 	public static Encoder rightEncoder = new Encoder(2, 3);
-	public static Encoder climberEncoder = new Encoder(4,5);
-	public static Encoder elevatorEncoder = new Encoder(6, 7);
+	public static Encoder elevatorEncoder = new Encoder(4, 5);
 	
 	public static DrivePodPIDOutput leftDrivePodOutput = new DrivePodPIDOutput(leftDrivepodSpeedController);	
 	public static DrivePodPIDOutput rightDrivePodOutput = new DrivePodPIDOutput(rightDrivepodSpeedController);
