@@ -22,16 +22,16 @@ import edu.wpi.first.wpilibj.SPI;
  * floating around.
  */
 public class RobotMap {
+	public static Victor leftDrivepodSpeedController = new Victor(0);
 	public static Victor rightDrivepodSpeedController = new Victor(1);
-	public static Victor leftDrivepodSpeedController = new Victor(4);
 
-	public static Victor leftIntake = new Victor(2);
-	public static Victor rightIntake = new Victor(3);
-	public static Victor barIntake = new Victor(5);
+	public static Victor elevatorMotor = new Victor(2);//Not the correct port
+	public static Victor elevatorFloorMotor = new Victor(3);
 
-	public static Victor elevatorMotor = new Victor(6);//Not the correct port
-	public static Victor elevatorFloorMotor = new Victor(7);
-	
+	public static Victor leftIntake = new Victor(6);
+	public static Victor rightIntake = new Victor(7);
+	public static Victor barIntake = new Victor(8);
+
 	public static DifferentialDrive robotDrive = new DifferentialDrive(leftDrivepodSpeedController, rightDrivepodSpeedController);
 	
 	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);

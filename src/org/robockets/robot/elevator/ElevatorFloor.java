@@ -10,7 +10,7 @@ import org.robockets.robot.RobotMap;
  */
 public class ElevatorFloor extends Subsystem {
 
-	public final double[][] INVALID_RANGE = {{0.0, 0.0}, {0.0, 0.0}}; // Input ranges that the elevator cannot go to (inches)
+	public final double[][] INVALID_RANGE = {{0.0, 0.0}, {0.0, 0.0}}; // Ranges that the elevator cannot go to (inches)
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new ElevatorFloorListener());
