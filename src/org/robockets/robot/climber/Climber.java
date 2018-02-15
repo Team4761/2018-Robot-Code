@@ -16,10 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Climber extends Subsystem {
 
 	final double STALLING_THRESHOLD = 70; // Stalling threshold in amperes.
-	final PowerDistributionPanel pdp;
 	
 	public Climber() {
-		pdp = RobotMap.pdp;
 	}
 	
 	/*
@@ -35,7 +33,7 @@ public class Climber extends Subsystem {
 	 * @return	the amount of current going from the power distribution panel to the climber motor.
 	 */
 	public double getClimberMotorCurrent() {
-		return pdp.getCurrent(RobotMap.climberMotorPDPChannel);
+		return RobotMap.pdp.getCurrent(RobotMap.climberMotorPDPChannel);
 	}
 	
 	/*
