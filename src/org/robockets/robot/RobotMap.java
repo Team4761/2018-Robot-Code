@@ -31,8 +31,8 @@ public class RobotMap {
 	public static Victor elevatorMotor = new Victor(2);//Not the correct port
 	public static Victor elevatorFloorMotor = new Victor(6); // Dominik is trash
 
-	public static Victor leftIntake = new Victor(3);
-	public static Victor rightIntake = new Victor(4);
+	public static Victor rightIntake = new Victor(3); // Dominik is more trash
+	public static Victor leftIntake = new Victor(4);
 	public static Victor barIntake = new Victor(5);
 
 	public static Victor climberMotorLeft = new Victor(7);
