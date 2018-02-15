@@ -13,14 +13,16 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.robockets.robot.climber.ClimberListener;
 import org.robockets.robot.cubeintake.IntakeListener;
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.drivetrain.Joyride;
 import org.robockets.robot.cubeintake.CubeIntake;
-import org.robockets.robot.elevator.Elevate;
 import org.robockets.robot.elevator.Elevator;
 import org.robockets.robot.elevator.ElevatorFloor;
 import org.robockets.robot.climber.Climber;
+import org.robockets.robot.elevator.ElevatorFloorListener;
+import org.robockets.robot.elevator.ManualElevate;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,7 +41,13 @@ public class Robot extends TimedRobot {
 	
 	public static CubeIntake cubeIntake;
 
-	public static Command joyride;
+
+	// These are not used because they are run automatically as default commands
+	/*public static Command joyride;
+	public static Command climberListener;
+	public static Command intakeListener;
+	public static Command elevatorFloorListener;
+	public static Command manualElevate;*/
 	
 	public static Elevator elevator;
 
@@ -60,10 +68,14 @@ public class Robot extends TimedRobot {
 		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
 		
 		cubeIntake = new CubeIntake();
-
-		joyride = new Joyride();
 		elevator = new Elevator();
+
+		/*joyride = new Joyride();
+		climberListener = new ClimberListener();
+		intakeListener = new IntakeListener();
+		elevatorFloorListener = new ElevatorFloorListener();
 		elevatorFloor = new ElevatorFloor();
+		manualElevate = new ManualElevate();*/
 
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
@@ -130,8 +142,6 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		
-		joyride.start();
 	}
 
 	/**

@@ -1,11 +1,7 @@
 package org.robockets.robot.climber;
 
 import org.robockets.robot.RobotMap;
-import org.robockets.robot.pidsources.ClimberPIDSource;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -71,6 +67,7 @@ public class Climber extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new ClimberListener());
     }
 }
 

@@ -7,14 +7,14 @@ import org.robockets.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command will climb the scale given certain starting parameters.
+ * This command will climberListener the scale given certain starting parameters.
  */
-public class Climb extends Command {
+public class ClimberListener extends Command {
 	
 	/*
-	 * Climb until the robot climber motor stalls.
+	 * ClimberListener until the robot climber motor stalls.
 	 */
-    public Climb(){
+    public ClimberListener(){
     	requires(Robot.climber);
     }
 
