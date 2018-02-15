@@ -16,18 +16,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Climber extends Subsystem {
 
 	final double STALLING_THRESHOLD = 70; // Stalling threshold in amperes.
-	final Victor climberMotor;
 	final PowerDistributionPanel pdp;
 	
 	final ClimberPIDSource climberPIDSource;
 	final PIDController climberPID;
 	
 	public Climber() {
-		climberMotor = RobotMap.climberMotor;
 		pdp = RobotMap.pdp;
 		
 		climberPIDSource = new ClimberPIDSource(RobotMap.climberEncoder); 
-		climberPID = new PIDController(0, 0, 0, climberPIDSource, climberMotor);
+		climberPID = new PIDController(0, 0, 0, climberPIDSource, RobotMap.climberMotorLeft);
 		climberPID.disable();
 		climberPID.setOutputRange(-1.0, 1.0);
 		climberPID.setAbsoluteTolerance(0.5);
@@ -53,15 +51,21 @@ public class Climber extends Subsystem {
 	 * Stop / brake the climbing motor(s).
 	 */
 	public void stop() {
-		climberMotor.set(0);
+		RobotMap.climberMotorLeft.set(0);
 	}
 	
 	/*
 	 * Set the speed from 0 to 1 of the climber motor.
 	 * @param speed		The exact speed to use with the climber motor.
 	 */
-	public void setMotor(double speed) {
-		climberMotor.set(speed);
+	public void setSpeed(double speed) {
+		RobotMap.climberMotorLeft.set(speed);
+		RobotMap.climberMotorRight.set(speed);
+	}
+
+	public void setSpeed(double leftSpeed, double rightSpeed) {
+		RobotMap.climberMotorLeft.set(leftSpeed);
+		RobotMap.climberMotorRight.set(rightSpeed);
 	}
 	
 	

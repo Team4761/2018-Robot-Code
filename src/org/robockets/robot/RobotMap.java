@@ -31,7 +31,8 @@ public class RobotMap {
 	public static Victor elevatorMotor = new Victor(2);//Not the correct port
 	public static Victor elevatorFloorMotor = new Victor(3);
 
-	public static Victor climberMotor = new Victor(4);
+	public static Victor climberMotorLeft = new Victor(4);
+	public static Victor climberMotorRight = new Victor(5);
 
 	public static Victor leftIntake = new Victor(6);
 	public static Victor rightIntake = new Victor(7);
