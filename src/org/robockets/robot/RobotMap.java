@@ -29,14 +29,14 @@ public class RobotMap {
 	public static Victor rightDrivepodSpeedController = new Victor(1);
 
 	public static Victor elevatorMotor = new Victor(2);//Not the correct port
-	public static Victor elevatorFloorMotor = new Victor(3);
+	public static Victor elevatorFloorMotor = new Victor(6); // Dominik is trash
 
-	public static Victor climberMotorLeft = new Victor(4);
-	public static Victor climberMotorRight = new Victor(5);
+	public static Victor leftIntake = new Victor(3);
+	public static Victor rightIntake = new Victor(4);
+	public static Victor barIntake = new Victor(5);
 
-	public static Victor leftIntake = new Victor(6);
-	public static Victor rightIntake = new Victor(7);
-	public static Victor barIntake = new Victor(8);
+	public static Victor climberMotorLeft = new Victor(7);
+	public static Victor climberMotorRight = new Victor(8);
 
 	public static DifferentialDrive robotDrive = new DifferentialDrive(leftDrivepodSpeedController, rightDrivepodSpeedController);
 	
