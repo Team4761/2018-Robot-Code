@@ -20,6 +20,7 @@ import org.robockets.robot.cubeintake.CubeIntake;
 import org.robockets.robot.elevator.Elevate;
 import org.robockets.robot.elevator.Elevator;
 import org.robockets.robot.elevator.ElevatorFloor;
+import org.robockets.robot.climber.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,6 +30,9 @@ import org.robockets.robot.elevator.ElevatorFloor;
  * project.
  */
 public class Robot extends TimedRobot {
+
+	public static final Climber climber = new Climber();
+
 	public static OI m_oi;
 	
 	public static Drivetrain drivetrain;

@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Victor;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -28,6 +31,8 @@ public class RobotMap {
 	public static Victor elevatorMotor = new Victor(2);//Not the correct port
 	public static Victor elevatorFloorMotor = new Victor(3);
 
+	public static Victor climberMotor = new Victor(4);
+
 	public static Victor leftIntake = new Victor(6);
 	public static Victor rightIntake = new Victor(7);
 	public static Victor barIntake = new Victor(8);
@@ -38,10 +43,14 @@ public class RobotMap {
 	
 	public static Encoder leftEncoder = new Encoder(0, 1);
 	public static Encoder rightEncoder = new Encoder(2, 3);
+	public static Encoder climberEncoder = new Encoder(4,5);
+	public static Encoder elevatorEncoder = new Encoder(6, 7);
 	
 	public static DrivePodPIDOutput leftDrivePodOutput = new DrivePodPIDOutput(leftDrivepodSpeedController);	
 	public static DrivePodPIDOutput rightDrivePodOutput = new DrivePodPIDOutput(rightDrivepodSpeedController);
 
-	public static Encoder elevatorEncoder = new Encoder(4, 5);
+	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.
+	public static int climberMotorPDPChannel = 1; // Dummy value.
 	
+
 }
