@@ -7,6 +7,7 @@
 
 package org.robockets.robot;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import org.robockets.robot.pidoutput.DrivePodPIDOutput;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -45,12 +46,8 @@ public class RobotMap {
 	public static Encoder leftEncoder = new Encoder(0, 1);
 	public static Encoder rightEncoder = new Encoder(2, 3);
 	public static Encoder elevatorEncoder = new Encoder(4, 5);
-	
-	public static DrivePodPIDOutput leftDrivePodOutput = new DrivePodPIDOutput(leftDrivepodSpeedController);	
-	public static DrivePodPIDOutput rightDrivePodOutput = new DrivePodPIDOutput(rightDrivepodSpeedController);
+
 
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.
 	public static int climberMotorPDPChannel = 1; // Dummy value.
-	
-
 }

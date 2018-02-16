@@ -1,6 +1,8 @@
 package org.robockets.robot.drivetrain;
 
+import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.RobotMap;
+import org.robockets.robot.pidoutput.DrivePodPIDOutput;
 import org.robockets.robot.pidoutput.GyroPIDOutput;
 import org.robockets.robot.pidsources.EncoderPIDSource;
 import org.robockets.robot.pidsources.GyroPIDSource;
@@ -17,34 +19,37 @@ public class Drivetrain extends Subsystem {
 	 private final EncoderPIDSource leftPodPIDSource;
 	 private final EncoderPIDSource rightPodPIDSource;
 	 private final GyroPIDSource gyroPIDSource;
-	 public final PIDController leftPodPID;
-	 public final PIDController rightPodPID;
-	 public final PIDController gyroPID;
+
+	public final PIDController leftPodPID;
+	public final PIDController rightPodPID;
+	public final PIDController gyroPID;
 
 	public Drivetrain() {
-		
-		leftPodPIDSource = new EncoderPIDSource(RobotMap.leftEncoder, 1); 
-		leftPodPID = new PIDController(0, 0, 0, leftPodPIDSource, RobotMap.leftDrivePodOutput);
+
+		leftPodPIDSource = new EncoderPIDSource(RobotMap.leftEncoder);
+		leftPodPID = new PIDController(0.05, 0, 0, leftPodPIDSource,
+				new DrivePodPIDOutput(RobotMap.leftDrivepodSpeedController));
         leftPodPID.disable();
-        leftPodPID.setOutputRange(-1.0, 1.0);
+        leftPodPID.setOutputRange(-0.5, 0.5);
         leftPodPID.setAbsoluteTolerance(0.5);
-        
-        rightPodPIDSource = new EncoderPIDSource(RobotMap.rightEncoder, 1);
-        rightPodPID = new PIDController(0, 0, 0, rightPodPIDSource, RobotMap.rightDrivePodOutput);
+
+        rightPodPIDSource = new EncoderPIDSource(RobotMap.rightEncoder);
+        rightPodPID = new PIDController(0.05, 0, 0, rightPodPIDSource,
+				new DrivePodPIDOutput(RobotMap.rightDrivepodSpeedController, true));
         rightPodPID.disable();
-        rightPodPID.setOutputRange(-1.0, 1.0);
+        rightPodPID.setOutputRange(-0.5, 0.5);
         rightPodPID.setAbsoluteTolerance(0.5);
 		
 		gyroPIDSource = new GyroPIDSource();
-        gyroPID = new PIDController(0, 0, 0, gyroPIDSource, new GyroPIDOutput());
+        gyroPID = new PIDController(0.06, 0.0002, 0.15, gyroPIDSource, new GyroPIDOutput(RobotMap.robotDrive));
         gyroPID.disable();
-        gyroPID.setOutputRange(-1.0, 1.0); // Set turning speed range
-        gyroPID.setPercentTolerance(5.0); // Set tolerance of 5%
+        gyroPID.setOutputRange(-0.5, 0.5); // Set turning speed range
+        gyroPID.setAbsoluteTolerance(2);
 		
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new Joyride());
+    	//setDefaultCommand(new Joyride());
     }
     
     /**
@@ -71,14 +76,26 @@ public class Drivetrain extends Subsystem {
     public void stop() {
     	driveTank(0, 0);
     }
-    
+
+    public void setGyroPID(double p, double i, double d) {
+		gyroPID.setPID(p, i, d);
+	}
+
+	public void setEncoderPID(RelativeDirection.XAxis side, double p,  double i, double d) {
+		if (side == RelativeDirection.XAxis.LEFT) {
+			leftPodPID.setPID(p, i, d);
+		} else {
+			rightPodPID.setPID(p, i, d);
+		}
+	}
+
     /**
      * A basic method to set the setpoint of both of the drive pods for a given distance with PID
      * @param distance Desired distance for both pods, in inches
      */
     public void setDistance(double distance) {
+		leftPodPID.setSetpoint(distance);
     	rightPodPID.setSetpoint(distance);
-    	leftPodPID.setSetpoint(distance);
     }
     
     /**
@@ -90,5 +107,37 @@ public class Drivetrain extends Subsystem {
     	leftPodPID.setSetpoint(leftDistance);
     	rightPodPID.setSetpoint(rightDistance);
     }
+
+	/**
+	 * Since the built in OnTarget for PID is terrible and broken, this is a manual one for the drive pods
+	 * @return Returns if both the encoder PIDs are OnTarget, with a tolerance of <code>ABSOLUTE_TOLERANCE</code>
+	 */
+	public boolean encodersOnTarget() {
+		final double ABSOLUTE_TOLERANCE = 1.0; // TODO: Change this to something more reasonable
+		return Math.abs((leftPodPID.getSetpoint() - leftPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE &&
+				Math.abs((rightPodPID.getSetpoint() - rightPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE;
+	}
+
+	public void enableEncoderPID() {
+		leftPodPID.enable();
+		rightPodPID.enable();
+	}
+
+    public void setGyroSetpoint(double angle) {
+    	gyroPID.setSetpoint(angle);
+	}
+
+	public void enableGyroPID() {
+    	gyroPID.enable();
+	}
+
+	public void disableGyroPID() {
+    	gyroPID.disable();
+	}
+
+	public void disableEncoderPID() {
+		leftPodPID.disable();
+		rightPodPID.disable();
+	}
 }
 
