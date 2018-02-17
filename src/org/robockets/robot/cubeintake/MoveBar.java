@@ -9,12 +9,21 @@ import org.robockets.robot.Robot;
 public class MoveBar extends Command {
 
 	private double speed;
+	private double time;
+
+	public MoveBar(double speed, double time) {
+		this.speed = speed;
+		this.time = time;
+	}
 
 	public MoveBar(double speed) {
-		this.speed = speed;
+		this(speed, 0);
 	}
 
 	protected void initialize() {
+		if (time != 0) {
+			setTimeout(time);
+		}
 	}
 
 	protected void execute() {
@@ -22,6 +31,9 @@ public class MoveBar extends Command {
 	}
 
 	protected boolean isFinished() {
+		if (time != 0) {
+			return isTimedOut();
+		}
 		return false;
 	}
 

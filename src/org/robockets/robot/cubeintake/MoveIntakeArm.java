@@ -13,17 +13,25 @@ public class MoveIntakeArm extends Command {
 	private RelativeDirection.XAxis arm;
 	
 	private double speed;
+	private double time;
+
+	public MoveIntakeArm(RelativeDirection.XAxis arm, double speed, double time) {
+		this.arm = arm;
+
+		this.speed = speed;
+		this.time = time;
+	}
 
     public MoveIntakeArm(RelativeDirection.XAxis arm, double speed) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	this.arm = arm;
-    	
-    	this.speed = speed;
+        this(arm, speed, 0);
     }
+
 
     // Called just before this Command runs the first time
     protected void initialize() {
+		if (time != 0) {
+			setTimeout(time);
+		}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,6 +41,9 @@ public class MoveIntakeArm extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+		if (time != 0) {
+			return isTimedOut();
+		}
         return false;
     }
 

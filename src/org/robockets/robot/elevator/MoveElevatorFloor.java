@@ -10,12 +10,21 @@ import org.robockets.robot.Robot;
 public class MoveElevatorFloor extends Command {
 
 	private double speed;
+	private double time;
+
+	public MoveElevatorFloor(double speed, double time) {
+		this.speed = speed;
+		this.time = time;
+	}
 
 	public MoveElevatorFloor(double speed) {
-		this.speed = speed;
+		this(speed, 0);
 	}
 
 	protected void initialize() {
+		if (time != 0) {
+			setTimeout(time);
+		}
 	}
 
 	protected void execute() {
@@ -23,6 +32,9 @@ public class MoveElevatorFloor extends Command {
 	}
 
 	protected boolean isFinished() {
+		if (time != 0) {
+			return isTimedOut();
+		}
 		return false;
 	}
 

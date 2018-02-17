@@ -21,8 +21,9 @@ public class DriveAngleAssisted extends Command {
 	}
 
 	protected void initialize() {
+		double abs = drivetrain.getGyroPos() - angle;
+		drivetrain.setGyroSetpoint(abs);
 		drivetrain.enableGyroPID();
-		drivetrain.setGyroSetpoint(angle);
 	}
 
 	protected void execute() {

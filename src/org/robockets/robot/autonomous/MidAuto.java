@@ -3,7 +3,7 @@ package org.robockets.robot.autonomous;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-import org.robockets.robot.commands.DropCube;
+import org.robockets.robot.cubeintake.DropCube;
 import org.robockets.robot.drivetrain.DriveAngleAssisted;
 import org.robockets.robot.drivetrain.DriveStraightAssisted;
 import org.robockets.robot.utility.AutoHelper;

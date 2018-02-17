@@ -139,5 +139,9 @@ public class Drivetrain extends Subsystem {
 		leftPodPID.disable();
 		rightPodPID.disable();
 	}
+
+	public double getGyroPos() {
+		return RobotMap.gyro.getAngle();
+	}
 }
 

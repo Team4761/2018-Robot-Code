@@ -8,8 +8,12 @@ import org.robockets.commons.RelativeDirection;
  */
 public class MoveBothArms extends CommandGroup {
 
+	public MoveBothArms(double speed, double time) {
+		addParallel(new MoveIntakeArm(RelativeDirection.XAxis.LEFT, speed, time));
+		addParallel(new MoveIntakeArm(RelativeDirection.XAxis.RIGHT, speed, time));
+	}
+
 	public MoveBothArms(double speed) {
-		addParallel(new MoveIntakeArm(RelativeDirection.XAxis.LEFT, speed));
-		addParallel(new MoveIntakeArm(RelativeDirection.XAxis.RIGHT, speed));
+		this(speed, 0);
 	}
 }
