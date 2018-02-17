@@ -28,7 +28,8 @@ public class Elevator extends Subsystem {
 		setDefaultCommand(new ManualElevate());
     }
     public void setElevatorSpeed(double elSpeed){
-    	RobotMap.elevatorMotor.set(ControlMode.PercentOutput, elSpeed);
+    	//RobotMap.elevatorMotor.set(ControlMode.PercentOutput, elSpeed);
+		RobotMap.climberMotorRight.set(elSpeed);
     }
 
     public ElevatorPosition getCurrentPosition() {

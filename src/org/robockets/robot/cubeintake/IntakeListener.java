@@ -18,8 +18,8 @@ public class IntakeListener extends Command {
 	}
 
 	protected void execute() {
-		double leftIntake = -OI.operatorJoystick.getRawAxis(2);
-		double rightIntake = -OI.operatorJoystick.getRawAxis(3);
+		double leftIntake = OI.operatorJoystick.getRawAxis(2);
+		double rightIntake = OI.operatorJoystick.getRawAxis(3);
 
 		boolean isLeftInverted = OI.operatorJoystick.getRawButton(5);
 		boolean isRightInverted = OI.operatorJoystick.getRawButton(6);

@@ -12,13 +12,13 @@ import org.robockets.robot.elevator.MoveElevatorFloor;
  */
 public class IntakeCube extends CommandGroup {
 
-	public IntakeCube(double speed) {
+	public IntakeCube(double intakeSpeed, double barSpeed) {
 		requires(Robot.cubeIntake);
 		requires(Robot.elevator);
 
-		addSequential(new Elevate(ElevatorPosition.BOTTOM, speed));
-		addParallel(new MoveBothArms(speed));
-		addParallel(new MoveBar(speed));
-		addParallel(new MoveElevatorFloor(speed));
+		//addSequential(new Elevate(ElevatorPosition.BOTTOM, intakeSpeed));
+		addParallel(new MoveBothArms(intakeSpeed));
+		addParallel(new MoveBar(barSpeed));
+		//addParallel(new MoveElevatorFloor(intakeSpeed));
 	}
 }

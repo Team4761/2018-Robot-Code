@@ -142,6 +142,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("PDP1: ", RobotMap.pdp.getCurrent(1));
 		SmartDashboard.putNumber("PDP14: ", RobotMap.pdp.getCurrent(14));
 		SmartDashboard.putNumber("PDP15: ", RobotMap.pdp.getCurrent(15));*/
+
+		SmartDashboard.putNumber("Elevator Encoder", elevator.getEncoderPos());
 	}
 
 	/**

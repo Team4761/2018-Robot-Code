@@ -26,7 +26,7 @@ public class MoveBar extends Command {
 	}
 
 	protected void end() {
-
+		Robot.cubeIntake.moveBar(0);
 	}
 
 	protected void interrupted() {

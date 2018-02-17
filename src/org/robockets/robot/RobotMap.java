@@ -30,11 +30,11 @@ public class RobotMap {
 	public static Victor leftDrivepodSpeedController = new Victor(0);
 	public static Victor rightDrivepodSpeedController = new Victor(1);
 
-	public static TalonSRX elevatorMotor = new TalonSRX(2);//Not the correct port
+	public static TalonSRX elevatorMotor = new TalonSRX(2); // This is the bane of my existence
 	public static Victor elevatorFloorMotor = new Victor(6); // Dominik is trash
 
-	public static Victor rightIntake = new Victor(3); // Dominik is more trash
-	public static Victor leftIntake = new Victor(8); // STROUT!!!!
+	public static Victor rightIntake = new Victor(8); // Dominik is more trash
+	public static Victor leftIntake = new Victor(4); // STROUT!!!!
 	public static Victor barIntake = new Victor(5);
 
 	public static Victor climberMotorLeft = new Victor(7);
@@ -46,7 +46,6 @@ public class RobotMap {
 	
 	public static Encoder leftEncoder = new Encoder(0, 1);
 	public static Encoder rightEncoder = new Encoder(2, 3);
-
 
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.
 	public static int climberMotorPDPChannel = 1; // Dummy value.
