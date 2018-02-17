@@ -9,7 +9,7 @@ import org.robockets.robot.drivetrain.DriveStraightAssisted;
 import org.robockets.robot.utility.AutoHelper;
 
 /**
- * @author Jake Backer
+ * @author Mathias Kools, Jake Backer
  */
 public class MidAuto extends CommandGroup {
 
@@ -20,7 +20,6 @@ public class MidAuto extends CommandGroup {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		boolean teamSwitchLeft = gameData.charAt(0) == 'L'; // true if switch is on the left from our driver perspective.
 		boolean scaleLeft = gameData.charAt(1) == 'L';
-		boolean opponentSwitchLeft = gameData.charAt(2) == 'L';
 		boolean scaleSameSide = (scaleLeft == true) == (robotPosition == AutoHelper.RobotPosition.LEFT);
 		boolean teamSwitchSameSide = (teamSwitchLeft == true) == (robotPosition == AutoHelper.RobotPosition.LEFT);
 		// true == true on left and false == false on right.
@@ -99,7 +98,7 @@ public class MidAuto extends CommandGroup {
 		driveStraight(168); // the switch starts 140 inches away, ends 196 inches away. We will go halfway.
 		double anotherSwitchAngle = (teamSwitchLeft ? -90 : 90); // The same as before. TODO: Move to higher level.
 		turnAngle(anotherSwitchAngle);
-		driveStraight(30); // RAM
+		driveStraight(20);
 		dropCube();
 	}
 
@@ -115,9 +114,9 @@ public class MidAuto extends CommandGroup {
 		driveStraight(299.65); // Drive straight the distance to the scale.
 		driveStraight(34); // Drive an extra 34 inches to get to the center. TODO: do we want this?
 		// dropCube(); It's unclear if we want to drop from the middle of the scale or the side.
-		double scaleAngle = (teamSwitchLeft ? -90 : 90); // Turn CCW (-90) if the switch is left, turn CW otherwise
+		double scaleAngle = (teamSwitchLeft ? 90 : -90); // Angles switched @https://github.com/Team4761/2018-Robot-Code/commit/64457c0306894c1615783da3df1c77317552accf
 		turnAngle(scaleAngle);
-		driveStraight(30); // RAM;
+		driveStraight(20);
 		dropCube();
 	}
 
@@ -131,15 +130,22 @@ public class MidAuto extends CommandGroup {
 		turnAngle(-sAngle); // If we turned CW before, we want a CCW turn now to go forward.
 		driveStraight(34 + 32.735); // Go to about halfway across the scale and center offset from scale/switch.
 		turnAngle(sAngle); // turn towards scale, CCW if on the left, CW if on the right.
-		driveStraight(50); // RAM with a longer distance.
+		driveStraight(30);
 		// Deposit cube in scale
 		dropCube();
 	}
 
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
 		driveStraight(78); // Clear both the exchange rotation w/ switch box (@ 98 in).
-		double switchAngle = (teamSwitchLeft ? -90 : 90); // Turn CW (-90) if the switch is left, turn CCW otherwise 
-		turnAngle(switchAngle);
+		double smallAngle = (teamSwitchLeft ? -64 : 64); // Turn CW (-64) if the switch is left, turn CCW otherwise 
+		turnAngle(smallAngle);
+		// Drive distance determined by hypotenuse of triangle formed by half of switch length (87.5) and
+		// switch box (42 inches). The angle was determined with the arctan of these dimensions.
+		driveStraight(97);
+		turnAngle(-smallAngle); // turn back.
+		driveStraight(48); // drive the remaining 28 + (98-78) inches to go halfway across the switch or so.
+		double switchAngle = (teamSwitchLeft ? -90 : 90);
+		turnAngle(switchAngle); // turn towards the switch.
 		driveStraight(52); // Drive the remaining 42 inches to the switch to dump. 52 to overdo it.
 	}
 }
