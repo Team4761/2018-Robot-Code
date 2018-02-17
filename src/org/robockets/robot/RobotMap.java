@@ -7,6 +7,7 @@
 
 package org.robockets.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import org.robockets.robot.pidoutput.DrivePodPIDOutput;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -29,7 +30,7 @@ public class RobotMap {
 	public static Victor leftDrivepodSpeedController = new Victor(0);
 	public static Victor rightDrivepodSpeedController = new Victor(1);
 
-	public static Victor elevatorMotor = new Victor(2);//Not the correct port
+	public static TalonSRX elevatorMotor = new TalonSRX(2);//Not the correct port
 	public static Victor elevatorFloorMotor = new Victor(6); // Dominik is trash
 
 	public static Victor rightIntake = new Victor(3); // Dominik is more trash
@@ -45,7 +46,6 @@ public class RobotMap {
 	
 	public static Encoder leftEncoder = new Encoder(0, 1);
 	public static Encoder rightEncoder = new Encoder(2, 3);
-	public static Encoder elevatorEncoder = new Encoder(4, 5);
 
 
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.

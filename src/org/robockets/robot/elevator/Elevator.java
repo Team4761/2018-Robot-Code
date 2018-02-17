@@ -1,5 +1,7 @@
 package org.robockets.robot.elevator;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.drive.Vector2d;
 import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.RobotMap;
@@ -13,6 +15,10 @@ public class Elevator extends Subsystem {
 
 	private ElevatorPosition position = ElevatorPosition.BOTTOM;
 
+	public Elevator() {
+		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0,0);
+	}
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -22,7 +28,7 @@ public class Elevator extends Subsystem {
 		setDefaultCommand(new ManualElevate());
     }
     public void setElevatorSpeed(double elSpeed){
-    	RobotMap.elevatorMotor.set(elSpeed);
+    	RobotMap.elevatorMotor.set(ControlMode.PercentOutput, elSpeed);
     }
 
     public ElevatorPosition getCurrentPosition() {
@@ -39,21 +45,16 @@ public class Elevator extends Subsystem {
     	double encoderPos = position.getValue();
 
     	if (direction == RelativeDirection.ZAxis.UP) {
-    		isPressed = RobotMap.elevatorEncoder.getDistance() > encoderPos;
+    		isPressed = getEncoderPos() > encoderPos;
 	    } else {
-			isPressed = RobotMap.elevatorEncoder.getDistance() < encoderPos;
+			isPressed = getEncoderPos() < encoderPos;
 	    }
 
 		return isPressed;
 	}
 
 	public double getEncoderPos() {
-    	return RobotMap.elevatorEncoder.getDistance();
+    	return RobotMap.elevatorMotor.getSelectedSensorPosition(0);
 	}
-
-    public void stop(){
-    	RobotMap.elevatorMotor.set(0);
-
-    }
 }
 
