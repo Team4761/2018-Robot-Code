@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.robockets.robot.cubeintake.DropCube;
 import org.robockets.robot.drivetrain.DriveAngleAssisted;
 import org.robockets.robot.drivetrain.DriveStraightAssisted;
+import org.robockets.robot.elevator.Elevate;
+import org.robockets.robot.elevator.ElevatorPosition;
+import org.robockets.robot.elevator.MoveElevatorFloor;
 import org.robockets.robot.utility.AutoHelper;
 
 /**
@@ -120,7 +123,7 @@ public class MidAuto extends CommandGroup {
 		dropCube();
 	}
 
-	// Code that is so ugly it should be tucked away here.
+	// Code that is so ugly it should be tucked away here. FIXME: This is still super broken
 	private void dropCubeInOppositeSideScaleSShape(boolean teamSwitchLeft) {
 		driveStraight(228.735); // scale starts around 261.47 inches away. switch ends 196 inches away.
 		double sAngle = (teamSwitchLeft ? -90 : 90); // turn CCW if on the left, CW on the right.
@@ -136,6 +139,8 @@ public class MidAuto extends CommandGroup {
 	}
 
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
+		addParallel(new Elevate(ElevatorPosition.SWITCH));
+
 		driveStraight(78); // Clear both the exchange rotation w/ switch box (@ 98 in).
 		double smallAngle = (teamSwitchLeft ? -64 : 64); // Turn CW (-64) if the switch is left, turn CCW otherwise 
 		turnAngle(smallAngle);
@@ -147,5 +152,7 @@ public class MidAuto extends CommandGroup {
 		double switchAngle = (teamSwitchLeft ? -90 : 90);
 		turnAngle(switchAngle); // turn towards the switch.
 		driveStraight(52); // Drive the remaining 42 inches to the switch to dump. 52 to overdo it.
+
+		addSequential(new DropCube());
 	}
 }
