@@ -8,6 +8,7 @@
 package org.robockets.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import org.robockets.robot.pidoutput.DrivePodPIDOutput;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -30,7 +31,7 @@ public class RobotMap {
 	public static Victor leftDrivepodSpeedController = new Victor(0);
 	public static Victor rightDrivepodSpeedController = new Victor(1);
 
-	public static TalonSRX elevatorMotor = new TalonSRX(2); // This is the bane of my existence
+	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(2); // This is the bane of my existence
 	public static Victor elevatorFloorMotor = new Victor(6); // Dominik is trash
 
 	public static Victor rightIntake = new Victor(8); // Dominik is more trash

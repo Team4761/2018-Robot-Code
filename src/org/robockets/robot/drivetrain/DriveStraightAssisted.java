@@ -17,9 +17,9 @@ public class DriveStraightAssisted extends Command {
 
 	protected void initialize() {
 		double leftPosition = RobotMap.leftEncoder.getDistance() + distance; // Convert relative to absolute
-		double rightPosition = RobotMap.rightEncoder.getDistance() + distance;
+		//double rightPosition = RobotMap.rightEncoder.getDistance() + distance;
 
-		Robot.drivetrain.setDistance(leftPosition, rightPosition);
+		Robot.drivetrain.setDistance(leftPosition, leftPosition);
 		Robot.drivetrain.enableEncoderPID();
 	}
 

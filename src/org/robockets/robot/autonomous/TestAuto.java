@@ -10,7 +10,7 @@ import org.robockets.robot.drivetrain.DriveStraightAssisted;
 public class TestAuto extends CommandGroup {
 
 	public TestAuto() {
-		addSequential(new DriveStraightAssisted(120));
+		addSequential(new DriveStraightAssisted(24));
 		addSequential(new DriveAngleAssisted(90));
 		/*addSequential(new DriveStraightAssisted(36));*/
 	}

@@ -76,9 +76,8 @@ public class Robot extends TimedRobot {
 
 		RobotMap.leftEncoder.setDistancePerPulse(1 / 39.92);
 		RobotMap.rightEncoder.setDistancePerPulse(1 / 39.07);
-		RobotMap.leftDrivepodSpeedController.setInverted(true);
-		RobotMap.rightDrivepodSpeedController.setInverted(true);
-		RobotMap.leftEncoder.setReverseDirection(true);
+		//RobotMap.leftDrivepodSpeedController.setInverted(true);
+		//RobotMap.rightDrivepodSpeedController.setInverted(true);
 
 		/*SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
 		SmartDashboard.putNumber("Gyro I", drivetrain.gyroPID.getI());
