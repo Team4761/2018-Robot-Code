@@ -16,7 +16,7 @@ public class Elevator extends Subsystem {
 	private final double TICKS_PER_INCH = 38171;
 
 	public Elevator() {
-		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,0);
+		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
 	}
 
     // Put methods for controlling this subsystem

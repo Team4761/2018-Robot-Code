@@ -53,6 +53,8 @@ public class Robot extends TimedRobot {
 
 	public static ElevatorFloor elevatorFloor;
 
+	public static String gameData = "";
+
 	Command m_autonomousCommand;
 	SendableChooser<AutoHelper.AutoType> autoChooser = new SendableChooser<>();
 	SendableChooser<AutoHelper.RobotPosition> positionChooser = new SendableChooser<>();

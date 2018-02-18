@@ -3,6 +3,7 @@ package org.robockets.robot.autonomous;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+import org.robockets.robot.Robot;
 import org.robockets.robot.cubeintake.DropCube;
 import org.robockets.robot.drivetrain.DriveAngleAssisted;
 import org.robockets.robot.drivetrain.DriveStraightAssisted;
@@ -20,63 +21,69 @@ public class MidAuto extends CommandGroup {
 
 	public MidAuto(AutoHelper.RobotPosition robotPosition, AutoHelper.Priority priority) {
 		// Get preliminary data.
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		addSequential(new WaitForGameData());
+		String gameData = Robot.gameData;
 		boolean teamSwitchLeft = gameData.charAt(0) == 'L'; // true if switch is on the left from our driver perspective.
 		boolean scaleLeft = gameData.charAt(1) == 'L';
 		boolean scaleSameSide = (scaleLeft == true) == (robotPosition == AutoHelper.RobotPosition.LEFT);
 		boolean teamSwitchSameSide = (teamSwitchLeft == true) == (robotPosition == AutoHelper.RobotPosition.LEFT);
 		// true == true on left and false == false on right.
 
-		// Start logic.
-		switch (robotPosition) {
-			case MIDDLE: // If in position 2 (middle)
-				// Drive to our switch position
-				dropCubeMiddleToSwitch(teamSwitchLeft);
-				break;
-			case LEFT: // Else if in position 1 (left) or 3 (right)
-			case RIGHT: // These two enums are just here for readability & changeability.
-			default:
-				switch (priority) {
-					case SCALE: //If priority is scale.
-						if (scaleSameSide) { // If scale is on our side
-							// Deposit cube in scale
-							dropCubeInSameSideScale(teamSwitchLeft);
-						} else { // scale is on other side
-							if (teamSwitchSameSide == false) { // If switch is on other side
-								// Drive in S shape to other side
-								dropCubeInOppositeSideScaleSShape(teamSwitchLeft);
-							} else { // If switch is on our side
-								// We can just drop in switch or still drive in s
-							}
-						}
-						break;
-					case SWITCH: // Else If priority is switch
-						if (teamSwitchSameSide) { // If switch is on our side
-							// Deposit cube in switch.
-							dropCubeInSameSideSwitch(teamSwitchLeft);
-						} else { // Else
-							// If scale is on our side
-							if (teamSwitchSameSide) {
+		if (gameData.length() > 0) {
+
+			// Start logic.
+			switch (robotPosition) {
+				case MIDDLE: // If in position 2 (middle)
+					// Drive to our switch position
+					dropCubeMiddleToSwitch(teamSwitchLeft);
+					break;
+				case LEFT: // Else if in position 1 (left) or 3 (right)
+				case RIGHT: // These two enums are just here for readability & changeability.
+				default:
+					switch (priority) {
+						case SCALE: //If priority is scale.
+							if (scaleSameSide) { // If scale is on our side
 								// Deposit cube in scale
 								dropCubeInSameSideScale(teamSwitchLeft);
+							} else { // scale is on other side
+								if (teamSwitchSameSide == false) { // If switch is on other side
+									// Drive in S shape to other side
+									dropCubeInOppositeSideScaleSShape(teamSwitchLeft);
+								} else { // If switch is on our side
+									// We can just drop in switch or still drive in s
+								}
+							}
+							break;
+						case SWITCH: // Else If priority is switch
+							if (teamSwitchSameSide) { // If switch is on our side
+								// Deposit cube in switch.
+								dropCubeInSameSideSwitch(teamSwitchLeft);
+							} else { // Else
+								// If scale is on our side
+								if (teamSwitchSameSide) {
+									// Deposit cube in scale
+									dropCubeInSameSideScale(teamSwitchLeft);
+								} else { // Else
+									// Drive to auto line.
+									autoLine();
+								}
+							}
+							break;
+						default: // Else
+							if (scaleSameSide) { // If scale is on our side
+								// Deposit cube in scale
+								dropCubeInSameSideScale(teamSwitchLeft);
+							} else if (teamSwitchSameSide) { // Else if switch is on our side
+								// Deposit cube in switch
+								dropCubeInSameSideSwitch(teamSwitchLeft);
 							} else { // Else
 								// Drive to auto line.
 								autoLine();
 							}
-						}
-						break;
-					default: // Else
-						if (scaleSameSide) { // If scale is on our side
-							// Deposit cube in scale
-							dropCubeInSameSideScale(teamSwitchLeft);
-						} else if (teamSwitchSameSide) { // Else if switch is on our side
-							// Deposit cube in switch
-							dropCubeInSameSideSwitch(teamSwitchLeft);
-						} else { // Else
-							// Drive to auto line.
-							autoLine();
-						}
-				}
+					}
+			}
+		} else {
+			autoLine();
 		}
 	}
 
