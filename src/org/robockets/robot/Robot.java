@@ -22,6 +22,7 @@ import org.robockets.robot.elevator.ElevatorFloor;
 import org.robockets.robot.climber.Climber;
 import org.robockets.robot.autonomous.AutoChooser;
 import org.robockets.robot.drivetrain.StartEncoderPID;
+import org.robockets.robot.elevator.ElevatorFloorListener;
 import org.robockets.robot.utility.AutoHelper;
 
 /**
@@ -35,7 +36,7 @@ public class Robot extends TimedRobot {
 
 	public static final Climber climber = new Climber();
 
-	public static OI m_oi;
+	private static OI m_oi;
 
 	public static Drivetrain drivetrain;
 
@@ -55,10 +56,10 @@ public class Robot extends TimedRobot {
 
 	public static String gameData = "";
 
-	Command m_autonomousCommand;
-	SendableChooser<AutoHelper.AutoType> autoChooser = new SendableChooser<>();
-	SendableChooser<AutoHelper.RobotPosition> positionChooser = new SendableChooser<>();
-	SendableChooser<AutoHelper.Priority> priorityChooser = new SendableChooser<>();
+	private Command m_autonomousCommand;
+	private SendableChooser<AutoHelper.AutoType> autoChooser = new SendableChooser<>();
+	private SendableChooser<AutoHelper.RobotPosition> positionChooser = new SendableChooser<>();
+	private SendableChooser<AutoHelper.Priority> priorityChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -76,6 +77,7 @@ public class Robot extends TimedRobot {
 
 		cubeIntake = new CubeIntake();
 		elevator = new Elevator();
+		elevatorFloor = new ElevatorFloor();
 
 		RobotMap.leftEncoder.setDistancePerPulse(1 / 39.92);
 		RobotMap.rightEncoder.setDistancePerPulse(1 / 39.07);

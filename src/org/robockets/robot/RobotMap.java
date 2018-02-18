@@ -27,6 +27,7 @@ public class RobotMap {
 
 	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(2); // This is the bane of my existence
 	public static Victor elevatorFloorMotor = new Victor(6); // Dominik is trash
+	public static Victor elevatorFloorMotor2 = new Victor(9);
 
 	public static Victor rightIntake = new Victor(8); // Dominik is more trash
 	public static Victor leftIntake = new Victor(4); // STROUT!!!!

@@ -28,7 +28,7 @@ public class OI {
 	public static Button operatorSelect = new JoystickButton(operatorJoystick, 7);
 
 	public OI() {
-		operatorA.whileHeld(new IntakeCube(0.5, 0.3));
+		operatorA.whileHeld(new IntakeCube(0.7, 0.45, 0.75));
 		operatorSelect.whenPressed(new InterruptElevator());
 	}
 }
