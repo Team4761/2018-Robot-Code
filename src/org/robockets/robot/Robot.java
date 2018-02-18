@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.cubeintake.CubeIntake;
+import org.robockets.robot.drivetrain.StartGyroPID;
 import org.robockets.robot.elevator.Elevator;
 import org.robockets.robot.elevator.ElevatorFloor;
 import org.robockets.robot.climber.Climber;
@@ -79,11 +80,11 @@ public class Robot extends TimedRobot {
 		//RobotMap.leftDrivepodSpeedController.setInverted(true);
 		//RobotMap.rightDrivepodSpeedController.setInverted(true);
 
-		/*SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
+		SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
 		SmartDashboard.putNumber("Gyro I", drivetrain.gyroPID.getI());
 		SmartDashboard.putNumber("Gyro D", drivetrain.gyroPID.getD());
 		SmartDashboard.putNumber("Gyro Setpoint", 0);
-		SmartDashboard.putData(new StartGyroPID());*/
+		SmartDashboard.putData(new StartGyroPID());
 
 		SmartDashboard.putNumber("Left Encoder P", drivetrain.leftPodPID.getP());
 		SmartDashboard.putNumber("Left Encoder I", drivetrain.leftPodPID.getI());
@@ -142,7 +143,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("PDP14: ", RobotMap.pdp.getCurrent(14));
 		SmartDashboard.putNumber("PDP15: ", RobotMap.pdp.getCurrent(15));*/
 
-		SmartDashboard.putNumber("Elevator Encoder", elevator.getEncoderPos());
+		SmartDashboard.putNumber("Raw Elevator Encoder", elevator.getRawEncoderPos());
+		SmartDashboard.putNumber("Elevator Encoder Position", elevator.getEncoderPos());
 	}
 
 	/**

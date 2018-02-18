@@ -24,6 +24,12 @@ public class IntakeListener extends Command {
 		boolean isLeftInverted = OI.operatorJoystick.getRawButton(5);
 		boolean isRightInverted = OI.operatorJoystick.getRawButton(6);
 
+		if (isLeftInverted && isRightInverted) {
+			Robot.cubeIntake.moveBar(-((leftIntake + rightIntake)/2));
+		} else if (!isLeftInverted && !isRightInverted) {
+			Robot.cubeIntake.moveBar((leftIntake + rightIntake)/2);
+		}
+
 		Robot.cubeIntake.moveIntakeArm(RelativeDirection.XAxis.LEFT, isLeftInverted ? -leftIntake : leftIntake);
 		Robot.cubeIntake.moveIntakeArm(RelativeDirection.XAxis.RIGHT, isRightInverted ? -rightIntake : rightIntake);
 	}

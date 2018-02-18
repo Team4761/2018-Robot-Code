@@ -1,8 +1,6 @@
 package org.robockets.robot.elevator;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import edu.wpi.first.wpilibj.drive.Vector2d;
 import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.RobotMap;
 
@@ -13,10 +11,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Elevator extends Subsystem {
 
-	private ElevatorPosition position = ElevatorPosition.BOTTOM;
+	private static ElevatorPosition position = ElevatorPosition.BOTTOM;
+
+	private final double TICKS_PER_INCH = 38171;
 
 	public Elevator() {
-		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0,0);
+		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,0);
 	}
 
     // Put methods for controlling this subsystem
@@ -54,8 +54,12 @@ public class Elevator extends Subsystem {
 		return isPressed;
 	}
 
-	public double getEncoderPos() {
+	public double getRawEncoderPos() {
     	return RobotMap.elevatorMotor.getSelectedSensorPosition(0);
+	}
+
+	public double getEncoderPos() {
+    	return getRawEncoderPos()/TICKS_PER_INCH;
 	}
 }
 

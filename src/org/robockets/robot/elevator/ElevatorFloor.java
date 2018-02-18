@@ -1,7 +1,6 @@
 package org.robockets.robot.elevator;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.Robot;
 import org.robockets.robot.RobotMap;
 
@@ -24,7 +23,7 @@ public class ElevatorFloor extends Subsystem {
 	}
 
 	public boolean canMove() {
-		double encoderPos = Robot.elevator.getEncoderPos();
+		double encoderPos = Robot.elevator.getRawEncoderPos();
 
 		for (double[] range : INVALID_RANGE) {
 			if (encoderPos <= range[1] && encoderPos >= range[0]) {
