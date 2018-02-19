@@ -105,6 +105,8 @@ public class MidAuto extends CommandGroup {
 	// Small bit of repeated code that could be put into a method.
 	// Starting position has the corner of robot right where slant of corner of field starts.
 	private void dropCubeInSameSideSwitch(boolean teamSwitchLeft) {
+		addParallel(new Elevate(ElevatorPosition.SWITCH));
+
 		// Deposit cube in switch
 		driveStraight(148.5);
 		 // 90deg CW if on the left.
@@ -123,6 +125,8 @@ public class MidAuto extends CommandGroup {
 	// Small bit of repeated code for going to the same side scale and dropping a cube.
 	// Starting position the same as dropCubeInSameSideSwitch.
 	private void dropCubeInSameSideScale(boolean teamSwitchLeft) {
+		addParallel(new Elevate(ElevatorPosition.MID_SCALE));
+
 		// Deposit cube in scale.
 		 // Drive straight the distance to the scale.
 		driveStraight(305.15);
@@ -134,6 +138,8 @@ public class MidAuto extends CommandGroup {
 
 	// Code that is so ugly it should be tucked away here. FIXME: This is still super broken
 	private void dropCubeInOppositeSideScaleSShape(boolean teamSwitchLeft) {
+		addParallel(new Elevate(ElevatorPosition.MID_SCALE));
+
 		driveStraight(209.235);
 		double angle = teamSwitchLeft ? 90 : -90;
 		turnAngle(angle); // turn 90deg CW when on the left.
