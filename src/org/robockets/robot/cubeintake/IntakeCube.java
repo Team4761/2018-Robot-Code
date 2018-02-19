@@ -14,12 +14,11 @@ public class IntakeCube extends CommandGroup {
 
 	public IntakeCube(double intakeSpeed, double barSpeed, double floorSpeed) {
 		requires(Robot.cubeIntake);
-		requires(Robot.elevator);
+		requires(Robot.elevatorFloor);
 
 		//addSequential(new Elevate(ElevatorPosition.BOTTOM, intakeSpeed));
 		addParallel(new MoveBothArms(intakeSpeed));
 		addParallel(new MoveBar(barSpeed));
 		addParallel(new MoveElevatorFloor(floorSpeed));
-		//addParallel(new MoveElevatorFloor(intakeSpeed));
 	}
 }
