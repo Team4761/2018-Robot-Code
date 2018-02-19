@@ -8,6 +8,8 @@
 package org.robockets.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
@@ -45,4 +47,8 @@ public class RobotMap {
 
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.
 	public static int climberMotorPDPChannel = 1; // Dummy value.
+
+	public static DigitalInput elevatorEncoder = new DigitalInput(5);
+
+	public static Counter counter = new Counter(elevatorEncoder);
 }

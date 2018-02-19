@@ -68,6 +68,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.gyro.calibrate();
 		RobotMap.gyro.reset();
+		RobotMap.elevatorMotor.getSensorCollection().setPulseWidthPosition(0, 0);
 
 		drivetrain = new Drivetrain();
 

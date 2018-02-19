@@ -13,10 +13,12 @@ public class Elevator extends Subsystem {
 
 	private static ElevatorPosition position = ElevatorPosition.BOTTOM;
 
-	private final double TICKS_PER_INCH = 38171;
+
+	private final double TICKS_PER_REVOLUTION = 4096;
+	private final double TICKS_PER_INCH = TICKS_PER_REVOLUTION / 8;
 
 	public Elevator() {
-		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 	}
 
 	// Put methods for controlling this subsystem
@@ -56,7 +58,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public double getRawEncoderPos() {
-		return RobotMap.elevatorMotor.getSelectedSensorPosition(0);
+		return RobotMap.counter.get();
 	}
 
 	public double getEncoderPos() {
