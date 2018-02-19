@@ -103,63 +103,66 @@ public class MidAuto extends CommandGroup {
 	}
 
 	// Small bit of repeated code that could be put into a method.
+	// Starting position has the corner of robot right where slant of corner of field starts.
 	private void dropCubeInSameSideSwitch(boolean teamSwitchLeft) {
 		// Deposit cube in switch
-		driveStraight(168); // the switch starts 140 inches away, ends 196 inches away. We will go halfway.
-		double anotherSwitchAngle = (teamSwitchLeft ? -90 : 90); // The same as before. TODO: Move to higher level.
-		turnAngle(anotherSwitchAngle);
-		driveStraight(20);
+		driveStraight(148.5);
+		 // 90deg CW if on the left.
+		turnAngle(teamSwitchLeft ? 90 : -90);
+		// align edge of robot to edge of switch.
+		driveStraight(16.56); 
 		dropCube();
 	}
 
 	// Small bit of repeated code that could be put into a method for auto line.
 	private void autoLine() {
 		//Drive to auto line
-		driveStraight(120); // 120 inches to auto line. Should probably do more.
+		driveStraight(120); // 120 inches to auto line.
 	}
 
 	// Small bit of repeated code for going to the same side scale and dropping a cube.
+	// Starting position the same as dropCubeInSameSideSwitch.
 	private void dropCubeInSameSideScale(boolean teamSwitchLeft) {
 		// Deposit cube in scale.
-		driveStraight(299.65); // Drive straight the distance to the scale.
-		driveStraight(34); // Drive an extra 34 inches to get to the center. TODO: do we want this?
-		// dropCube(); It's unclear if we want to drop from the middle of the scale or the side.
-		double scaleAngle = (teamSwitchLeft ? 90 : -90); // Angles switched @https://github.com/Team4761/2018-Robot-Code/commit/64457c0306894c1615783da3df1c77317552accf
-		turnAngle(scaleAngle);
-		driveStraight(20);
+		 // Drive straight the distance to the scale.
+		driveStraight(305.15);
+		// 90deg CW if on the left.
+		turnAngle(teamSwitchLeft ? 90 : -90);
+		driveStraight(2.88);
 		dropCube();
 	}
 
 	// Code that is so ugly it should be tucked away here. FIXME: This is still super broken
 	private void dropCubeInOppositeSideScaleSShape(boolean teamSwitchLeft) {
-		driveStraight(228.735); // scale starts around 261.47 inches away. switch ends 196 inches away.
-		double sAngle = (teamSwitchLeft ? -90 : 90); // turn CCW if on the left, CW on the right.
-		turnAngle(sAngle);
-		driveStraight(264.0); // 264 inches is the length of drive station area without slanted corner.
-		// Now go to the scale.
-		turnAngle(-sAngle); // If we turned CW before, we want a CCW turn now to go forward.
-		driveStraight(34 + 32.735); // Go to about halfway across the scale and center offset from scale/switch.
-		turnAngle(sAngle); // turn towards scale, CCW if on the left, CW if on the right.
-		driveStraight(30);
-		// Deposit cube in scale
+		driveStraight(209.235);
+		double angle = teamSwitchLeft ? 90 : -90;
+		turnAngle(angle); // turn 90deg CW when on the left.
+		driveStraight(244.5);
+		turnAngle(-angle); // 90deg CCW when starting from the left.
+		driveStraight(98.915);
+		turnAngle(-angle);
+		driveStraight(2.88);
 		dropCube();
 	}
 
+	// The starting position for this middle auto is 1 ft from the right side
+	// of the exchange to the side of the robot.
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
 		addParallel(new Elevate(ElevatorPosition.SWITCH));
 
-		driveStraight(78); // Clear both the exchange rotation w/ switch box (@ 98 in).
-		double smallAngle = (teamSwitchLeft ? -64 : 64); // Turn CW (-64) if the switch is left, turn CCW otherwise 
+		driveStraight(50); // 50 of all the numbers was chosen arbitrarily.
+		if (teamSwitchLeft == false) {
+			// If on the right. Move to a new starting position.
+			turnAngle(-90); // Turn a right angle CCW.
+			driveStraight(39);
+			turnAngle(90); // Reset to face straight again.
+		}
+		double smallAngle = (teamSwitchLeft ? 41.7 : -41.7); // CW first on the left.
 		turnAngle(smallAngle);
-		// Drive distance determined by hypotenuse of triangle formed by half of switch length (87.5) and
-		// switch box (42 inches). The angle was determined with the arctan of these dimensions.
-		driveStraight(97);
-		turnAngle(-smallAngle); // turn back.
-		driveStraight(48); // drive the remaining 28 + (98-78) inches to go halfway across the switch or so.
-		double switchAngle = (teamSwitchLeft ? -90 : 90);
-		turnAngle(switchAngle); // turn towards the switch.
-		driveStraight(52); // Drive the remaining 42 inches to the switch to dump. 52 to overdo it.
+		driveStraight(52.34);
+		turnAngle(-smallAngle);
+		driveStraight(10);
+		dropCube();
 
-		addSequential(new DropCube());
 	}
 }
