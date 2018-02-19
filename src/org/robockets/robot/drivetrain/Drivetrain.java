@@ -43,7 +43,7 @@ public class Drivetrain extends Subsystem {
 		gyroPIDSource = new GyroPIDSource();
         gyroPID = new PIDController(0.06, 0.0002, 0.15, gyroPIDSource, new GyroPIDOutput(RobotMap.robotDrive));
         gyroPID.disable();
-        gyroPID.setOutputRange(-0.5, 0.5); // Set turning speed range
+        gyroPID.setOutputRange(-0.75, 0.75); // Set turning speed range
         gyroPID.setAbsoluteTolerance(2);
 		
 	}
