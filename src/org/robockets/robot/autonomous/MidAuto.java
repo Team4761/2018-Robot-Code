@@ -1,6 +1,5 @@
 package org.robockets.robot.autonomous;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import org.robockets.robot.Robot;
@@ -9,8 +8,6 @@ import org.robockets.robot.drivetrain.DriveAngleAssisted;
 import org.robockets.robot.drivetrain.DriveStraightAssisted;
 import org.robockets.robot.elevator.Elevate;
 import org.robockets.robot.elevator.ElevatorPosition;
-import org.robockets.robot.elevator.MoveElevatorFloor;
-import org.robockets.robot.utility.AutoHelper;
 
 /**
  * @author Mathias Kools, Jake Backer

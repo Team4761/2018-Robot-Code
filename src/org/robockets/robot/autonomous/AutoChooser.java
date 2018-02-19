@@ -2,7 +2,6 @@ package org.robockets.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.robockets.robot.utility.AutoHelper;
 
 /**
  * @author Jake Backer

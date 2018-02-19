@@ -22,8 +22,7 @@ import org.robockets.robot.elevator.ElevatorFloor;
 import org.robockets.robot.climber.Climber;
 import org.robockets.robot.autonomous.AutoChooser;
 import org.robockets.robot.drivetrain.StartEncoderPID;
-import org.robockets.robot.elevator.ElevatorFloorListener;
-import org.robockets.robot.utility.AutoHelper;
+import org.robockets.robot.autonomous.AutoHelper;
 
 /**
  * The VM is configured to automatically run this class, and to call the

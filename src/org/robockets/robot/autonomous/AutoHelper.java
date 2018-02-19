@@ -1,4 +1,4 @@
-package org.robockets.robot.utility;
+package org.robockets.robot.autonomous;
 
 /**
  * A helper class to assist with autonomous choosing
