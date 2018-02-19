@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SpeedController;
 
 public class DrivePodPIDOutput implements PIDOutput {
-	
+
 	private SpeedController c;
 	private boolean inverted;
 
@@ -19,7 +19,7 @@ public class DrivePodPIDOutput implements PIDOutput {
 	public DrivePodPIDOutput(SpeedController c) {
 		this(c, false);
 	}
-	
+
 	@Override
 	public void pidWrite(double output) {
 		c.set(inverted ? -output : output);

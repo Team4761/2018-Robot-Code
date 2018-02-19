@@ -106,10 +106,10 @@ public class MidAuto extends CommandGroup {
 
 		// Deposit cube in switch
 		driveStraight(148.5);
-		 // 90deg CW if on the left.
+		// 90deg CW if on the left.
 		turnAngle(teamSwitchLeft ? 90 : -90);
 		// align edge of robot to edge of switch.
-		driveStraight(16.56); 
+		driveStraight(16.56);
 		dropCube();
 	}
 
@@ -125,7 +125,7 @@ public class MidAuto extends CommandGroup {
 		addParallel(new Elevate(ElevatorPosition.MID_SCALE));
 
 		// Deposit cube in scale.
-		 // Drive straight the distance to the scale.
+		// Drive straight the distance to the scale.
 		driveStraight(305.15);
 		// 90deg CW if on the left.
 		turnAngle(teamSwitchLeft ? 90 : -90);

@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class ClimberPIDSource implements PIDSource {
 	private Encoder encoder;
-	
+
 	public ClimberPIDSource(Encoder encoder) {
 		this.encoder = encoder;
 	}
-	
+
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
 	}
@@ -23,5 +23,5 @@ public class ClimberPIDSource implements PIDSource {
 	@Override
 	public double pidGet() {
 		return encoder.getRate();
-}
+	}
 }

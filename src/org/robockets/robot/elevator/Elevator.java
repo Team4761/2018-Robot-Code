@@ -16,50 +16,51 @@ public class Elevator extends Subsystem {
 	private final double TICKS_PER_INCH = 38171;
 
 	public Elevator() {
-		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
+		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 	}
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		//setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new ManualElevate());
-    }
-    public void setElevatorSpeed(double elSpeed){
-    	RobotMap.elevatorMotor.set(elSpeed);
-		//RobotMap.climberMotorRight.set(elSpeed);
-    }
+	}
 
-    public ElevatorPosition getCurrentPosition() {
-    	return position;
+	public void setElevatorSpeed(double elSpeed) {
+		RobotMap.elevatorMotor.set(elSpeed);
+		//RobotMap.climberMotorRight.set(elSpeed);
+	}
+
+	public ElevatorPosition getCurrentPosition() {
+		return position;
 	}
 
 	public void setCurrentPosition(ElevatorPosition position) {
-    	this.position = position;
+		this.position = position;
 	}
 
 	public boolean isInPosition(ElevatorPosition position, RelativeDirection.ZAxis direction) {
-    	boolean isPressed = false;
+		boolean isPressed = false;
 
-    	double encoderPos = position.getValue();
+		double encoderPos = position.getValue();
 
-    	if (direction == RelativeDirection.ZAxis.UP) {
-    		isPressed = getEncoderPos() > encoderPos;
-	    } else {
+		if (direction == RelativeDirection.ZAxis.UP) {
+			isPressed = getEncoderPos() > encoderPos;
+		} else {
 			isPressed = getEncoderPos() < encoderPos;
-	    }
+		}
 
 		return isPressed;
 	}
 
 	public double getRawEncoderPos() {
-    	return RobotMap.elevatorMotor.getSelectedSensorPosition(0);
+		return RobotMap.elevatorMotor.getSelectedSensorPosition(0);
 	}
 
 	public double getEncoderPos() {
-    	return getRawEncoderPos()/TICKS_PER_INCH;
+		return getRawEncoderPos() / TICKS_PER_INCH;
 	}
 }
 

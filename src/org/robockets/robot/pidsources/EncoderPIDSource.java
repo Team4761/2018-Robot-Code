@@ -9,13 +9,14 @@ public class EncoderPIDSource implements PIDSource {
 
 	/**
 	 * Encoder PID Source
+	 *
 	 * @param encoder The encoder that you wish to read values from.
-	 * @param factor A multiplier to manipulate the encoder output.
+	 * @param factor  A multiplier to manipulate the encoder output.
 	 */
 	public EncoderPIDSource(Encoder encoder) {
 		this.encoder = encoder;
 	}
-	
+
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
 	}

@@ -11,20 +11,20 @@ import edu.wpi.first.wpilibj.command.Command;
  * User-input driving command for teloperated mode.
  */
 public class Joyride extends Command {
-	
+
 	private double translate;
-    private double rotate;
+	private double rotate;
 
-    public Joyride() {
-        requires(Robot.drivetrain);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
+	public Joyride() {
+		requires(Robot.drivetrain);
 	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
+
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
 		translate = OI.driverJoystick.getRawAxis(1);
 		rotate = -OI.driverJoystick.getRawAxis(4);
 
@@ -32,23 +32,23 @@ public class Joyride extends Command {
 
 		translate *= scalar;
 		rotate *= scalar;
-		
+
 		Robot.drivetrain.driveArcade(translate, rotate);
-    }
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return false;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
+	// Called once after isFinished returns true
+	protected void end() {
 		Robot.drivetrain.stop();
-    }
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }

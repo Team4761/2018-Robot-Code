@@ -37,9 +37,9 @@ public class RobotMap {
 	public static Victor climberMotorRight = new Victor(3);
 
 	public static DifferentialDrive robotDrive = new DifferentialDrive(leftDrivepodSpeedController, rightDrivepodSpeedController);
-	
+
 	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
-	
+
 	public static Encoder leftEncoder = new Encoder(0, 1);
 	public static Encoder rightEncoder = new Encoder(2, 3);
 

@@ -5,8 +5,8 @@ import org.robockets.robot.elevator.MoveElevatorFloor;
 
 /**
  * Command stub to simulate the presence of a DropCube commandgroup.
- * @author Mathias Kools
  *
+ * @author Mathias Kools
  */
 public class DropCube extends CommandGroup {
 	public DropCube() {

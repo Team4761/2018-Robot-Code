@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Climber extends Subsystem {
 
 	final double STALLING_THRESHOLD = 70; // Stalling threshold in amperes.
-	
+
 	public Climber() {
 	}
-	
+
 	/*
 	 * Detect if the climbing motor is stalling.
 	 * @return	whether the motor is stalling or not. true means it's stalling, false means it's not.
@@ -23,7 +23,7 @@ public class Climber extends Subsystem {
 	public boolean isStalling() {
 		return (getClimberMotorCurrent() > STALLING_THRESHOLD);
 	}
-	
+
 	/*
 	 * Detect the amount of current going to the climber motor.
 	 * @return	the amount of current going from the power distribution panel to the climber motor.
@@ -31,7 +31,7 @@ public class Climber extends Subsystem {
 	public double getClimberMotorCurrent() {
 		return RobotMap.pdp.getCurrent(RobotMap.climberMotorPDPChannel);
 	}
-	
+
 	/*
 	 * Stop / brake the climbing motor(s).
 	 */
@@ -39,7 +39,7 @@ public class Climber extends Subsystem {
 		RobotMap.climberMotorLeft.set(0);
 		RobotMap.climberMotorRight.set(0);
 	}
-	
+
 	/*
 	 * Set the speed from 0 to 1 of the climber motor.
 	 * @param speed		The exact speed to use with the climber motor.
@@ -53,9 +53,9 @@ public class Climber extends Subsystem {
 		RobotMap.climberMotorLeft.set(leftSpeed);
 		RobotMap.climberMotorRight.set(rightSpeed);
 	}
-	
+
 	// SmartDashboard related commands.
-	
+
 	/*
 	 * Update different display values on the SmartDashboard / Shuffleboard.
 	 */
@@ -63,11 +63,11 @@ public class Climber extends Subsystem {
 		SmartDashboard.putBoolean("Climber stalling", isStalling());
 		SmartDashboard.putNumber("Climber motor current", getClimberMotorCurrent());
 	}
-	
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
+
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
 		//setDefaultCommand(new ClimberListener());
-    }
+	}
 }
 

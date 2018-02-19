@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveIntakeArm extends Command {
 
 	private RelativeDirection.XAxis arm;
-	
+
 	private double speed;
 	private double time;
 
@@ -22,39 +22,39 @@ public class MoveIntakeArm extends Command {
 		this.time = time;
 	}
 
-    public MoveIntakeArm(RelativeDirection.XAxis arm, double speed) {
-        this(arm, speed, 0);
-    }
+	public MoveIntakeArm(RelativeDirection.XAxis arm, double speed) {
+		this(arm, speed, 0);
+	}
 
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
+	// Called just before this Command runs the first time
+	protected void initialize() {
 		if (time != 0) {
 			setTimeout(time);
 		}
-    }
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.cubeIntake.moveIntakeArm(arm, speed);
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		Robot.cubeIntake.moveIntakeArm(arm, speed);
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
 		if (time != 0) {
 			return isTimedOut();
 		}
-        return false;
-    }
+		return false;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	Robot.cubeIntake.moveIntakeArm(arm, 0);
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+		Robot.cubeIntake.moveIntakeArm(arm, 0);
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }
