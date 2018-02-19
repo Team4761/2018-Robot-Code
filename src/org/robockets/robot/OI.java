@@ -31,7 +31,7 @@ public class OI {
 
 	public static Button driverA = new JoystickButton(driverJoystick, 1);
 	public static Button driverB = new JoystickButton(driverJoystick, 2);
-	public static Button driverSelect = new JoystickButton(driverJoystick, );
+	public static Button driverSelect = new JoystickButton(driverJoystick, 7);
 	public static Button driverStart = new JoystickButton(driverJoystick, 8);
 
 	public static Button operatorA = new JoystickButton(operatorJoystick, 1);
