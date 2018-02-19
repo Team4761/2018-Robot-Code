@@ -78,6 +78,8 @@ public class Robot extends TimedRobot {
 		cubeIntake = new CubeIntake();
 		elevator = new Elevator();
 		elevatorFloor = new ElevatorFloor();
+		RobotMap.elevatorMotor.setInverted(true);
+		RobotMap.elevatorFloorMotor2.setInverted(true);
 
 		RobotMap.leftEncoder.setDistancePerPulse(1 / 39.92);
 		RobotMap.rightEncoder.setDistancePerPulse(1 / 39.07);
@@ -85,7 +87,7 @@ public class Robot extends TimedRobot {
 		//RobotMap.rightDrivepodSpeedController.setInverted(true);
 
 		SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
-		SmartDashboard.putNumber("Gyro I", drivetrain.gyroPID.getI());
+		//SmartDashboard .putNumber("Gyro I", drivetrain.gyroPID.getI());
 		SmartDashboard.putNumber("Gyro D", drivetrain.gyroPID.getD());
 		SmartDashboard.putNumber("Gyro Setpoint", 0);
 		SmartDashboard.putData(new StartGyroPID());

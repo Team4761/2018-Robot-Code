@@ -18,8 +18,8 @@ public class ElevatorFloor extends Subsystem {
 
 	public void moveElevatorFloor(double speed) {
 		//if (canMove()) {
-			RobotMap.elevatorFloorMotor.set(speed);
-			RobotMap.elevatorFloorMotor2.set(speed);
+			RobotMap.elevatorFloorMotor.set(-speed);
+			RobotMap.elevatorFloorMotor2.set(-speed);
 		//}
 	}
 
