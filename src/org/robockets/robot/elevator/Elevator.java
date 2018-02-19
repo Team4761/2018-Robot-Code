@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Elevator extends Subsystem {
 
-	private static ElevatorPosition position = ElevatorPosition.BOTTOM;
-
+	private ElevatorPosition position = ElevatorPosition.BOTTOM;
 
 	private final double TICKS_PER_REVOLUTION = 4096;
 	private final double TICKS_PER_INCH = TICKS_PER_REVOLUTION / 8;

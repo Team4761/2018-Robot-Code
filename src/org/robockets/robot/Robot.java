@@ -135,7 +135,8 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotPeriodic() {
-		SmartDashboard.putNumber("Gyro Value", RobotMap.gyro.getAngle());
+		//SmartDashboard.putNumber("Gyro Value", RobotMap.gyro.getAngle());
+		SmartDashboard.putData(RobotMap.gyro);
 		SmartDashboard.putNumber("Left Encoder Value", RobotMap.leftEncoder.get());
 		SmartDashboard.putNumber("Right Encoder Value", RobotMap.rightEncoder.get());
 
