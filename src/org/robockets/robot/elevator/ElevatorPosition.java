@@ -4,10 +4,10 @@ public enum ElevatorPosition {
 
 	// All in inches
 	BOTTOM(0.0),
-	EXCHANGE(1.1),
-	SWITCH(1.5),
-	MID_SCALE(3),
-	HIGH_SCALE(3.5);
+	EXCHANGE(3),
+	SWITCH(31),
+	MID_SCALE(62),
+	HIGH_SCALE(73);
 
 	private double val;
 
