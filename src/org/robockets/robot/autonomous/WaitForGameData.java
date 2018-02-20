@@ -16,11 +16,12 @@ public class WaitForGameData extends Command {
 	}
 
 	protected void initialize() {
-		setTimeout(1.5);
+		setTimeout(5);
 	}
 
 	protected void execute() {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		System.out.println(gameData);
 		if (gameData.length() > 0) {
 			Robot.gameData = gameData;
 			isDone = true;

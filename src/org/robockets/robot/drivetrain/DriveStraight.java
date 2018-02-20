@@ -26,7 +26,7 @@ public class DriveStraight extends Command {
 	}
 
 	protected void execute() {
-		Robot.drivetrain.driveArcade(speed, 0);
+		Robot.drivetrain.driveArcade(-speed, 0);
 	}
 
 	protected boolean isFinished() {

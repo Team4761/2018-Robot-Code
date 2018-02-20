@@ -1,33 +1,28 @@
 package org.robockets.robot.drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.robockets.robot.Robot;
 
 import static org.robockets.robot.Robot.drivetrain;
 
-import org.robockets.robot.Robot;
-
 /**
- * @author Mathias Kools!
- * Theoretical command to assist in constructing Mid Auto program.
+ * @author Jake Backer
  */
-public class DriveAngleAssisted extends Command {
+public class TurnAbsolute extends Command {
 
 	private double angle;
 
-	public DriveAngleAssisted(double angle) {
-		requires(drivetrain);
+	public TurnAbsolute(double angle) {
+		requires(Robot.drivetrain);
 		this.angle = angle;
 	}
 
 	protected void initialize() {
-		double abs = drivetrain.getGyroPos() - angle;
-		drivetrain.setGyroSetpoint(abs);
+		drivetrain.setGyroSetpoint(-angle);
 		drivetrain.enableGyroPID();
 	}
 
 	protected void execute() {
-		// Stub.
 	}
 
 	protected boolean isFinished() {

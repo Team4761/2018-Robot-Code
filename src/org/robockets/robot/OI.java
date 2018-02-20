@@ -48,12 +48,12 @@ public class OI {
 		driverSelect.whenPressed(new Joyride());
 		driverStart.whenPressed(new FakeDriveAssisted());
 
-		operatorA.whileHeld(new IntakeCube(0.75, 0.4, 0.5));
-		operatorB.whenPressed(new Elevate(ElevatorPosition.BOTTOM, 0.75));
-		operatorX.whenPressed(new Elevate(ElevatorPosition.EXCHANGE, 0.75));
-		operatorY.whenPressed(new Elevate(ElevatorPosition.SWITCH, 0.75));
+		operatorA.whileHeld(new IntakeCube(0.75, 0.4, 0.65));
+		operatorB.whenPressed(new Elevate(ElevatorPosition.BOTTOM, 0.5));
+		operatorX.whenPressed(new Elevate(ElevatorPosition.EXCHANGE, 0.5));
+		operatorY.whenPressed(new Elevate(ElevatorPosition.SWITCH, 0.5));
 		operatorSelect.whenPressed(new InterruptElevator());
 		operatorLeftStick.whenPressed(new Elevate(ElevatorPosition.MID_SCALE, 0.75));
-		operatorRightStick.whenPressed(new Elevate(ElevatorPosition.HIGH_SCALE, 0.75));
+		//operatorRightStick.whenPressed(new Elevate(ElevatorPosition.HIGH_SCALE, 0.75));
 	}
 }

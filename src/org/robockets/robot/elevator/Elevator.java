@@ -13,8 +13,7 @@ public class Elevator extends Subsystem {
 
 	private ElevatorPosition position = ElevatorPosition.BOTTOM;
 
-	private final double TICKS_PER_REVOLUTION = 4096;
-	private final double TICKS_PER_INCH = TICKS_PER_REVOLUTION / 8;
+	private final double TICKS_PER_INCH = 1.1428571428571428571428571428571;
 
 	public Elevator() {
 		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
@@ -43,17 +42,22 @@ public class Elevator extends Subsystem {
 	}
 
 	public boolean isInPosition(ElevatorPosition position, RelativeDirection.ZAxis direction) {
-		boolean isPressed = false;
+		boolean isInPosition = false;
 
 		double encoderPos = position.getValue();
 
+		System.out.println("New Encoder Pos: " + encoderPos);
+		System.out.println("Encoder Pos: " + getEncoderPos());
+
 		if (direction == RelativeDirection.ZAxis.UP) {
-			isPressed = getEncoderPos() > encoderPos;
+			isInPosition = getEncoderPos() > encoderPos;
 		} else {
-			isPressed = getEncoderPos() < encoderPos;
+			isInPosition = getEncoderPos() < encoderPos;
 		}
 
-		return isPressed;
+		System.out.println("Is in position: " + isInPosition);
+
+		return isInPosition;
 	}
 
 	public double getRawEncoderPos() {

@@ -2,10 +2,13 @@ package org.robockets.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import org.robockets.robot.Robot;
 import org.robockets.robot.cubeintake.DropCube;
 import org.robockets.robot.drivetrain.DriveAngleAssisted;
+import org.robockets.robot.drivetrain.DriveStraight;
 import org.robockets.robot.drivetrain.DriveStraightAssisted;
+import org.robockets.robot.drivetrain.TurnAbsolute;
 import org.robockets.robot.elevator.Elevate;
 import org.robockets.robot.elevator.ElevatorPosition;
 
@@ -18,8 +21,9 @@ public class MidAuto extends CommandGroup {
 
 	public MidAuto(AutoHelper.RobotPosition robotPosition, AutoHelper.Priority priority) {
 		// Get preliminary data.
-		addSequential(new WaitForGameData());
-		String gameData = Robot.gameData;
+		/*addSequential(new WaitForGameData());
+		String gameData = Robot.gameData;*/
+		String gameData = "RLR";
 		boolean teamSwitchLeft = gameData.charAt(0) == 'L'; // true if switch is on the left from our driver perspective.
 		boolean scaleLeft = gameData.charAt(1) == 'L';
 		boolean scaleSameSide = (scaleLeft == true) == (robotPosition == AutoHelper.RobotPosition.LEFT);
@@ -151,21 +155,27 @@ public class MidAuto extends CommandGroup {
 	// The starting position for this middle auto is 1 ft from the right side
 	// of the exchange to the side of the robot.
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
-		addParallel(new Elevate(ElevatorPosition.SWITCH));
+		//addParallel(new Elevate(ElevatorPosition.SWITCH));
 
 		driveStraight(50); // 50 of all the numbers was chosen arbitrarily.
-		if (teamSwitchLeft == false) {
+		addSequential(new WaitCommand(0.1));
+		/*if (teamSwitchLeft == false) {
 			// If on the right. Move to a new starting position.
 			turnAngle(-90); // Turn a right angle CCW.
 			driveStraight(39);
 			turnAngle(90); // Reset to face straight again.
-		}
+		}*/
 		double smallAngle = (teamSwitchLeft ? 41.7 : -41.7); // CW first on the left.
-		turnAngle(smallAngle);
-		driveStraight(52.34);
-		turnAngle(-smallAngle);
-		driveStraight(10);
-		dropCube();
+		//turnAngle(smallAngle);
+		addSequential(new TurnAbsolute(smallAngle));
+		addSequential(new WaitCommand(0.1));
+		driveStraight(55);
+		addSequential(new WaitCommand(0.1));
+		//turnAngle(-smallAngle);
+		addSequential(new TurnAbsolute(0));
+		addSequential(new WaitCommand(0.1));
+		driveStraight(5);
+		//dropCube();
 
 	}
 }

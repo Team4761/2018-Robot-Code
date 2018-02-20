@@ -27,24 +27,24 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 
 		leftPodPIDSource = new EncoderPIDSource(RobotMap.leftEncoder);
-		leftPodPID = new PIDController(0.05, 0, 0, leftPodPIDSource,
-				new DrivePodPIDOutput(RobotMap.leftDrivepodSpeedController));
+		leftPodPID = new PIDController(0.05, 0.00001, 0.00001, leftPodPIDSource,
+				new DrivePodPIDOutput(RobotMap.leftDrivepodSpeedController, true));
 		leftPodPID.disable();
-		leftPodPID.setOutputRange(-0.5, 0.5);
-		leftPodPID.setAbsoluteTolerance(0.5);
+		leftPodPID.setOutputRange(-0.4, 0.4);
+		leftPodPID.setAbsoluteTolerance(2);
 
 		rightPodPIDSource = new EncoderPIDSource(RobotMap.rightEncoder);
-		rightPodPID = new PIDController(0.05, 0, 0, rightPodPIDSource,
-				new DrivePodPIDOutput(RobotMap.rightDrivepodSpeedController, true));
+		rightPodPID = new PIDController(0.05, 0.00001, 0.00001, rightPodPIDSource,
+				new DrivePodPIDOutput(RobotMap.rightDrivepodSpeedController));
 		rightPodPID.disable();
-		rightPodPID.setOutputRange(-0.5, 0.5);
-		rightPodPID.setAbsoluteTolerance(0.5);
+		rightPodPID.setOutputRange(-0.4, 0.4);
+		rightPodPID.setAbsoluteTolerance(2);
 
 		gyroPIDSource = new GyroPIDSource();
-		gyroPID = new PIDController(0.06, 0.0002, 0.15, gyroPIDSource, new GyroPIDOutput(RobotMap.robotDrive));
+		gyroPID = new PIDController(0.05, 0.0004, 0.15, gyroPIDSource, new GyroPIDOutput(RobotMap.robotDrive));
 		gyroPID.disable();
 		gyroPID.setOutputRange(-0.75, 0.75); // Set turning speed range
-		gyroPID.setAbsoluteTolerance(2);
+		gyroPID.setAbsoluteTolerance(3);
 
 	}
 
@@ -118,7 +118,7 @@ public class Drivetrain extends Subsystem {
 	 * @return Returns if both the encoder PIDs are OnTarget, with a tolerance of <code>ABSOLUTE_TOLERANCE</code>
 	 */
 	public boolean encodersOnTarget() {
-		final double ABSOLUTE_TOLERANCE = 1.0; // TODO: Change this to something more reasonable
+		final double ABSOLUTE_TOLERANCE = 3.0; // TODO: Change this to something more reasonable
 		return Math.abs((leftPodPID.getSetpoint() - leftPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE &&
 				Math.abs((rightPodPID.getSetpoint() - rightPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE;
 	}

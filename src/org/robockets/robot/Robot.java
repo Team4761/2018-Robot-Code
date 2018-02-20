@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.robockets.robot.drivetrain.Drivetrain;
 import org.robockets.robot.cubeintake.CubeIntake;
+import org.robockets.robot.drivetrain.ResetEncoders;
 import org.robockets.robot.drivetrain.StartGyroPID;
 import org.robockets.robot.elevator.Elevator;
 import org.robockets.robot.elevator.ElevatorFloor;
@@ -23,6 +24,7 @@ import org.robockets.robot.climber.Climber;
 import org.robockets.robot.autonomous.AutoChooser;
 import org.robockets.robot.drivetrain.StartEncoderPID;
 import org.robockets.robot.autonomous.AutoHelper;
+import org.robockets.robot.elevator.ResetCounter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -72,9 +74,6 @@ public class Robot extends TimedRobot {
 
 		drivetrain = new Drivetrain();
 
-		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
-		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
-
 		cubeIntake = new CubeIntake();
 		elevator = new Elevator();
 		elevatorFloor = new ElevatorFloor();
@@ -82,7 +81,8 @@ public class Robot extends TimedRobot {
 		RobotMap.elevatorFloorMotor2.setInverted(true);
 
 		RobotMap.leftEncoder.setDistancePerPulse(1 / 39.92);
-		RobotMap.rightEncoder.setDistancePerPulse(1 / 39.07);
+		RobotMap.rightEncoder.setDistancePerPulse(1 / 39.92);
+		RobotMap.rightEncoder.setReverseDirection(true);
 		RobotMap.leftDrivepodSpeedController.setInverted(true);
 		RobotMap.rightDrivepodSpeedController.setInverted(true);
 
@@ -92,7 +92,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Gyro Setpoint", 0);
 		SmartDashboard.putData(new StartGyroPID());
 
-		SmartDashboard.putNumber("Left Encoder P", drivetrain.leftPodPID.getP());
+		/*SmartDashboard.putNumber("Left Encoder P", drivetrain.leftPodPID.getP());
 		SmartDashboard.putNumber("Left Encoder I", drivetrain.leftPodPID.getI());
 		SmartDashboard.putNumber("Left Encoder D", drivetrain.leftPodPID.getD());
 		SmartDashboard.putNumber("Left Encoder Setpoint", 0);
@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Right Encoder I", drivetrain.rightPodPID.getI());
 		SmartDashboard.putNumber("Right Encoder D", drivetrain.rightPodPID.getD());
 		SmartDashboard.putNumber("Right Encoder Setpoint", 0);
-		SmartDashboard.putData(new StartEncoderPID());
+		SmartDashboard.putData(new StartEncoderPID());*/
 
 		/*joyride = new Joyride();
 		climberListener = new ClimberListener();
@@ -111,8 +111,9 @@ public class Robot extends TimedRobot {
 		manualElevate = new ManualElevate();*/
 
 		autoChooser.addObject("Test Auto", AutoHelper.AutoType.TEST);
-		autoChooser.addDefault("Dumb Auto", AutoHelper.AutoType.DUMB);
+		autoChooser.addObject("Dumb Auto", AutoHelper.AutoType.DUMB);
 		autoChooser.addObject("Min Auto", AutoHelper.AutoType.MIN);
+		autoChooser.addDefault("Mid Auto", AutoHelper.AutoType.MID);
 
 		SmartDashboard.putData("Auto mode", autoChooser);
 
@@ -128,9 +129,12 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putData("Autonomous Priority", priorityChooser);
 
-		m_oi = new OI();
-
 		SmartDashboard.putNumber("Drivetrain Scalar", 1);
+		SmartDashboard.putData("Reset Counter", new ResetCounter());
+
+		SmartDashboard.putData("Reset Encoders", new ResetEncoders());
+
+		m_oi = new OI();
 	}
 
 	@Override

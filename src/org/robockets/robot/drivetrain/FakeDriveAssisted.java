@@ -13,7 +13,7 @@ public class FakeDriveAssisted extends Command {
 	double previousLeft = 0;
 	double previousRight = 0;
 
-	final double VELOCITY = 0.5;
+	final double VELOCITY = 0.25;
 
 	public FakeDriveAssisted() {
 		requires(Robot.drivetrain);
@@ -23,7 +23,7 @@ public class FakeDriveAssisted extends Command {
 	}
 
 	protected void execute() {
-		double leftValue = -OI.driverJoystick.getRawAxis(1);
+		double leftValue = OI.driverJoystick.getRawAxis(1);
 		double rightValue = -OI.driverJoystick.getRawAxis(5);
 
 		double leftDiff = leftValue - previousLeft;

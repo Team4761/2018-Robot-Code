@@ -18,8 +18,6 @@ public class Elevate extends Command {
 		this.newPosition = newPosition;
 		this.elSpeed = elSpeed;
 
-		direction = newPosition.getValue() > Robot.elevator.getCurrentPosition().getValue()
-				? RelativeDirection.ZAxis.UP : RelativeDirection.ZAxis.DOWN;
 	}
 
 	public Elevate(ElevatorPosition newPosition) {
@@ -28,11 +26,14 @@ public class Elevate extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double tempSpeed = Math.abs(elSpeed);
+		direction = newPosition.getValue() > Robot.elevator.getCurrentPosition().getValue()
+				? RelativeDirection.ZAxis.UP : RelativeDirection.ZAxis.DOWN;
 
 		if (direction == RelativeDirection.ZAxis.DOWN) {
 			tempSpeed = -tempSpeed;
