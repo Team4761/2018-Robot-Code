@@ -19,11 +19,8 @@ public class MidAuto extends CommandGroup {
 
 	// TODO: I use driveStraight sometimes to RAM, these should be changed to timed drives.
 
-	public MidAuto(AutoHelper.RobotPosition robotPosition, AutoHelper.Priority priority) {
+	public MidAuto(AutoHelper.RobotPosition robotPosition, AutoHelper.Priority priority, String gameData) {
 		// Get preliminary data.
-		/*addSequential(new WaitForGameData());
-		String gameData = Robot.gameData;*/
-		String gameData = "RLR";
 		boolean teamSwitchLeft = gameData.charAt(0) == 'L'; // true if switch is on the left from our driver perspective.
 		boolean scaleLeft = gameData.charAt(1) == 'L';
 		boolean scaleSameSide = (scaleLeft == true) == (robotPosition == AutoHelper.RobotPosition.LEFT);

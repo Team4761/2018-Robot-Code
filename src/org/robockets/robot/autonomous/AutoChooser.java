@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoChooser extends CommandGroup {
 
-	public AutoChooser(AutoHelper.AutoType auto, AutoHelper.RobotPosition startingPosition, AutoHelper.Priority priority) {
+	public AutoChooser(AutoHelper.AutoType auto, AutoHelper.RobotPosition startingPosition, AutoHelper.Priority priority, String gameData) {
 		Command autoCommand = new DumbAuto();
 		switch (auto) {
 			case TEST:
@@ -21,7 +21,7 @@ public class AutoChooser extends CommandGroup {
 				autoCommand = new MinAuto();
 				break;
 			case MID:
-				autoCommand = new MidAuto(startingPosition, priority);
+				autoCommand = new MidAuto(startingPosition, priority, gameData);
 				break;
 			case MAX:
 				// autoCommand = new MaxAuto(SOMETHING_HERE);

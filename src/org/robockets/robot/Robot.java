@@ -7,6 +7,7 @@
 
 package org.robockets.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -186,10 +187,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = new AutoChooser(
-				autoChooser.getSelected(),
-				positionChooser.getSelected(),
-				priorityChooser.getSelected());
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -197,6 +194,16 @@ public class Robot extends TimedRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
+		String gameData = "";
+		while (gameData.length() == 0) {
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
+		}
+
+		m_autonomousCommand = new AutoChooser(
+				autoChooser.getSelected(),
+				positionChooser.getSelected(),
+				priorityChooser.getSelected(), gameData);
+
 
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
