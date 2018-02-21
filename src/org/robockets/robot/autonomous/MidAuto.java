@@ -103,15 +103,16 @@ public class MidAuto extends CommandGroup {
 	// Small bit of repeated code that could be put into a method.
 	// Starting position has the corner of robot right where slant of corner of field starts.
 	private void dropCubeInSameSideSwitch(boolean teamSwitchLeft) {
-		addParallel(new Elevate(ElevatorPosition.SWITCH));
+		//addParallel(new Elevate(ElevatorPosition.SWITCH));
 
+		System.out.println("SSS");
 		// Deposit cube in switch
-		driveStraight(148.5);
+		driveStraight(140);
 		// 90deg CW if on the left.
-		turnAngle(teamSwitchLeft ? 90 : -90);
+		turnAngle(teamSwitchLeft ? -90 : 90);
 		// align edge of robot to edge of switch.
 		driveStraight(16.56);
-		dropCube();
+		//dropCube();
 	}
 
 	// Small bit of repeated code that could be put into a method for auto line.
@@ -154,24 +155,18 @@ public class MidAuto extends CommandGroup {
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
 		//addParallel(new Elevate(ElevatorPosition.SWITCH));
 
-		driveStraight(50); // 50 of all the numbers was chosen arbitrarily.
+		driveStraight(36); // 50 of all the numbers was chosen arbitrarily.
 		addSequential(new WaitCommand(0.1));
-		/*if (teamSwitchLeft == false) {
-			// If on the right. Move to a new starting position.
-			turnAngle(-90); // Turn a right angle CCW.
-			driveStraight(39);
-			turnAngle(90); // Reset to face straight again.
-		}*/
 		double smallAngle = (teamSwitchLeft ? 41.7 : -41.7); // CW first on the left.
 		//turnAngle(smallAngle);
 		addSequential(new TurnAbsolute(smallAngle));
 		addSequential(new WaitCommand(0.1));
-		driveStraight(55);
+		driveStraight(68);
 		addSequential(new WaitCommand(0.1));
 		//turnAngle(-smallAngle);
 		addSequential(new TurnAbsolute(0));
 		addSequential(new WaitCommand(0.1));
-		driveStraight(5);
+		driveStraight(8);
 		//dropCube();
 
 	}

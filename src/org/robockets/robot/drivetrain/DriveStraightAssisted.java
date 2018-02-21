@@ -28,7 +28,7 @@ public class DriveStraightAssisted extends Command {
 	}
 
 	protected boolean isFinished() {
-		return Robot.drivetrain.encodersOnTarget();
+		return Robot.drivetrain.leftPodPID.onTarget() && Robot.drivetrain.rightPodPID.onTarget();
 	}
 
 	protected void end() {

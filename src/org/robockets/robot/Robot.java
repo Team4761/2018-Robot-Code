@@ -87,13 +87,13 @@ public class Robot extends TimedRobot {
 		RobotMap.leftDrivepodSpeedController.setInverted(true);
 		RobotMap.rightDrivepodSpeedController.setInverted(true);
 
-		SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
+		/*SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
 		SmartDashboard.putNumber("Gyro I", drivetrain.gyroPID.getI());
 		SmartDashboard.putNumber("Gyro D", drivetrain.gyroPID.getD());
 		SmartDashboard.putNumber("Gyro Setpoint", 0);
-		SmartDashboard.putData(new StartGyroPID());
+		SmartDashboard.putData(new StartGyroPID());*/
 
-		/*SmartDashboard.putNumber("Left Encoder P", drivetrain.leftPodPID.getP());
+		SmartDashboard.putNumber("Left Encoder P", drivetrain.leftPodPID.getP());
 		SmartDashboard.putNumber("Left Encoder I", drivetrain.leftPodPID.getI());
 		SmartDashboard.putNumber("Left Encoder D", drivetrain.leftPodPID.getD());
 		SmartDashboard.putNumber("Left Encoder Setpoint", 0);
@@ -102,14 +102,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Right Encoder I", drivetrain.rightPodPID.getI());
 		SmartDashboard.putNumber("Right Encoder D", drivetrain.rightPodPID.getD());
 		SmartDashboard.putNumber("Right Encoder Setpoint", 0);
-		SmartDashboard.putData(new StartEncoderPID());*/
-
-		/*joyride = new Joyride();
-		climberListener = new ClimberListener();
-		intakeListener = new IntakeListener();
-		elevatorFloorListener = new ElevatorFloorListener();
-		elevatorFloor = new ElevatorFloor();
-		manualElevate = new ManualElevate();*/
+		SmartDashboard.putData(new StartEncoderPID());
 
 		autoChooser.addObject("Test Auto", AutoHelper.AutoType.TEST);
 		autoChooser.addObject("Dumb Auto", AutoHelper.AutoType.DUMB);
