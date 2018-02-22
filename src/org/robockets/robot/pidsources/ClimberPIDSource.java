@@ -4,16 +4,10 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public class EncoderPIDSource implements PIDSource {
+public class ClimberPIDSource implements PIDSource {
 	private Encoder encoder;
 
-	/**
-	 * Encoder PID Source
-	 *
-	 * @param encoder The encoder that you wish to read values from.
-	 * @param factor  A multiplier to manipulate the encoder output.
-	 */
-	public EncoderPIDSource(Encoder encoder) {
+	public ClimberPIDSource(Encoder encoder) {
 		this.encoder = encoder;
 	}
 
@@ -23,11 +17,11 @@ public class EncoderPIDSource implements PIDSource {
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
-		return PIDSourceType.kDisplacement;
+		return PIDSourceType.kRate;
 	}
 
 	@Override
 	public double pidGet() {
-		return this.encoder.getDistance();
+		return encoder.getRate();
 	}
 }

@@ -7,13 +7,25 @@
 
 package org.robockets.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.robockets.robot.drivetrain.Drivetrain;
-import org.robockets.robot.drivetrain.Joyride;
+import org.robockets.robot.cubeintake.CubeIntake;
+import org.robockets.robot.drivetrain.ResetEncoders;
+import org.robockets.robot.drivetrain.StartGyroPID;
+import org.robockets.robot.elevator.Elevator;
+import org.robockets.robot.elevator.ElevatorFloor;
+import org.robockets.robot.climber.Climber;
+import org.robockets.robot.autonomous.AutoChooser;
+import org.robockets.robot.drivetrain.StartEncoderPID;
+import org.robockets.robot.autonomous.AutoHelper;
+import org.robockets.robot.elevator.ResetCounter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,14 +35,33 @@ import org.robockets.robot.drivetrain.Joyride;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static OI m_oi;
-	
+
+	public static final Climber climber = new Climber();
+
+	private static OI m_oi;
+
 	public static Drivetrain drivetrain;
 
-	public static Command joyride;
+	public static CubeIntake cubeIntake;
 
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+	// These are not used because they are run automatically as default commands
+	/*public static Command joyride;
+	public static Command climberListener;
+	public static Command intakeListener;
+	public static Command elevatorFloorListener;
+	public static Command manualElevate;*/
+
+	public static Elevator elevator;
+
+	public static ElevatorFloor elevatorFloor;
+
+	public static String gameData = "";
+
+	private Command m_autonomousCommand;
+	private SendableChooser<AutoHelper.AutoType> autoChooser = new SendableChooser<>();
+	private SendableChooser<AutoHelper.RobotPosition> positionChooser = new SendableChooser<>();
+	private SendableChooser<AutoHelper.Priority> priorityChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -38,16 +69,87 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
+		RobotMap.gyro.calibrate();
+		RobotMap.gyro.reset();
+		RobotMap.elevatorMotor.getSensorCollection().setPulseWidthPosition(0, 0);
+
 		drivetrain = new Drivetrain();
-		RobotMap.leftEncoder.setDistancePerPulse(4 * Math.PI / 360); //FIXME: Set to real encoder conversion
-		RobotMap.rightEncoder.setDistancePerPulse(4 * Math.PI / 360);
 
-		joyride = new Joyride();
+		cubeIntake = new CubeIntake();
+		elevator = new Elevator();
+		elevatorFloor = new ElevatorFloor();
+		RobotMap.elevatorMotor.setInverted(true);
+		RobotMap.elevatorFloorMotor2.setInverted(true);
 
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		RobotMap.leftEncoder.setDistancePerPulse(1 / 39.92);
+		RobotMap.rightEncoder.setDistancePerPulse(1 / 39.92);
+		RobotMap.rightEncoder.setReverseDirection(true);
+		RobotMap.leftDrivepodSpeedController.setInverted(true);
+		RobotMap.rightDrivepodSpeedController.setInverted(true);
+
+		/*SmartDashboard.putNumber("Gyro P", drivetrain.gyroPID.getP());
+		SmartDashboard.putNumber("Gyro I", drivetrain.gyroPID.getI());
+		SmartDashboard.putNumber("Gyro D", drivetrain.gyroPID.getD());
+		SmartDashboard.putNumber("Gyro Setpoint", 0);
+		SmartDashboard.putData(new StartGyroPID());*/
+
+		SmartDashboard.putNumber("Left Encoder P", drivetrain.leftPodPID.getP());
+		SmartDashboard.putNumber("Left Encoder I", drivetrain.leftPodPID.getI());
+		SmartDashboard.putNumber("Left Encoder D", drivetrain.leftPodPID.getD());
+		SmartDashboard.putNumber("Left Encoder Setpoint", 0);
+
+		SmartDashboard.putNumber("Right Encoder P", drivetrain.rightPodPID.getP());
+		SmartDashboard.putNumber("Right Encoder I", drivetrain.rightPodPID.getI());
+		SmartDashboard.putNumber("Right Encoder D", drivetrain.rightPodPID.getD());
+		SmartDashboard.putNumber("Right Encoder Setpoint", 0);
+		SmartDashboard.putData(new StartEncoderPID());
+
+		autoChooser.addObject("Test Auto", AutoHelper.AutoType.TEST);
+		autoChooser.addObject("Dumb Auto", AutoHelper.AutoType.DUMB);
+		autoChooser.addObject("Min Auto", AutoHelper.AutoType.MIN);
+		autoChooser.addDefault("Mid Auto", AutoHelper.AutoType.MID);
+
+		SmartDashboard.putData("Auto mode", autoChooser);
+
+		positionChooser.addDefault("Left", AutoHelper.RobotPosition.LEFT);
+		positionChooser.addObject("Right", AutoHelper.RobotPosition.RIGHT);
+		positionChooser.addObject("Middle", AutoHelper.RobotPosition.MIDDLE);
+
+		SmartDashboard.putData("Robot Starting Position", positionChooser);
+
+		priorityChooser.addObject("Switch", AutoHelper.Priority.SWITCH);
+		priorityChooser.addObject("Scale", AutoHelper.Priority.SCALE);
+		priorityChooser.addDefault("None", AutoHelper.Priority.NONE);
+
+		SmartDashboard.putData("Autonomous Priority", priorityChooser);
+
+		SmartDashboard.putNumber("Drivetrain Scalar", 1);
+		SmartDashboard.putData("Reset Counter", new ResetCounter());
+
+		SmartDashboard.putData("Reset Encoders", new ResetEncoders());
+
 		m_oi = new OI();
+	}
+
+	@Override
+	public void robotPeriodic() {
+		//SmartDashboard.putNumber("Gyro Value", RobotMap.gyro.getAngle());
+		SmartDashboard.putData(RobotMap.gyro);
+		SmartDashboard.putNumber("Left Encoder Value", RobotMap.leftEncoder.get());
+		SmartDashboard.putNumber("Right Encoder Value", RobotMap.rightEncoder.get());
+
+		SmartDashboard.putNumber("Left Distance", RobotMap.leftEncoder.getDistance());
+		SmartDashboard.putNumber("Right Distance", RobotMap.rightEncoder.getDistance());
+
+		SmartDashboard.putNumber("Left PID Output", drivetrain.leftPodPID.get());
+		SmartDashboard.putNumber("Right PID Output", drivetrain.rightPodPID.get());
+		/*SmartDashboard.putNumber("PDP0: ", RobotMap.pdp.getCurrent(0));
+		SmartDashboard.putNumber("PDP1: ", RobotMap.pdp.getCurrent(1));
+		SmartDashboard.putNumber("PDP14: ", RobotMap.pdp.getCurrent(14));
+		SmartDashboard.putNumber("PDP15: ", RobotMap.pdp.getCurrent(15));*/
+
+		SmartDashboard.putNumber("Raw Elevator Encoder", elevator.getRawEncoderPos());
+		SmartDashboard.putNumber("Elevator Encoder Position", elevator.getEncoderPos());
 	}
 
 	/**
@@ -71,14 +173,13 @@ public class Robot extends TimedRobot {
 	 * chooser code works with the Java SmartDashboard. If you prefer the
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString code to get the auto name from the text box below the Gyro
-	 *
+	 * <p>
 	 * <p>You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -86,6 +187,16 @@ public class Robot extends TimedRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
+		String gameData = "";
+		while (gameData.length() == 0) {
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
+		}
+
+		m_autonomousCommand = new AutoChooser(
+				autoChooser.getSelected(),
+				positionChooser.getSelected(),
+				priorityChooser.getSelected(), gameData);
+
 
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
@@ -110,8 +221,6 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		
-		joyride.start();
 	}
 
 	/**
@@ -120,6 +229,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+	}
+
+	@Override
+	public void testInit() {
+		LiveWindow.addActuator("Drivetrain", "RobotDrive", RobotMap.robotDrive);
 	}
 
 	/**

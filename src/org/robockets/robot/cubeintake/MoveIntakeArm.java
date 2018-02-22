@@ -1,49 +1,55 @@
-package org.robockets.robot.drivetrain;
+package org.robockets.robot.cubeintake;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.robockets.robot.OI;
+import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * @author Brian Shin
- * User-input driving command for teloperated mode.
+ *
  */
-public class Joyride extends Command {
+public class MoveIntakeArm extends Command {
 
-	private double translate;
-	private double rotate;
+	private RelativeDirection.XAxis arm;
 
-	public Joyride() {
-		requires(Robot.drivetrain);
+	private double speed;
+	private double time;
+
+	public MoveIntakeArm(RelativeDirection.XAxis arm, double speed, double time) {
+		this.arm = arm;
+
+		this.speed = speed;
+		this.time = time;
 	}
+
+	public MoveIntakeArm(RelativeDirection.XAxis arm, double speed) {
+		this(arm, speed, 0);
+	}
+
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		if (time != 0) {
+			setTimeout(time);
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		translate = OI.driverJoystick.getRawAxis(1);
-		rotate = -OI.driverJoystick.getRawAxis(4);
-
-		double scalar = SmartDashboard.getNumber("Drivetrain Scalar", 1);
-
-		translate *= scalar;
-		rotate *= scalar;
-
-		Robot.drivetrain.driveArcade(translate, rotate);
+		Robot.cubeIntake.moveIntakeArm(arm, speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
+		if (time != 0) {
+			return isTimedOut();
+		}
 		return false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.drivetrain.stop();
+		Robot.cubeIntake.moveIntakeArm(arm, 0);
 	}
 
 	// Called when another command which requires one or more of the same
