@@ -33,7 +33,7 @@ public class MidAuto extends CommandGroup {
 			switch (robotPosition) {
 				case MIDDLE: // If in position 2 (middle)
 					// Drive to our switch position
-					dropCubeMiddleToSwitch(teamSwitchLeft);
+					dropCubeMiddleToSwitch(teamSwitchLeft); // Tested
 					break;
 				case LEFT: // Else if in position 1 (left) or 3 (right)
 				case RIGHT: // These two enums are just here for readability & changeability.
@@ -42,46 +42,47 @@ public class MidAuto extends CommandGroup {
 						case SCALE: //If priority is scale.
 							if (scaleSameSide) { // If scale is on our side
 								// Deposit cube in scale
-								dropCubeInSameSideScale(teamSwitchLeft);
+								dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
 							} else { // scale is on other side
 								if (teamSwitchSameSide == false) { // If switch is on other side
 									// Drive in S shape to other side
-									dropCubeInOppositeSideScaleSShape(teamSwitchLeft);
+									dropCubeInOppositeSideScaleSShape(teamSwitchLeft); // TODO: Test
 								} else { // If switch is on our side
 									// We can just drop in switch or still drive in s
+									dropCubeInSameSideScale(teamSwitchLeft);
 								}
 							}
 							break;
 						case SWITCH: // Else If priority is switch
 							if (teamSwitchSameSide) { // If switch is on our side
 								// Deposit cube in switch.
-								dropCubeInSameSideSwitch(teamSwitchLeft);
+								dropCubeInSameSideSwitch(teamSwitchLeft); // Tested
 							} else { // Else
 								// If scale is on our side
 								if (teamSwitchSameSide) {
 									// Deposit cube in scale
-									dropCubeInSameSideScale(teamSwitchLeft);
+									dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
 								} else { // Else
 									// Drive to auto line.
-									autoLine();
+									autoLine(); // Tested
 								}
 							}
 							break;
 						default: // Else
 							if (scaleSameSide) { // If scale is on our side
 								// Deposit cube in scale
-								dropCubeInSameSideScale(teamSwitchLeft);
+								dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
 							} else if (teamSwitchSameSide) { // Else if switch is on our side
 								// Deposit cube in switch
-								dropCubeInSameSideSwitch(teamSwitchLeft);
+								dropCubeInSameSideSwitch(teamSwitchLeft); // Tested
 							} else { // Else
 								// Drive to auto line.
-								autoLine();
+								autoLine(); // Tested
 							}
 					}
 			}
 		} else {
-			autoLine();
+			autoLine(); // Tested
 		}
 	}
 
@@ -124,7 +125,7 @@ public class MidAuto extends CommandGroup {
 	// Small bit of repeated code for going to the same side scale and dropping a cube.
 	// Starting position the same as dropCubeInSameSideSwitch.
 	private void dropCubeInSameSideScale(boolean teamSwitchLeft) {
-		addParallel(new Elevate(ElevatorPosition.MID_SCALE));
+		//addParallel(new Elevate(ElevatorPosition.MID_SCALE));
 
 		// Deposit cube in scale.
 		// Drive straight the distance to the scale.
@@ -132,7 +133,7 @@ public class MidAuto extends CommandGroup {
 		// 90deg CW if on the left.
 		turnAngle(teamSwitchLeft ? 90 : -90);
 		driveStraight(2.88);
-		dropCube();
+		//dropCube();
 	}
 
 	// Code that is so ugly it should be tucked away here. FIXME: This is still super broken
