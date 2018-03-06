@@ -93,15 +93,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Gyro Setpoint", 0);
 		SmartDashboard.putData(new StartGyroPID());*/
 
-		SmartDashboard.putNumber("Left Encoder P", drivetrain.leftPodPID.getP());
-		SmartDashboard.putNumber("Left Encoder I", drivetrain.leftPodPID.getI());
-		SmartDashboard.putNumber("Left Encoder D", drivetrain.leftPodPID.getD());
-		SmartDashboard.putNumber("Left Encoder Setpoint", 0);
-
-		SmartDashboard.putNumber("Right Encoder P", drivetrain.rightPodPID.getP());
-		SmartDashboard.putNumber("Right Encoder I", drivetrain.rightPodPID.getI());
-		SmartDashboard.putNumber("Right Encoder D", drivetrain.rightPodPID.getD());
-		SmartDashboard.putNumber("Right Encoder Setpoint", 0);
+		SmartDashboard.putNumber("Encoder P", drivetrain.encoderPID.getP());
+		SmartDashboard.putNumber("Encoder I", drivetrain.encoderPID.getI());
+		SmartDashboard.putNumber("Encoder D", drivetrain.encoderPID.getD());
+		SmartDashboard.putNumber("Encoder Setpoint", 0);
 		SmartDashboard.putData(new StartEncoderPID());
 
 		autoChooser.addObject("Test Auto", AutoHelper.AutoType.TEST);
@@ -141,8 +136,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Left Distance", RobotMap.leftEncoder.getDistance());
 		SmartDashboard.putNumber("Right Distance", RobotMap.rightEncoder.getDistance());
 
-		SmartDashboard.putNumber("Left PID Output", drivetrain.leftPodPID.get());
-		SmartDashboard.putNumber("Right PID Output", drivetrain.rightPodPID.get());
+		SmartDashboard.putNumber("Encoder PID Output", drivetrain.encoderPID.get());
 		/*SmartDashboard.putNumber("PDP0: ", RobotMap.pdp.getCurrent(0));
 		SmartDashboard.putNumber("PDP1: ", RobotMap.pdp.getCurrent(1));
 		SmartDashboard.putNumber("PDP14: ", RobotMap.pdp.getCurrent(14));
