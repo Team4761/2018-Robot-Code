@@ -17,22 +17,20 @@ public class StartEncoderPID extends Command {
 	}
 
 	protected void initialize() {
-		drivetrain.setEncoderPID(RelativeDirection.XAxis.LEFT, SmartDashboard.getNumber("Left Encoder P", 0),
+		drivetrain.setEncoderPID(SmartDashboard.getNumber("Left Encoder P", 0),
 				SmartDashboard.getNumber("Left Encoder I", 0),
 				SmartDashboard.getNumber("Left Encoder D", 0));
-		drivetrain.setEncoderPID(RelativeDirection.XAxis.RIGHT, SmartDashboard.getNumber("Right Encoder P", 0),
-				SmartDashboard.getNumber("Right Encoder I", 0),
-				SmartDashboard.getNumber("Right Encoder D", 0));
-		drivetrain.setDistance(SmartDashboard.getNumber("Left Encoder Setpoint", 0),
-				SmartDashboard.getNumber("Right Encoder Setpoint", 0));
+		drivetrain.setDistance(SmartDashboard.getNumber("Left Encoder Setpoint", 0));
 		drivetrain.enableEncoderPID();
 	}
 
 	protected void execute() {
+		double angle = Robot.drivetrain.getGyroPos();
+		Robot.drivetrain.driveArcade(Robot.drivetrain.encoderPID.get(), -angle*Robot.drivetrain.ENCODER_KP);
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return Robot.drivetrain.encoderPID.onTarget();
 	}
 
 	protected void end() {

@@ -17,18 +17,19 @@ public class DriveStraightAssisted extends Command {
 	}
 
 	protected void initialize() {
-		double leftPosition = RobotMap.leftEncoder.getDistance() + distance; // Convert relative to absolute
-		double rightPosition = RobotMap.rightEncoder.getDistance() + distance;
+		double position = Robot.drivetrain.getEncoderPos() + distance; // Convert relative to absolute
 
-		Robot.drivetrain.setDistance(leftPosition, rightPosition);
+		Robot.drivetrain.setDistance(position);
 		Robot.drivetrain.enableEncoderPID();
 	}
 
 	protected void execute() {
+		double angle = Robot.drivetrain.getGyroPos();
+		Robot.drivetrain.driveArcade(Robot.drivetrain.encoderPID.get(), -angle*Robot.drivetrain.ENCODER_KP);
 	}
 
 	protected boolean isFinished() {
-		return Robot.drivetrain.leftPodPID.onTarget() && Robot.drivetrain.rightPodPID.onTarget();
+		return Robot.drivetrain.encoderPID.onTarget();
 	}
 
 	protected void end() {
