@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import org.robockets.commons.RelativeDirection;
+import org.robockets.robot.climber.Climb;
 import org.robockets.robot.cubeintake.IntakeCube;
 import org.robockets.robot.cubeintake.IntakeOut;
 import org.robockets.robot.drivetrain.FakeDriveAssisted;
@@ -31,6 +32,7 @@ public class OI {
 
 	public static Button driverA = new JoystickButton(driverJoystick, 1);
 	public static Button driverB = new JoystickButton(driverJoystick, 2);
+	public static Button driverY = new JoystickButton(driverJoystick, 4);
 	public static Button driverSelect = new JoystickButton(driverJoystick, 7);
 	public static Button driverStart = new JoystickButton(driverJoystick, 8);
 
@@ -45,6 +47,7 @@ public class OI {
 	public OI() {
 		driverA.whileHeld(new IntakeCube(0.75, 0.4, 0.5));
 		driverB.whileHeld(new IntakeOut(0.75, 0.4));
+		driverY.whileHeld(new Climb(0.75));
 		driverSelect.whenPressed(new Joyride());
 		driverStart.whenPressed(new FakeDriveAssisted());
 
