@@ -158,7 +158,7 @@ public class MidAuto extends CommandGroup {
 
 		driveStraight(36); // 50 of all the numbers was chosen arbitrarily.
 		addSequential(new WaitCommand(0.1));
-		double smallAngle = (teamSwitchLeft ? 41.7 : -41.7); // CW first on the left.
+		double smallAngle = (teamSwitchLeft ? 40 : -42.5); // CW first on the left. TODO: CHange these
 		//turnAngle(smallAngle);
 		addSequential(new TurnAbsolute(smallAngle));
 		addSequential(new WaitCommand(0.1));
