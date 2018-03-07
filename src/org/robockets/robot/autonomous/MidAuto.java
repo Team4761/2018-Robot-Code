@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import org.robockets.robot.Robot;
 import org.robockets.robot.cubeintake.DropCube;
+import org.robockets.robot.cubeintake.IntakeCube;
 import org.robockets.robot.drivetrain.DriveAngleAssisted;
 import org.robockets.robot.drivetrain.DriveStraight;
 import org.robockets.robot.drivetrain.DriveStraightAssisted;
@@ -70,8 +71,12 @@ public class MidAuto extends CommandGroup {
 							break;
 						default: // Else
 							if (scaleSameSide) { // If scale is on our side
-								// Deposit cube in scale
-								dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
+								if(teamSwitchSameSide) {
+									twoCubeSS(teamSwitchLeft);
+								} else {
+									// Deposit cube in scale
+									dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
+								}
 							} else if (teamSwitchSameSide) { // Else if switch is on our side
 								// Deposit cube in switch
 								dropCubeInSameSideSwitch(teamSwitchLeft); // Tested
@@ -99,6 +104,24 @@ public class MidAuto extends CommandGroup {
 	// Small helper method for dropping cubes.
 	private void dropCube() {
 		addSequential(new DropCube());
+	}
+
+	private void twoCubeSS(boolean teamSwitchLeft) {
+		addParallel(new Elevate(ElevatorPosition.MID_SCALE));
+		dropCubeInSameSideScale(teamSwitchLeft);
+		addSequential(new TurnAbsolute(0));
+		driveStraight(-195); // Either this
+		//driveStraight(150); // or this
+		addParallel(new Elevate(ElevatorPosition.BOTTOM));
+		turnAngle(135);
+		addParallel(new IntakeCube(0.75, 0.4, 0.65, 4));
+		driveStraight(50); // TODO: Make this an actual value
+		driveStraight(-50); // TODO: This may or may not work
+		addSequential(new TurnAbsolute(0));
+		driveStraight(-10); // TODO: This will change
+		addParallel(new Elevate(ElevatorPosition.SWITCH));
+		turnAngle(90);
+		driveStraight(50);
 	}
 
 	// Small bit of repeated code that could be put into a method.
@@ -158,7 +181,7 @@ public class MidAuto extends CommandGroup {
 
 		driveStraight(36); // 50 of all the numbers was chosen arbitrarily.
 		addSequential(new WaitCommand(0.1));
-		double smallAngle = (teamSwitchLeft ? 40 : -42.5); // CW first on the left. TODO: CHange these
+		double smallAngle = (teamSwitchLeft ? 40 : -42.5); // CW first on the left. TODO: Change these
 		//turnAngle(smallAngle);
 		addSequential(new TurnAbsolute(smallAngle));
 		addSequential(new WaitCommand(0.1));
