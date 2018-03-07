@@ -13,5 +13,7 @@ public class TestAuto extends CommandGroup {
 
 	public TestAuto() {
 		addSequential(new DriveStraightAssisted(120));
+		addSequential(new TurnAbsolute(90));
+		addSequential(new DriveStraightAssisted(36)); // BE CAREFUL WITH THIS
 	}
 }
