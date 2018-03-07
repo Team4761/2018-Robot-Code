@@ -8,6 +8,8 @@ public class EncoderPIDSource implements PIDSource {
 	private Encoder encoder1;
 	private Encoder encoder2;
 
+	private final double FACTOR = 1.0 / 39.92;
+
 	/**
 	 * Encoder PID Source
 	 */
@@ -27,6 +29,6 @@ public class EncoderPIDSource implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		return (encoder1.get() + encoder2.get())/2.0;
+		return (encoder1.getDistance() + encoder2.getDistance())/2.0;
 	}
 }

@@ -22,12 +22,12 @@ public class Drivetrain extends Subsystem {
 	public final PIDController encoderPID;
 	public final PIDController gyroPID;
 
-	public final double ENCODER_KP = 0.03;
+	public final double ENCODER_KP = 0.3;
 
 	public Drivetrain() {
 
 		encoderPIDSource = new EncoderPIDSource(RobotMap.leftEncoder, RobotMap.rightEncoder);
-		encoderPID = new PIDController(0.05, 0.00001, 0.00001, encoderPIDSource,
+		encoderPID = new PIDController(0.075, 0.00001, 0.00001, encoderPIDSource,
 				new DummyPIDOutput()); // This might need to change
 		encoderPID.disable();
 		encoderPID.setOutputRange(-0.5, 0.5);

@@ -24,8 +24,9 @@ public class DriveStraightAssisted extends Command {
 	}
 
 	protected void execute() {
+		System.out.println("Encoder Pos: " + Robot.drivetrain.getEncoderPos());
 		double angle = Robot.drivetrain.getGyroPos();
-		Robot.drivetrain.driveArcade(Robot.drivetrain.encoderPID.get(), -angle*Robot.drivetrain.ENCODER_KP);
+		Robot.drivetrain.driveArcade(Robot.drivetrain.encoderPID.get(), angle*Robot.drivetrain.ENCODER_KP);
 	}
 
 	protected boolean isFinished() {
@@ -33,6 +34,7 @@ public class DriveStraightAssisted extends Command {
 	}
 
 	protected void end() {
+		System.out.println("DRIVESTRAIGHT");
 		Robot.drivetrain.disableEncoderPID();
 	}
 

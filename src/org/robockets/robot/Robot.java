@@ -73,17 +73,18 @@ public class Robot extends TimedRobot {
 		RobotMap.gyro.reset();
 		RobotMap.elevatorMotor.getSensorCollection().setPulseWidthPosition(0, 0);
 
+		RobotMap.leftEncoder.setDistancePerPulse(1.0 / 39.92);
+		RobotMap.rightEncoder.setDistancePerPulse(1.0 / 39.92);
+
 		drivetrain = new Drivetrain();
 
 		cubeIntake = new CubeIntake();
 		elevator = new Elevator();
 		elevatorFloor = new ElevatorFloor();
-		RobotMap.elevatorMotor.setInverted(true);
+		//RobotMap.elevatorMotor.setInverted(true);
 		RobotMap.elevatorFloorMotor2.setInverted(true);
-
-		RobotMap.leftEncoder.setDistancePerPulse(1 / 39.92);
-		RobotMap.rightEncoder.setDistancePerPulse(1 / 39.92);
 		RobotMap.rightEncoder.setReverseDirection(true);
+
 		RobotMap.leftDrivepodSpeedController.setInverted(true);
 		RobotMap.rightDrivepodSpeedController.setInverted(true);
 
