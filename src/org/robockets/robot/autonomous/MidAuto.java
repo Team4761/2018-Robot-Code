@@ -70,16 +70,16 @@ public class MidAuto extends CommandGroup {
 							}
 							break;
 						default: // Else
-							if (scaleSameSide) { // If scale is on our side
-								if(teamSwitchSameSide) {
-									twoCubeSS(teamSwitchLeft);
-								} else {
-									// Deposit cube in scale
-									dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
-								}
-							} else if (teamSwitchSameSide) { // Else if switch is on our side
+							if (teamSwitchSameSide) { // If switch is on our side
 								// Deposit cube in switch
 								dropCubeInSameSideSwitch(teamSwitchLeft); // Tested
+							} else if (scaleSameSide) { // Else if scale is on our side
+								/*if(teamSwitchSameSide) {
+									twoCubeSS(teamSwitchLeft);
+								} else {*/
+								// Deposit cube in scale
+								dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
+								//}
 							} else { // Else
 								// Drive to auto line.
 								autoLine(); // Tested
