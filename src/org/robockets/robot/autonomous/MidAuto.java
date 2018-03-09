@@ -167,17 +167,7 @@ public class MidAuto extends CommandGroup {
 		double angle = teamSwitchLeft ? 90 : -90;
 		turnAngle(angle); // turn 90deg CW when on the left.
 		driveStraight(244.5);
-		turnAngle(-angle); // 90deg CCW when starting from the left.
-		driveStraight(98.915);
-		turnAngle(-angle);
-		driveStraight(2.88);
-		dropCube();
-	}
-
-	// The starting position for this middle auto is 1 ft from the right side
-	// of the exchange to the side of the robot.
-	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
-		//addParallel(new Elevate(ElevatorPosition.SWITCH));
+		turnAngle(-angle); // 90deg CCW whaddParallel(new Elevate(ElevatorPosition.SWITCH));
 
 		driveStraight(36); // 50 of all the numbers was chosen arbitrarily.
 		addSequential(new WaitCommand(0.1));
@@ -189,7 +179,17 @@ public class MidAuto extends CommandGroup {
 		addSequential(new WaitCommand(0.1));
 		//turnAngle(-smallAngle);
 		addSequential(new TurnAbsolute(0));
-		addSequential(new WaitCommand(0.1));
+		addSequential(new WaitCommand(0.1)); //en starting from the left.
+		driveStraight(98.915);
+		turnAngle(-angle);
+		driveStraight(2.88);
+		dropCube();
+	}
+
+	// The starting position for this middle auto is 1 ft from the right side
+	// of the exchange to the side of the robot.
+	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
+		//
 		driveStraight(8);
 		//dropCube();
 

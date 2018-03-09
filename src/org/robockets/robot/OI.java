@@ -51,7 +51,7 @@ public class OI {
 		driverSelect.whenPressed(new Joyride());
 		driverStart.whenPressed(new FakeDriveAssisted());
 
-		operatorA.whileHeld(new IntakeCube(0.75, 0.4, 0.65));
+		operatorA.whileHeld(new IntakeCube(0.9, 0.5, 0.8));
 		operatorB.whenPressed(new Elevate(ElevatorPosition.BOTTOM, 0.5));
 		operatorX.whenPressed(new Elevate(ElevatorPosition.EXCHANGE, 0.5));
 		operatorY.whenPressed(new Elevate(ElevatorPosition.SWITCH, 0.5));
