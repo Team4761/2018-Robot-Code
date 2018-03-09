@@ -82,6 +82,7 @@ public class Robot extends TimedRobot {
 		elevator = new Elevator();
 		elevatorFloor = new ElevatorFloor();
 
+		RobotMap.elevatorMotor.setInverted(true);
 		RobotMap.elevatorFloorMotor.setInverted(true);
 		//RobotMap.elevatorFloorMotor2.setInverted(true);
 		RobotMap.rightEncoder.setReverseDirection(true);

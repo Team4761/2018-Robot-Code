@@ -47,7 +47,7 @@ public class RobotMap {
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.
 	public static int climberMotorPDPChannel = 1; // Dummy value.
 
-	public static DigitalInput elevatorEncoder = new DigitalInput(5);
+	public static DigitalInput elevatorEncoder = new DigitalInput(4);
 
 	public static Counter counter = new Counter(elevatorEncoder);
 }
