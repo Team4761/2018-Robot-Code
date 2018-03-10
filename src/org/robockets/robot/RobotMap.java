@@ -48,6 +48,4 @@ public class RobotMap {
 	public static int climberMotorPDPChannel = 1; // Dummy value.
 
 	public static DigitalInput elevatorEncoder = new DigitalInput(4);
-
-	public static Counter counter = new Counter(elevatorEncoder);
 }

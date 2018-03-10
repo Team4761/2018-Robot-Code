@@ -20,6 +20,7 @@ import org.robockets.robot.cubeintake.CubeIntake;
 import org.robockets.robot.drivetrain.ResetEncoders;
 import org.robockets.robot.drivetrain.StartGyroPID;
 import org.robockets.robot.elevator.Elevator;
+import org.robockets.robot.elevator.ElevatorCounter;
 import org.robockets.robot.elevator.ElevatorFloor;
 import org.robockets.robot.climber.Climber;
 import org.robockets.robot.autonomous.AutoChooser;
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
 	public static Command intakeListener;
 	public static Command elevatorFloorListener;
 	public static Command manualElevate;*/
+	public static Command elevatorCounter;
 
 	public static Elevator elevator;
 
@@ -81,6 +83,7 @@ public class Robot extends TimedRobot {
 		cubeIntake = new CubeIntake();
 		elevator = new Elevator();
 		elevatorFloor = new ElevatorFloor();
+		elevatorCounter = new ElevatorCounter();
 
 		RobotMap.elevatorMotor.setInverted(true);
 		RobotMap.elevatorFloorMotor.setInverted(true);
@@ -125,6 +128,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Reset Counter", new ResetCounter());
 
 		SmartDashboard.putData("Reset Encoders", new ResetEncoders());
+
+		elevatorCounter.start();
 
 		m_oi = new OI();
 	}

@@ -15,6 +15,10 @@ public class Elevator extends Subsystem {
 
 	private final double TICKS_PER_INCH = 1.1428571428571428571428571428571;
 
+	private int elevatorTicks = 0;
+
+	private RelativeDirection.ZAxis lastDirection = RelativeDirection.ZAxis.UP;
+
 	public Elevator() {
 		RobotMap.elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 	}
@@ -30,6 +34,12 @@ public class Elevator extends Subsystem {
 
 	public void setElevatorSpeed(double elSpeed) {
 		RobotMap.elevatorMotor.set(elSpeed);
+
+		if (elSpeed > 0) {
+			lastDirection = RelativeDirection.ZAxis.UP;
+		} else if (elSpeed < 0) {
+			lastDirection = RelativeDirection.ZAxis.DOWN;
+		}
 		//RobotMap.climberMotorRight.set(elSpeed);
 	}
 
@@ -61,7 +71,23 @@ public class Elevator extends Subsystem {
 	}
 
 	public double getRawEncoderPos() {
-		return RobotMap.counter.get();
+		return elevatorTicks;
+	}
+
+	public RelativeDirection.ZAxis getLastDirection() {
+		return lastDirection;
+	}
+
+	public void countUp() {
+		elevatorTicks++;
+	}
+
+	public void countDown() {
+		elevatorTicks--;
+	}
+
+	public void resetCounter() {
+		elevatorTicks = 0;
 	}
 
 	public double getEncoderPos() {

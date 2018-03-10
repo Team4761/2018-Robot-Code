@@ -1,6 +1,7 @@
 package org.robockets.robot.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.robockets.robot.Robot;
 import org.robockets.robot.RobotMap;
 
 /**
@@ -13,7 +14,7 @@ public class ResetCounter extends Command {
 	}
 
 	protected void initialize() {
-		RobotMap.counter.reset();
+		Robot.elevator.resetCounter();
 	}
 
 	protected void execute() {
