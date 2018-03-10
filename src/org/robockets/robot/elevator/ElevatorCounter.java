@@ -23,12 +23,12 @@ public class ElevatorCounter extends Command {
 		boolean currentState = RobotMap.elevatorEncoder.get();
 
 		if (wasActive != currentState) {
-			wasActive = currentState;
 			if (Robot.elevator.getLastDirection() == RelativeDirection.ZAxis.UP) {
 				Robot.elevator.countUp();
 			} else {
 				Robot.elevator.countDown();
 			}
+			wasActive = currentState;
 		}
 	}
 

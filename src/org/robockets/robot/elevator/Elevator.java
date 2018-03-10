@@ -33,13 +33,13 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setElevatorSpeed(double elSpeed) {
-		RobotMap.elevatorMotor.set(elSpeed);
-
 		if (elSpeed > 0) {
 			lastDirection = RelativeDirection.ZAxis.UP;
 		} else if (elSpeed < 0) {
 			lastDirection = RelativeDirection.ZAxis.DOWN;
 		}
+
+		RobotMap.elevatorMotor.set(elSpeed);
 		//RobotMap.climberMotorRight.set(elSpeed);
 	}
 

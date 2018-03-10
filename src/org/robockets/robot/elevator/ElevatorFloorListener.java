@@ -17,7 +17,7 @@ public class ElevatorFloorListener extends Command {
 	}
 
 	protected void execute() {
-		double speed = -OI.operatorJoystick.getRawAxis(1);
+		double speed = OI.operatorJoystick.getRawAxis(1);
 
 		Robot.elevatorFloor.moveElevatorFloor(speed);
 	}
