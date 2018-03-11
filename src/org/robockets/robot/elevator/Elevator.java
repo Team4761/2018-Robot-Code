@@ -33,7 +33,10 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setElevatorSpeed(double elSpeed) {
-		if (elSpeed > 0) {
+
+		if (elSpeed < 0.1 && elSpeed > 0.1) {
+			lastDirection = RelativeDirection.ZAxis.DOWN;
+		} else if (elSpeed > 0) {
 			lastDirection = RelativeDirection.ZAxis.UP;
 		} else if (elSpeed < 0) {
 			lastDirection = RelativeDirection.ZAxis.DOWN;

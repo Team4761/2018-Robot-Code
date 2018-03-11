@@ -41,7 +41,7 @@ public class RobotMap {
 
 	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 
-	public static Encoder leftEncoder = new Encoder(0, 1);
+	public static Encoder leftEncoder = new Encoder(8, 9);
 	public static Encoder rightEncoder = new Encoder(2, 3);
 
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel(0); // Zero is the CAN id of the powerdistribution panel.

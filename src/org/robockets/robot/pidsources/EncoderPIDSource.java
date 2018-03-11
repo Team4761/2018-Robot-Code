@@ -29,6 +29,7 @@ public class EncoderPIDSource implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		return (encoder1.getDistance() + encoder2.getDistance())/2.0;
+		//return (encoder1.getDistance() + encoder2.getDistance())/2.0;
+		return encoder2.getDistance();
 	}
 }

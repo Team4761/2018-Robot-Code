@@ -12,6 +12,8 @@ public class TurnAbsolute extends Command {
 
 	private double angle;
 
+	private final double TIMEOUT = 1.75;
+
 	public TurnAbsolute(double angle) {
 		requires(Robot.drivetrain);
 		this.angle = angle;
@@ -20,14 +22,15 @@ public class TurnAbsolute extends Command {
 	protected void initialize() {
 		drivetrain.setGyroSetpoint(-angle);
 		drivetrain.enableGyroPID();
+		setTimeout(TIMEOUT);
 	}
 
 	protected void execute() {
-		drivetrain.driveArcade(0, drivetrain.gyroPID.get());
+		drivetrain.driveArcade(0, -drivetrain.gyroPID.get());
 	}
 
 	protected boolean isFinished() {
-		return drivetrain.gyroPID.onTarget();
+		return drivetrain.gyroPID.onTarget() || isTimedOut();
 	}
 
 	protected void end() {

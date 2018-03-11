@@ -2,23 +2,27 @@ package org.robockets.robot.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.robockets.robot.Robot;
-import org.robockets.robot.RobotMap;
 
 /**
  * @author Jake Backer
  */
-public class ResetCounter extends Command {
+public class TimedElevator extends Command {
 
-	public ResetCounter() {
-		setRunWhenDisabled(true);
+	private double time;
+	private double speed;
+
+	public TimedElevator(double time, double speed) {
+		this.time = time;
+		this.speed = speed;
 	}
 
 	protected void initialize() {
-		setTimeout(1);
-		Robot.elevator.resetCounter();
+		setTimeout(time);
 	}
 
 	protected void execute() {
+		System.out.println("ELEVATING");
+		Robot.elevator.setElevatorSpeed(speed);
 	}
 
 	protected boolean isFinished() {

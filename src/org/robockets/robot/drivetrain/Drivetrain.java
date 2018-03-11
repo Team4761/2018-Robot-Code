@@ -22,19 +22,19 @@ public class Drivetrain extends Subsystem {
 	public final PIDController encoderPID;
 	public final PIDController gyroPID;
 
-	public final double ENCODER_KP = 0.3;
+	public final double ENCODER_KP = 0.2;
 
 	public Drivetrain() {
 
 		encoderPIDSource = new EncoderPIDSource(RobotMap.leftEncoder, RobotMap.rightEncoder);
-		encoderPID = new PIDController(0.075, 0.00001, 0.00001, encoderPIDSource,
+		encoderPID = new PIDController(0.076, 0.00001, 0.00001, encoderPIDSource,
 				new DummyPIDOutput()); // This might need to change
 		encoderPID.disable();
-		encoderPID.setOutputRange(-0.5, 0.5);
+		encoderPID.setOutputRange(-0.6, 0.6);
 		encoderPID.setAbsoluteTolerance(2);
 
 		gyroPIDSource = new GyroPIDSource();
-		gyroPID = new PIDController(0.05, 0.0004, 0.15, gyroPIDSource, new DummyPIDOutput());
+		gyroPID = new PIDController(0.052, 0.0005, 0.16, gyroPIDSource, new DummyPIDOutput());
 		gyroPID.disable();
 		gyroPID.setOutputRange(-0.75, 0.75); // Set turning speed range
 		gyroPID.setAbsoluteTolerance(3);
@@ -114,7 +114,8 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public double getEncoderPos() {
-		return (RobotMap.leftEncoder.get() + RobotMap.rightEncoder.get()) / 2.0;
+		//return (RobotMap.leftEncoder.get() + RobotMap.rightEncoder.get()) / 2.0;
+		return RobotMap.rightEncoder.getDistance();
 	}
 }
 

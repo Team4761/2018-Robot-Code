@@ -10,6 +10,6 @@ import org.robockets.robot.elevator.MoveElevatorFloor;
  */
 public class DropCube extends CommandGroup {
 	public DropCube() {
-		addParallel(new MoveElevatorFloor(0.75, 1));
+		addParallel(new MoveElevatorFloor(-0.75, 1));
 	}
 }

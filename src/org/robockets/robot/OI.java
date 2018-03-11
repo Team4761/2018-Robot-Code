@@ -52,11 +52,11 @@ public class OI {
 		driverStart.whenPressed(new FakeDriveAssisted());
 
 		operatorA.whileHeld(new IntakeCube(0.9, 0.5, 0.8));
-		operatorB.whenPressed(new Elevate(ElevatorPosition.BOTTOM, 0.5));
-		operatorX.whenPressed(new Elevate(ElevatorPosition.EXCHANGE, 0.5));
-		operatorY.whenPressed(new Elevate(ElevatorPosition.SWITCH, 0.5));
+		//operatorB.whenPressed(new Elevate(ElevatorPosition.BOTTOM, 0.5));
+		//operatorX.whenPressed(new Elevate(ElevatorPosition.EXCHANGE, 0.5));
+		//operatorY.whenPressed(new Elevate(ElevatorPosition.SWITCH, 0.5));
 		operatorSelect.whenPressed(new InterruptElevator());
-		operatorLeftStick.whenPressed(new Elevate(ElevatorPosition.MID_SCALE, 0.75));
+		//operatorLeftStick.whenPressed(new Elevate(ElevatorPosition.MID_SCALE, 0.75));
 		//operatorRightStick.whenPressed(new Elevate(ElevatorPosition.HIGH_SCALE, 0.75));
 	}
 }

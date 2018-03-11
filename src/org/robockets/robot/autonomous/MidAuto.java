@@ -12,6 +12,7 @@ import org.robockets.robot.drivetrain.DriveStraightAssisted;
 import org.robockets.robot.drivetrain.TurnAbsolute;
 import org.robockets.robot.elevator.Elevate;
 import org.robockets.robot.elevator.ElevatorPosition;
+import org.robockets.robot.elevator.TimedElevator;
 
 /**
  * @author Mathias Kools, Jake Backer
@@ -43,14 +44,14 @@ public class MidAuto extends CommandGroup {
 						case SCALE: //If priority is scale.
 							if (scaleSameSide) { // If scale is on our side
 								// Deposit cube in scale
-								dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
+								dropCubeInSameSideScale(scaleLeft); // TODO: Test
 							} else { // scale is on other side
 								if (teamSwitchSameSide == false) { // If switch is on other side
 									// Drive in S shape to other side
 									dropCubeInOppositeSideScaleSShape(teamSwitchLeft); // TODO: Test
 								} else { // If switch is on our side
 									// We can just drop in switch or still drive in s
-									dropCubeInSameSideScale(teamSwitchLeft);
+									dropCubeInSameSideScale(scaleLeft);
 								}
 							}
 							break;
@@ -62,7 +63,7 @@ public class MidAuto extends CommandGroup {
 								// If scale is on our side
 								if (teamSwitchSameSide) {
 									// Deposit cube in scale
-									dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
+									dropCubeInSameSideScale(scaleLeft); // TODO: Test
 								} else { // Else
 									// Drive to auto line.
 									autoLine(); // Tested
@@ -78,7 +79,7 @@ public class MidAuto extends CommandGroup {
 									twoCubeSS(teamSwitchLeft);
 								} else {*/
 								// Deposit cube in scale
-								dropCubeInSameSideScale(teamSwitchLeft); // TODO: Test
+								dropCubeInSameSideScale(scaleLeft); // TODO: Test
 								//}
 							} else { // Else
 								// Drive to auto line.
@@ -106,9 +107,9 @@ public class MidAuto extends CommandGroup {
 		addSequential(new DropCube());
 	}
 
-	private void twoCubeSS(boolean teamSwitchLeft) {
+	private void twoCubeSS(boolean scaleLeft) {
 		addParallel(new Elevate(ElevatorPosition.MID_SCALE));
-		dropCubeInSameSideScale(teamSwitchLeft);
+		dropCubeInSameSideScale(scaleLeft);
 		addSequential(new TurnAbsolute(0));
 		driveStraight(-195); // Either this
 		//driveStraight(150); // or this
@@ -147,14 +148,14 @@ public class MidAuto extends CommandGroup {
 
 	// Small bit of repeated code for going to the same side scale and dropping a cube.
 	// Starting position the same as dropCubeInSameSideSwitch.
-	private void dropCubeInSameSideScale(boolean teamSwitchLeft) {
+	private void dropCubeInSameSideScale(boolean scaleLeft) {
 		//addParallel(new Elevate(ElevatorPosition.MID_SCALE));
 
 		// Deposit cube in scale.
 		// Drive straight the distance to the scale.
 		driveStraight(305.15);
 		// 90deg CW if on the left.
-		turnAngle(teamSwitchLeft ? 90 : -90);
+		turnAngle(scaleLeft ? 90 : -90);
 		driveStraight(2.88);
 		//dropCube();
 	}
@@ -189,9 +190,21 @@ public class MidAuto extends CommandGroup {
 	// The starting position for this middle auto is 1 ft from the right side
 	// of the exchange to the side of the robot.
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
-		//
-		driveStraight(8);
-		//dropCube();
+		//addParallel(new Elevate(ElevatorPosition.SWITCH));
+		addParallel(new TimedElevator(4.5, 0.8));
 
+		driveStraight(25); // 50 of all the numbers was chosen arbitrarily.
+
+		double smallAngle = (teamSwitchLeft ? 42.5 : -40.0); // CW first on the left.
+		//turnAngle(smallAngle);
+		addSequential(new TurnAbsolute(smallAngle));
+
+		driveStraight(97);
+
+		//turnAngle(-smallAngle);
+		addSequential(new TurnAbsolute(0));
+
+		driveStraight(30);
+		dropCube();
 	}
 }
