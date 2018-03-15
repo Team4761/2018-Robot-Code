@@ -132,9 +132,10 @@ public class MidAuto extends CommandGroup {
 
 		System.out.println("SSS");
 		// Deposit cube in switch
-		driveStraight(140);
+		driveStraight(130); // FIXME: This will be 140
 		// 90deg CW if on the left.
-		turnAngle(teamSwitchLeft ? -90 : 90);
+		addSequential(new TurnAbsolute(teamSwitchLeft ? -90 : 90));
+		addSequential(new WaitCommand(0.5));
 		// align edge of robot to edge of switch.
 		driveStraight(16.56);
 		//dropCube();
