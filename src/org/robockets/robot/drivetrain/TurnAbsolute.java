@@ -34,6 +34,7 @@ public class TurnAbsolute extends Command {
 	}
 
 	protected void end() {
+		System.out.println("Finished Turning");
 		drivetrain.disableGyroPID();
 	}
 

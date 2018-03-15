@@ -24,11 +24,9 @@ public class DriveStraightAssisted extends Command {
 	}
 
 	protected void execute() {
-		System.out.println("Encoder Pos: " + Robot.drivetrain.getEncoderPos());
 		double angle = Robot.drivetrain.getGyroPos();
 		double translate = -Robot.drivetrain.encoderPID.get();
 		double rotate = (angle-Robot.drivetrain.gyroPID.getSetpoint())*Robot.drivetrain.ENCODER_KP;
-		System.out.println("Drive Straight: (" + translate + "), (" + rotate + ")");
 
 		Robot.drivetrain.driveArcade(translate, rotate);
 	}

@@ -34,7 +34,7 @@ public class Drivetrain extends Subsystem {
 		encoderPID.setAbsoluteTolerance(2);
 
 		gyroPIDSource = new GyroPIDSource();
-		gyroPID = new PIDController(0.052, 0.0005, 0.16, gyroPIDSource, new DummyPIDOutput());
+		gyroPID = new PIDController(0.057, 0.0005, 0.16, gyroPIDSource, new DummyPIDOutput());
 		gyroPID.disable();
 		gyroPID.setOutputRange(-0.75, 0.75); // Set turning speed range
 		gyroPID.setAbsoluteTolerance(3);

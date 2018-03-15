@@ -191,20 +191,20 @@ public class MidAuto extends CommandGroup {
 	// of the exchange to the side of the robot.
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
 		//addParallel(new Elevate(ElevatorPosition.SWITCH));
-		addParallel(new TimedElevator(4.5, 0.8));
+		//addParallel(new TimedElevator(3.75, 0.8));
 
 		driveStraight(25); // 50 of all the numbers was chosen arbitrarily.
 
-		double smallAngle = (teamSwitchLeft ? 42.5 : -40.0); // CW first on the left.
+		double smallAngle = (teamSwitchLeft ? 42.5 : -40.5); // CW first on the left.
 		//turnAngle(smallAngle);
 		addSequential(new TurnAbsolute(smallAngle));
 
-		driveStraight(97);
+		driveStraight(teamSwitchLeft ? 90 : 70);
 
 		//turnAngle(-smallAngle);
 		addSequential(new TurnAbsolute(0));
 
-		driveStraight(30);
-		dropCube();
+		driveStraight(21);
+		//dropCube();
 	}
 }
