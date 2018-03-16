@@ -12,7 +12,7 @@ public class TurnAbsolute extends Command {
 
 	private double angle;
 
-	private final double TIMEOUT = 1.75;
+	private final double TIMEOUT = 1.9;
 
 	public TurnAbsolute(double angle) {
 		requires(Robot.drivetrain);

@@ -45,13 +45,13 @@ public class OI {
 	public static Button operatorRightStick = new JoystickButton(operatorJoystick, 10);
 
 	public OI() {
-		driverA.whileHeld(new IntakeCube(0.75, 0.4, 0.5));
+		driverA.whileHeld(new IntakeCube(0.9, 0.6, 0.8));
 		driverB.whileHeld(new IntakeOut(0.75, 0.4));
 		driverY.whileHeld(new Climb(0.75));
 		driverSelect.whenPressed(new Joyride());
 		driverStart.whenPressed(new FakeDriveAssisted());
 
-		operatorA.whileHeld(new IntakeCube(0.9, 0.5, 0.8));
+		operatorA.whileHeld(new IntakeCube(0.9, 0.6, 0.8));
 		//operatorB.whenPressed(new Elevate(ElevatorPosition.BOTTOM, 0.5));
 		//operatorX.whenPressed(new Elevate(ElevatorPosition.EXCHANGE, 0.5));
 		//operatorY.whenPressed(new Elevate(ElevatorPosition.SWITCH, 0.5));
