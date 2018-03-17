@@ -108,19 +108,20 @@ public class MidAuto extends CommandGroup {
 	}
 
 	private void twoCubeSS(boolean scaleLeft) {
-		addParallel(new Elevate(ElevatorPosition.MID_SCALE));
+		addParallel(new TimedElevator(4.5, 0.75));
+
 		dropCubeInSameSideScale(scaleLeft);
 		addSequential(new TurnAbsolute(0));
 		driveStraight(-195); // Either this
 		//driveStraight(150); // or this
-		addParallel(new Elevate(ElevatorPosition.BOTTOM));
+		addParallel(new TimedElevator(4.5, -0.5));
 		turnAngle(135);
 		addParallel(new IntakeCube(0.75, 0.4, 0.65, 4));
 		driveStraight(50); // TODO: Make this an actual value
 		driveStraight(-50); // TODO: This may or may not work
 		addSequential(new TurnAbsolute(0));
 		driveStraight(-10); // TODO: This will change
-		addParallel(new Elevate(ElevatorPosition.SWITCH));
+		addParallel(new TimedElevator(4, 0.75));
 		turnAngle(90);
 		driveStraight(50);
 	}
@@ -129,8 +130,8 @@ public class MidAuto extends CommandGroup {
 	// Starting position has the corner of robot right where slant of corner of field starts.
 	private void dropCubeInSameSideSwitch(boolean teamSwitchLeft) {
 		//addParallel(new Elevate(ElevatorPosition.SWITCH));
+		addParallel(new TimedElevator(4, 0.75));
 
-		System.out.println("SSS");
 		// Deposit cube in switch
 		driveStraight(130); // FIXME: This will be 140
 		// 90deg CW if on the left.
@@ -138,7 +139,7 @@ public class MidAuto extends CommandGroup {
 		addSequential(new WaitCommand(0.5));
 		// align edge of robot to edge of switch.
 		driveStraight(16.56);
-		//dropCube();
+		dropCube();
 	}
 
 	// Small bit of repeated code that could be put into a method for auto line.
@@ -151,6 +152,7 @@ public class MidAuto extends CommandGroup {
 	// Starting position the same as dropCubeInSameSideSwitch.
 	private void dropCubeInSameSideScale(boolean scaleLeft) {
 		//addParallel(new Elevate(ElevatorPosition.MID_SCALE));
+		addParallel(new TimedElevator(4.5, 0.75));
 
 		// Deposit cube in scale.
 		// Drive straight the distance to the scale.
@@ -158,12 +160,12 @@ public class MidAuto extends CommandGroup {
 		// 90deg CW if on the left.
 		turnAngle(scaleLeft ? 90 : -90);
 		driveStraight(2.88);
-		//dropCube();
+		dropCube();
 	}
 
 	// Code that is so ugly it should be tucked away here. FIXME: This is still super broken
 	private void dropCubeInOppositeSideScaleSShape(boolean teamSwitchLeft) {
-		addParallel(new Elevate(ElevatorPosition.MID_SCALE));
+		addParallel(new TimedElevator(4.5, 0.75));
 
 		driveStraight(209.235);
 		double angle = teamSwitchLeft ? 90 : -90;
@@ -192,7 +194,7 @@ public class MidAuto extends CommandGroup {
 	// of the exchange to the side of the robot.
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
 		//addParallel(new Elevate(ElevatorPosition.SWITCH));
-		//addParallel(new TimedElevator(3.75, 0.8));
+		addParallel(new TimedElevator(4, 0.75));
 
 		driveStraight(25); // 50 of all the numbers was chosen arbitrarily.
 
@@ -206,6 +208,6 @@ public class MidAuto extends CommandGroup {
 		addSequential(new TurnAbsolute(0));
 
 		driveStraight(21);
-		//dropCube();
+		dropCube();
 	}
 }

@@ -21,6 +21,7 @@ import org.robockets.robot.elevator.Elevate;
 import org.robockets.robot.elevator.ElevatorPosition;
 import org.robockets.robot.elevator.InterruptElevator;
 import org.robockets.robot.elevator.ManualElevate;
+import org.robockets.robot.elevator.RotateCube;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -51,9 +52,11 @@ public class OI {
 		driverSelect.whenPressed(new Joyride());
 		driverStart.whenPressed(new FakeDriveAssisted());
 
-		operatorA.whileHeld(new IntakeCube(0.9, 0.6, 0.8));
+		operatorA.whileHeld(new IntakeCube(0.9, 0.3, 0.8));
 		//operatorB.whenPressed(new Elevate(ElevatorPosition.BOTTOM, 0.5));
+		operatorB.whileHeld(new RotateCube(RelativeDirection.XAxis.RIGHT, 0.8));
 		//operatorX.whenPressed(new Elevate(ElevatorPosition.EXCHANGE, 0.5));
+		operatorX.whileHeld(new RotateCube(RelativeDirection.XAxis.LEFT, 0.8));
 		//operatorY.whenPressed(new Elevate(ElevatorPosition.SWITCH, 0.5));
 		operatorSelect.whenPressed(new InterruptElevator());
 		//operatorLeftStick.whenPressed(new Elevate(ElevatorPosition.MID_SCALE, 0.75));

@@ -1,6 +1,7 @@
 package org.robockets.robot.elevator;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.robockets.commons.RelativeDirection;
 import org.robockets.robot.Robot;
 import org.robockets.robot.RobotMap;
 
@@ -18,9 +19,17 @@ public class ElevatorFloor extends Subsystem {
 
 	public void moveElevatorFloor(double speed) {
 		//if (canMove()) {
-		RobotMap.elevatorFloorMotor.set(speed);
-		RobotMap.elevatorFloorMotor2.set(speed);
+		moveElevatorFloor(RelativeDirection.XAxis.LEFT, speed);
+		moveElevatorFloor(RelativeDirection.XAxis.RIGHT, speed);
 		//}
+	}
+
+	public void moveElevatorFloor(RelativeDirection.XAxis side, double speed) {
+		if (side == RelativeDirection.XAxis.LEFT) {
+			RobotMap.elevatorFloorMotor.set(speed);
+		} else {
+			RobotMap.elevatorFloorMotor2.set(speed);
+		}
 	}
 
 	public boolean canMove() {

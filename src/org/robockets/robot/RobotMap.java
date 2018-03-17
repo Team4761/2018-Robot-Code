@@ -35,7 +35,7 @@ public class RobotMap {
 	public static Victor leftIntake = new Victor(4); // STROUT!!!!
 	public static Victor barIntake = new Victor(5);
 
-	public static Victor climberMotor = new Victor(7);
+	public static Victor climberMotor = new Victor(8);
 
 	public static DifferentialDrive robotDrive = new DifferentialDrive(leftDrivepodSpeedController, rightDrivepodSpeedController);
 
