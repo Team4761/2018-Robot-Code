@@ -130,7 +130,7 @@ public class MidAuto extends CommandGroup {
 	// Starting position has the corner of robot right where slant of corner of field starts.
 	private void dropCubeInSameSideSwitch(boolean teamSwitchLeft) {
 		//addParallel(new Elevate(ElevatorPosition.SWITCH));
-		addParallel(new TimedElevator(4, 0.75));
+		addParallel(new TimedElevator(5, 0.5));
 
 		// Deposit cube in switch
 		driveStraight(130); // FIXME: This will be 140
@@ -152,7 +152,7 @@ public class MidAuto extends CommandGroup {
 	// Starting position the same as dropCubeInSameSideSwitch.
 	private void dropCubeInSameSideScale(boolean scaleLeft) {
 		//addParallel(new Elevate(ElevatorPosition.MID_SCALE));
-		addParallel(new TimedElevator(4.5, 0.75));
+		addParallel(new TimedElevator(5.5, 0.5));
 
 		// Deposit cube in scale.
 		// Drive straight the distance to the scale.
@@ -191,23 +191,27 @@ public class MidAuto extends CommandGroup {
 	}
 
 	// The starting position for this middle auto is 1 ft from the right side
-	// of the exchange to the side of the robot.
+	// of the exchange to the side ofq the robot.
 	private void dropCubeMiddleToSwitch(boolean teamSwitchLeft) {
+		System.out.println("Y Auto");
 		//addParallel(new Elevate(ElevatorPosition.SWITCH));
-		addParallel(new TimedElevator(4, 0.75));
+		addParallel(new TimedElevator(5, 0.5));
 
-		driveStraight(25); // 50 of all the numbers was chosen arbitrarily.
+		//driveStraight(25); // 50 of all the numbers was chosen arbitrarily.
+		addSequential(new DriveStraight(2, 0.6));
 
 		double smallAngle = (teamSwitchLeft ? 42.5 : -40.5); // CW first on the left.
 		//turnAngle(smallAngle);
 		addSequential(new TurnAbsolute(smallAngle));
 
-		driveStraight(teamSwitchLeft ? 90 : 70);
+		//driveStraight(teamSwitchLeft ? 90 : 70);
+		addSequential(new DriveStraight(4.5, 0.7));
 
 		//turnAngle(-smallAngle);
 		addSequential(new TurnAbsolute(0));
 
-		driveStraight(21);
+		addSequential(new DriveStraight(3.5, 0.6));
+		
 		dropCube();
 	}
 }

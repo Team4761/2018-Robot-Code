@@ -18,9 +18,9 @@ public class Climb extends Command {
     }
 
     protected void execute() {
-        if (Robot.climber.isStalling()) {
+        //if (Robot.climber.isStalling()) {
             Robot.climber.setSpeed(speed);
-        }
+        //}
     }
 
     protected boolean isFinished() {

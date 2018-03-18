@@ -28,7 +28,6 @@ public class MoveElevatorFloor extends Command {
 	}
 
 	protected void execute() {
-		System.out.println("Moving Floor");
 		Robot.elevatorFloor.moveElevatorFloor(speed);
 	}
 
