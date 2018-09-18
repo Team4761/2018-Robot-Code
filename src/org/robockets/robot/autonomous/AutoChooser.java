@@ -12,7 +12,7 @@ public class AutoChooser extends CommandGroup {
 		Command autoCommand = new DumbAuto();
 		switch (auto) {
 			case TEST:
-				autoCommand = new TestAuto2();
+				autoCommand = new TestAuto();
 				break;
 			case DUMB:
 				autoCommand = new DumbAuto();

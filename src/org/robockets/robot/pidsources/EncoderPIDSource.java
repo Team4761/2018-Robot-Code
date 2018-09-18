@@ -5,16 +5,17 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class EncoderPIDSource implements PIDSource {
-	private Encoder encoder;
+	private Encoder encoder1;
+	private Encoder encoder2;
+
+	private final double FACTOR = 1.0 / 39.92;
 
 	/**
 	 * Encoder PID Source
-	 *
-	 * @param encoder The encoder that you wish to read values from.
-	 * @param factor  A multiplier to manipulate the encoder output.
 	 */
-	public EncoderPIDSource(Encoder encoder) {
-		this.encoder = encoder;
+	public EncoderPIDSource(Encoder encoder1, Encoder encoder2) {
+		this.encoder1 = encoder1;
+		this.encoder2 = encoder2;
 	}
 
 	@Override
@@ -28,6 +29,6 @@ public class EncoderPIDSource implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		return this.encoder.getDistance();
+		return (encoder1.getDistance() + encoder2.getDistance())/2.0;
 	}
 }
