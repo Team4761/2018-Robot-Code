@@ -23,6 +23,7 @@ public class TurnAbsolute extends Command {
 	}
 
 	protected void execute() {
+		drivetrain.driveArcade(0, drivetrain.gyroPID.get());
 	}
 
 	protected boolean isFinished() {

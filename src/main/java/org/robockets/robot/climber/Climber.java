@@ -36,8 +36,7 @@ public class Climber extends Subsystem {
 	 * Stop / brake the climbing motor(s).
 	 */
 	public void stop() {
-		RobotMap.climberMotorLeft.set(0);
-		RobotMap.climberMotorRight.set(0);
+		RobotMap.climberMotor.set(0);
 	}
 
 	/*
@@ -45,13 +44,7 @@ public class Climber extends Subsystem {
 	 * @param speed		The exact speed to use with the climber motor.
 	 */
 	public void setSpeed(double speed) {
-		RobotMap.climberMotorLeft.set(speed);
-		RobotMap.climberMotorRight.set(speed);
-	}
-
-	public void setSpeed(double leftSpeed, double rightSpeed) {
-		RobotMap.climberMotorLeft.set(leftSpeed);
-		RobotMap.climberMotorRight.set(rightSpeed);
+		RobotMap.climberMotor.set(speed);
 	}
 
 	// SmartDashboard related commands.
