@@ -23,6 +23,13 @@ deploy {
     }
 }
 
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+
 // Defining my dependencies. In this case, WPILib (+ friends), CTRE Phoenix (Talon SRX)
 // and NavX.
 dependencies {
@@ -30,6 +37,7 @@ dependencies {
     compile ctre()
     compile navx()
     compile openrio.powerup.matchData()
+    implementation 'com.github.Team4761:Robockets-Commons:master-SNAPSHOT'
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
