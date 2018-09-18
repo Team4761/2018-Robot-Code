@@ -1,6 +1,9 @@
 language: java
 
-script: ./gradlew build
+before_install:
+  - sudo apt-get install -y gradle
+
+script: gradle build
 
 jdk: oraclejdk8
 
