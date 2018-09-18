@@ -1,8 +1,5 @@
 language: java
 
-install:
-  - sh .travis-init.sh
-
 script: gradlew build
 
 jdk: oraclejdk8
